@@ -21,7 +21,11 @@ TEST(TestOptional, Assign) {
 TEST(TestOptional, Convert) {
   pie::Optional<int> o = 1;
   int p = o;
+  double q = o;
   ASSERT_EQ(p, o.value());
+  ASSERT_EQ(static_cast<double>(o.value()), q);
+  pie::Optional<int> r;
+  ASSERT_ANY_THROW(int s = r);
 }
 
 TEST(TestOptional, Empty) {
