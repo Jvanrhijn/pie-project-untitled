@@ -19,7 +19,7 @@ add_subdirectory(tests)
 enable_testing()
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-add_executable(unit_tests tests/tests.cc ${TESTS})
+add_executable(unit_tests tests/tests.cc ${TESTS} tests/test_optional.cc)
 find_package(Threads REQUIRED)
 target_link_libraries(unit_tests gtest gtest_main Threads::Threads)
 add_test(unit_tests unit_tests)
@@ -28,4 +28,4 @@ add_test(unit_tests unit_tests)
 # nothing yet
 
 # executable
-add_executable(${TARGET} main.cc ${SOURCES})
+add_executable(${TARGET} main.cc ${SOURCES} src/optional.h)
