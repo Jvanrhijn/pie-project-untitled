@@ -34,3 +34,9 @@ TEST(TestGrid, OutOfBounds) {
   pie::Grid<int> g(0, 0);
   ASSERT_ANY_THROW(g.Get(0, 0));
 }
+
+TEST(TestGrid, SquareGrid) {
+  pie::SquareGrid<int> g(5);
+  g.Set(2, 2, 1);
+  ASSERT_EQ(g.Get(2, 2), 1);
+}

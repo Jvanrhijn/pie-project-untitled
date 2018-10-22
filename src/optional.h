@@ -19,15 +19,18 @@ namespace pie {
 
 };
 
+ //! Wrapper that may or may not contain a value (essentially a non-nullable type)
 template<class T>
 class Optional {
  public:
   Optional(T value)
   : value_(value), has_value_(true) {}
 
+  //! Default constructor
   Optional()
   : has_value_(false) {}
 
+  //! Value getter, throws on invalid access
   T value() const {
     if (!has_value_) {
       throw OptionalAccessException();
@@ -35,10 +38,12 @@ class Optional {
     return value_;
   }
 
+  //! Return internal flag, true if the value is set
   bool has_value() const {
     return has_value_;
   }
 
+  //! Conversion operator to T
   operator T() const {
     if (!has_value_) {
       throw OptionalAccessException();
@@ -46,6 +51,7 @@ class Optional {
     return value_;
   }
 
+  //! Copy assignment operator
   Optional &operator=(T value) {
     value_ = value;
     has_value_ = true;

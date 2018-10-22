@@ -10,7 +10,7 @@
 
 namespace pie {
 
-// Convenience class for keeping a 2D grid of values
+//! Convenience class for keeping a 2D grid of values
 template<class T>
 class Grid {
  public:
@@ -18,10 +18,12 @@ class Grid {
       : data_(std::vector<std::vector<T>>(rows, std::vector<T>(columns))), rows_(rows), columns_(columns)
   {}
 
+  //! Set the value of a point in the grid at (row, column)
   void Set(size_t row, size_t col, const T &value) {
     data_[row][col] = value;
   }
 
+  //! Get a const reference to the element of the grid at (row, column)
   const T &Get(size_t row, size_t col) const {
     // We don't care much about accessor performance right now
     return data_.at(row).at(col);
@@ -42,6 +44,7 @@ class Grid {
 
 };
 
+// Simple specialization for a square grid type
 template<class T>
 class SquareGrid : public Grid<T> {
  public:
