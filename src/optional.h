@@ -13,7 +13,7 @@ namespace pie {
 
  class OptionalAccessException : public std::exception {
  public:
-   const char *what() const throw() {
+   const char *what() const noexcept {
      return "Attempted value access on empty Optional";
    }
 
