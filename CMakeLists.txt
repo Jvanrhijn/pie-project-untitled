@@ -28,6 +28,4 @@ add_test(unit_tests unit_tests)
 # nothing yet
 
 # executable
-add_executable(${TARGET} main.cc ${SOURCES} src/optional.h)
-
-target_link_libraries(${TARGET} src)
+add_executable(${TARGET} main.cc ${SOURCES})
