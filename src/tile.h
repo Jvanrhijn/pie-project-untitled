@@ -16,6 +16,9 @@ namespace pie {
 class Tile {
  public:
   Tile(size_t row, size_t column);
+
+  Tile() = default;
+
   bool IsSet() const;
 
  public:
@@ -24,6 +27,7 @@ class Tile {
   const std::vector<std::shared_ptr<Tile>> &reachables() const;
 
   void set_value(const size_t value);
+  void set_coordinates(size_t, size_t);
 
  private:
   Optional<size_t> value_;

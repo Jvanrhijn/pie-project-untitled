@@ -4,12 +4,12 @@
 #include "board.h"
 
 namespace pie {
-/*
+
 Board::Board(size_t side)
   : tiles_(side)
 {
   // TODO create tiles with appropriate coordinates and reachable neighbors
 }
-*/
+
 } // namespace pie
 

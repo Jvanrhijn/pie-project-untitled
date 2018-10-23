@@ -31,4 +31,8 @@ void Tile::set_value(const size_t value) {
   Tile::value_ = value;
 }
 
+void Tile::set_coordinates(size_t x, size_t y) {
+  coordinates_ = std::make_pair(x, y);
+}
+
 } //namespace pie

@@ -8,7 +8,7 @@
 #include <memory>
 
 #include "grid.h"
-/*#include "tile.h"
+#include "tile.h"
 
 namespace pie {
 
@@ -28,5 +28,5 @@ class Board {
 
 };
 
-} // namespace pie*/
+} // namespace pie
 #endif //PIE_BOARD_H
