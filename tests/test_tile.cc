@@ -12,7 +12,7 @@ TEST(TestTile, Constructor) {
   ASSERT_EQ(test_tile.coordinates(), std::make_pair(row, column));
 }
 
-TEST(TestTile, SetAndValue){
+TEST(TestTile, SetAndValue) {
   pie::Tile tile(1, 2);
   ASSERT_FALSE(tile.IsSet());
 
@@ -21,5 +21,3 @@ TEST(TestTile, SetAndValue){
 
   ASSERT_EQ(tile.value(), 5);
 }
-
-TEST()
