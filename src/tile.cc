@@ -2,3 +2,33 @@
 // Created by Guthorak on 10/22/18.
 //
 
+#include <tuple>
+#include "tile.h"
+
+namespace pie {
+
+Tile::Tile(size_t row, size_t column)
+: coordinates_(std::make_pair(row, column)){
+}
+
+bool Tile::IsSet() const {
+  return value_.has_value();
+}
+
+const std::pair<size_t, size_t> &Tile::coordinates() const {
+  return coordinates_;
+}
+
+const Optional<size_t> &Tile::value() const {
+  return value_;
+}
+
+const std::vector<std::shared_ptr<Tile>> &Tile::reachables() const {
+  return reachables_;
+}
+
+void Tile::set_value(const size_t value) {
+  Tile::value_ = value;
+}
+
+} //namespace pie
