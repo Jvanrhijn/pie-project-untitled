@@ -8,13 +8,9 @@
 TEST(TestOptional, Construct) {
   pie::Optional<int> q(0);
   pie::Optional<double> p(1.0);
-  {
-    pie::Optional<int> o = 1;
-    int r = o.value();
-  }
   ASSERT_EQ(q.value(), 0);
   ASSERT_EQ(p.value(), 1.0);
-};
+}
 
 TEST(TestOptional, Assign) {
   pie::Optional<int> o;
@@ -29,7 +25,7 @@ TEST(TestOptional, Convert) {
   ASSERT_EQ(p, o.value());
   ASSERT_EQ(static_cast<double>(o.value()), q);
   pie::Optional<int> r;
-  ASSERT_ANY_THROW(int s = r);
+  ASSERT_ANY_THROW(int s  = r);
 }
 
 TEST(TestOptional, Empty) {

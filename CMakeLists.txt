@@ -6,6 +6,11 @@ set(UNIT_TESTS unit_tests)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# compiler flags
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic")
+set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 --coverage")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+
 # include dirs
 include_directories(lib src)
 
