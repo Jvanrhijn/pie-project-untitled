@@ -7,7 +7,7 @@
 
 #include <memory>
 
-#include "grid.h"
+#include "../lib/grid.h"
 #include "tile.h"
 
 namespace pie {

@@ -24,18 +24,28 @@ template<class T>
 class Optional {
  public:
   Optional(T value)
-  : value_(value), has_value_(true) {}
+  : has_value_(true)
+  {
+    // use placement new to place constructed T into byte array value_
+    auto *pvalue_ = reinterpret_cast<unsigned char*>(new (value_) T(value));
+  }
 
   //! Default constructor
   Optional()
   : has_value_(false) {}
+
+  ~Optional() {
+    if (has_value_) {
+      reinterpret_cast<T *>(value_)->~T();
+    }
+  }
 
   //! Value getter, throws on invalid access
   T value() const {
     if (!has_value_) {
       throw OptionalAccessException();
     }
-    return value_;
+    return *const_cast<T*>(reinterpret_cast<const T*>(value_));
   }
 
   //! Return internal flag, true if the value is set
@@ -45,21 +55,18 @@ class Optional {
 
   //! Conversion operator to T
   operator T() const {
-    if (!has_value_) {
-      throw OptionalAccessException();
-    }
-    return value_;
+    return value();
   }
 
   //! Copy assignment operator
   Optional &operator=(T value) {
-    value_ = value;
+    T *pvalue = new (value_) T(value);
     has_value_ = true;
     return *this;
   }
 
  private:
-  T value_;
+  alignas(T) unsigned char value_[sizeof(T)];
   bool has_value_;
 
 };

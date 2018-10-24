@@ -2,13 +2,17 @@
 // Created by jesse on 10/22/18.
 //
 #include "gtest/gtest.h"
-#include "optional.h"
+#include "../lib/optional.h"
 
 
 TEST(TestOptional, Construct) {
-  pie::Optional<int> o = 1;
+  pie::Optional<int> q(0);
   pie::Optional<double> p(1.0);
-  ASSERT_EQ(o.value(), 1);
+  {
+    pie::Optional<int> o = 1;
+    int r = o.value();
+  }
+  ASSERT_EQ(q.value(), 0);
   ASSERT_EQ(p.value(), 1.0);
 };
 
