@@ -2,13 +2,17 @@
 // Created by jesse on 10/22/18.
 //
 #include "gtest/gtest.h"
-#include "optional.h"
+#include "../lib/optional.h"
 
 
 TEST(TestOptional, Construct) {
-  pie::Optional<int> o = 1;
+  pie::Optional<int> q(0);
   pie::Optional<double> p(1.0);
-  ASSERT_EQ(o.value(), 1);
+  {
+    pie::Optional<int> o = 1;
+    int r = o.value();
+  }
+  ASSERT_EQ(q.value(), 0);
   ASSERT_EQ(p.value(), 1.0);
 };
 
@@ -42,4 +46,17 @@ TEST(TestOptional, Bools) {
   ASSERT_EQ(x, y);
   ASSERT_NE(x, z);
   ASSERT_LE(z, x);
+}
+
+TEST(TestOptional, NonDefaultConstructible) {
+  // non-default constructible test type
+  struct Foo {
+    explicit Foo(int x) : x(x) {}
+    int x;
+  };
+
+  pie::Optional<Foo> opt_foo;
+  Foo foo(1);
+  opt_foo = foo;
+  ASSERT_EQ(opt_foo.value().x, foo.x);
 }
