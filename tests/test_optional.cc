@@ -63,3 +63,14 @@ TEST(TestOptional, NonDefaultConstructible) {
   opt_foo = foo;
   ASSERT_EQ(opt_foo.value().x, foo.x);
 }
+
+TEST(TestOptional, Deref) {
+  pie::Optional<int> o = 1;
+  ASSERT_EQ(*o, o.value());
+}
+
+TEST(TestOptional, Pointer) {
+  int foo = 1;
+  pie::Optional<int*> o_foo = &foo;
+  ASSERT_EQ(&foo, *o_foo);
+}

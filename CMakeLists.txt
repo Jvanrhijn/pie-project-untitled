@@ -10,7 +10,7 @@ set(COVERAGE OFF CACHE BOOL "Coverage")
 
 # compiler flags
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic")
-set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 --coverage")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 
 # include dirs

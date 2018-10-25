@@ -58,6 +58,11 @@ class Optional {
     return value();
   }
 
+  //! Deref operator
+  T operator*() const {
+    return value();
+  }
+
   //! Copy assignment operator
   Optional &operator=(T value) {
     (void) new (value_) T(value);
