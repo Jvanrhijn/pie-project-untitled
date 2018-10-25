@@ -29,9 +29,7 @@ class Tile {
   void set_value(const size_t value);
   void set_coordinates(size_t, size_t);
 
-  void compute_reachables();
-
-  void add_reachable();
+  void add_reachable(std::shared_ptr<Tile> tile);
 
  private:
   Optional<size_t> value_;

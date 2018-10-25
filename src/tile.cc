@@ -35,14 +35,8 @@ void Tile::set_coordinates(size_t x, size_t y) {
   coordinates_ = std::make_pair(x, y);
 }
 
-void Tile::compute_reachables() {
-  auto current_coordinates = coordinates_; //denk dat auto daar werkt?
-
-  std::vector<std::shared_ptr<Tile>> reachables; //Make empty vector called reachables
-}
-
-void Tile::add_reachable() {
-  .
+void Tile::add_reachable(std::shared_ptr<Tile> tile) {
+  reachables_.push_back(std::move(tile));
 }
 
 } //namespace pie
