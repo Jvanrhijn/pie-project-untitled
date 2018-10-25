@@ -16,20 +16,51 @@ This project implements an interactive math puzzle, played as follows:
  The project will implement an interactive version, where the player can choose where to move,
  as well as an automated solver algorithm.
 
-### Code coverage
+ ### Building
 
-You can test the code coverage using lcov, by running the `coverage.sh` script. This will
-run lcov on a given executable, generate a coverage report, and open it in your default
-browser. Example:
+ Clone the repository:
+
+ ```
+ $ git clone --recurse-submodules [url]
+ ```
+
+Create a build directory,
 
 ```
-$ mkdir build
+$ mkdir build && cd build
+```
 
-$ ./coverage.sh build unit_tests
+Build the source with optimizations:
+
+```
+$ cmake -DCMAKE_BUILD_TYPE=RELEASE ..
+$ make -j pie
+```
+
+### Running
+
+[WIP]
+
+### Testing
+
+See `Building`. Instead of building with optimizations, call cmake as
+
+```
+$ cmake -DCMAKE_BUILD_TYPE=DEBUG ..
+$ make -j unit_tests
+```
+
+This will create the `unit_tests` executable in your build directory:
+
+```
+./unit_tests
 ```
 
  ### Requirements
 
- For running the tests:
- * GTest
+General:
+* cmake >=3.9.2
+
+For development:
+* GTest: https://github.com/google/googletest
  
