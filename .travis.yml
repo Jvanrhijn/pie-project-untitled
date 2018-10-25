@@ -22,5 +22,5 @@ script:
   - cmake --build .
   - ./unit_tests
 
-after_sucess:
+after_success:
   - coveralls --root . -E ".*gtest.*" -E ".CMakeFiles.*"
