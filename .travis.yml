@@ -1,27 +1,26 @@
+dist:
+  - trusty
+    
 language: 
   - cpp
 
-sudo: enabled
+sudo:
+  - false
 
-os: linux
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-6
 
-install: 
-  - sudo apt-get install cmake
-  - sudo apt-get install libgtest-dev 
-  - cd /usr/src/gtest
-  - cmake .
-  - make
-  - sudo mv libgtest* /usr/lib
-  - cd "${TRAVIS_BUILD_DIR}"
+before_install:
+  - pip install --user cpp-coveralls
 
 script:
-  - mkdir _builds
-  - cd _builds
-  - cmake ..
-  - make
-  - ctest
+  - CXX=/usr/bin/g++-6 CC=/usr/bin/gcc-6 cmake -DCOVERAGE=1 .
+  - cmake --build .
+  - ./unit_tests
 
-compiler: 
-  - clang
-  - gcc
-
+after_sucess:
+  - coveralls --root . -E ".*gtest.*" -E ".CMakeFiles.*"
