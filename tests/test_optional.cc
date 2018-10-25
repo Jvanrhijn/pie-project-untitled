@@ -5,14 +5,6 @@
 #include "lib/optional.h"
 #include "util/macros.h"
 
-#define EXPECT_THROWS(x, exception, expr) do { EXPECT_ANY_THROW(try { \
-                                                  expr; \
-                                                  } catch (const exception &e) {\
-                                                    EXPECT_EQ(e.what(), x);\
-                                                    throw;\
-                                                  });} while (0)
-
-
 TEST(TestOptional, Construct) {
   pie::Optional<int> q(0);
   pie::Optional<double> p(1.0);
