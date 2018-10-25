@@ -9,7 +9,7 @@
 #include <vector>
 #include <memory>
 
-#include "../lib/optional.h"
+#include "lib/optional.h"
 
 namespace pie {
 
