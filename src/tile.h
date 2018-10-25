@@ -9,7 +9,7 @@
 #include <vector>
 #include <memory>
 
-#include "../lib/optional.h"
+#include "lib/optional.h"
 
 namespace pie {
 
@@ -36,6 +36,7 @@ class Tile {
 
 };
 
+} //namespace pie
+
 #endif //__PIE_SRC_TILE_H
 
-} //namespace pie
