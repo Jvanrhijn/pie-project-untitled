@@ -1,5 +1,8 @@
 # PiE C++ project
 
+[![Coverage Status](https://coveralls.io/repos/github/Jvanrhijn/pie-project-untitled/badge.svg?branch=master)](https://coveralls.io/github/Jvanrhijn/pie-project-untitled?branch=master)
+[![Build Status](https://travis-ci.com/Jvanrhijn/pie-project-untitled.svg?branch=master)](https://travis-ci.com/Jvanrhijn/pie-project-untitled)
+
 This project implements an interactive math puzzle, played as follows:
 
 * Draw a square grid, of `N` by `N` squares.
@@ -12,3 +15,21 @@ This project implements an interactive math puzzle, played as follows:
  
  The project will implement an interactive version, where the player can choose where to move,
  as well as an automated solver algorithm.
+
+### Code coverage
+
+You can test the code coverage using lcov, by running the `coverage.sh` script. This will
+run lcov on a given executable, generate a coverage report, and open it in your default
+browser. Example:
+
+```
+$ mkdir build
+
+$ ./coverage.sh build unit_tests
+```
+
+ ### Requirements
+
+ For running the tests:
+ * GTest
+ 
