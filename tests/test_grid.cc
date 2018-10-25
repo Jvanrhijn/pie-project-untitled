@@ -2,7 +2,7 @@
 // Created by jesse on 10/22/18.
 //
 #include "gtest/gtest.h"
-#include "../lib/grid.h"
+#include "lib/grid.h"
 
 
 TEST(TestGrid, Construct) {
@@ -22,8 +22,8 @@ TEST(TestGrid, SetData) {
   g.Set(2, 0, 5);
   g.Set(2, 1, 6);
   int num = 1;
-  for (int i=0; i<rows; i++) {
-    for (int j=0; j<cols; j++) {
+  for (size_t i=0; i<rows; i++) {
+    for (size_t j=0; j<cols; j++) {
       ASSERT_EQ(g.Get(i, j), num);
       num++;
     }

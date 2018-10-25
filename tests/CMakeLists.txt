@@ -7,6 +7,7 @@ find_package(Threads REQUIRED)
 
 # include dirs for tests
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+include_directories(.)
 
 set (test_files
         tests/test_grid.cc

@@ -12,12 +12,12 @@ set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 --coverage")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 
 # include dirs
-include_directories(lib src)
+include_directories(.)
 
 # include other CMakeLists
 include(src/CMakeLists.txt)
 include(tests/CMakeLists.txt)
 
 # executables
-add_executable(${TARGET} main.cc ${SOURCES})
+add_executable(${TARGET} main.cc ${SOURCES} util/macros.h)
 target_link_libraries(${TARGET} sources)

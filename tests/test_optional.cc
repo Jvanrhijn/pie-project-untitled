@@ -2,7 +2,15 @@
 // Created by jesse on 10/22/18.
 //
 #include "gtest/gtest.h"
-#include "../lib/optional.h"
+#include "lib/optional.h"
+#include "util/macros.h"
+
+#define EXPECT_THROWS(x, exception, expr) do { EXPECT_ANY_THROW(try { \
+                                                  expr; \
+                                                  } catch (const exception &e) {\
+                                                    EXPECT_EQ(e.what(), x);\
+                                                    throw;\
+                                                  });} while (0)
 
 
 TEST(TestOptional, Construct) {
@@ -25,14 +33,13 @@ TEST(TestOptional, Convert) {
   ASSERT_EQ(p, o.value());
   ASSERT_EQ(static_cast<double>(o.value()), q);
   pie::Optional<int> r;
-  ASSERT_ANY_THROW(int s  = r);
+  EXPECT_THROWS("Attempted value access on empty Optional", pie::OptionalAccessException, int s = r; (void)s);
 }
 
 TEST(TestOptional, Empty) {
   pie::Optional<int> o;
   ASSERT_FALSE(o.has_value());
-  ASSERT_ANY_THROW(o.value());
-  ASSERT_ANY_THROW(int x = o);
+  EXPECT_THROWS("Attempted value access on empty Optional", pie::OptionalAccessException, (void) o.value());
 }
 
 TEST(TestOptional, Bools) {
