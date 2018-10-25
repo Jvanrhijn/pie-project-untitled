@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.9.2)
 set (UNIT_TESTS unit_tests)
 
 set (test_files
