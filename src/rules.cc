@@ -10,6 +10,13 @@ Rules::Rules(size_t side, size_t start_row, size_t start_col)
 : board_(Board(side)), current_tile_(std::make_shared<Tile>(board_.GetTile(start_row, start_col)))
 {
   // TODO assign reachable tiles to each tile
+  for (size_t i=0; i<side; i++) {
+    for (size_t j=0; j<side; j++) {
+      auto& tile = board_.GetTile(i, j);
+      //tile->add_reachable(board_.GetTile(i-2, j);
+      tile.set_coordinates(0, 0);
+    }
+  }
 }
 
 std::shared_ptr<Tile> Rules::current_tile() const {

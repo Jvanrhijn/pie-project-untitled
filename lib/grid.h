@@ -23,8 +23,8 @@ class Grid {
     data_[row][col] = value;
   }
 
-  //! Get a const reference to the element of the grid at (row, column)
-  const T &Get(size_t row, size_t col) const {
+  //! Get a mutable reference to the element of the grid at (row, column)
+  T &Get(size_t row, size_t col) {
     // We don't care much about accessor performance right now
     return data_.at(row).at(col);
   }

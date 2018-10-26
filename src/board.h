@@ -17,7 +17,7 @@ class Board {
   explicit Board(size_t side);
 
   //! Retrieves a reference to the tile located at (row, col)
-  const Tile& GetTile(size_t row, size_t col) const;
+  Tile& GetTile(size_t row, size_t col);
 
  private:
   SquareGrid<Tile> tiles_;
