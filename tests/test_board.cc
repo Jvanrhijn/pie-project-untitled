@@ -10,5 +10,5 @@ TEST(TestBoard, GetTile) {
   size_t row = 2;
   size_t col = 2;
   auto tile = board.GetTile(row, col);
-  ASSERT_EQ(tile.coordinates(), std::make_pair(row, col));
+  ASSERT_EQ(tile->coordinates(), std::make_pair(row, col));
 }

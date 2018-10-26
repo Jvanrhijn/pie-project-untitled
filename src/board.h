@@ -17,10 +17,14 @@ class Board {
   explicit Board(size_t side);
 
   //! Retrieves a reference to the tile located at (row, col)
-  Tile& GetTile(size_t row, size_t col);
+  std::shared_ptr<Tile> GetTile(size_t row, size_t col);
+
+  // Getters
+  size_t side() const;
 
  private:
-  SquareGrid<Tile> tiles_;
+  SquareGrid<std::shared_ptr<Tile>> tiles_;
+  size_t side_;
 
 };
 

@@ -8,6 +8,8 @@
 #include "src/board.h"
 #include "src/tile.h"
 
+#include "util/functions.h"
+
 #include "lib/optional.h"
 
 namespace pie {
@@ -21,8 +23,15 @@ class Rules {
   std::shared_ptr<Tile> current_tile() const;
 
  private:
+  void SetTileReachables(std::shared_ptr<Tile> tile);
+
+ private:
   Board board_;
   std::shared_ptr<Tile> current_tile_;
+
+  // Tiles that are skipped in a move
+  static constexpr size_t straight_move_spacing_{2};
+  static constexpr size_t diagonal_move_spacing_{1};
 };
 
 } // namespace pie

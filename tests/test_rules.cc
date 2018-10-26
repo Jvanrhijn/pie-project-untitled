@@ -14,6 +14,16 @@ TEST(TestRules, Construct) {
   ASSERT_EQ(tile->coordinates(), std::make_pair(x, y));
 }
 
+TEST(TestRules, Reachables) {
+  size_t side = 10;
+  size_t x = 5;
+  size_t y = 5;
+  pie::Rules rules(side, x , y);
+  auto tile = rules.current_tile();
+  auto reachables = tile->reachables();
+  ASSERT_EQ(reachables.size(), 8ul);
+}
+
 TEST(TestRules, MoveTo) {
   size_t side = 10;
   size_t x = 5;
