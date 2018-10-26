@@ -21,14 +21,16 @@ class Tile {
 
   bool IsSet() const;
 
- public:
+  // getters
   const std::pair<size_t, size_t> &coordinates() const;
   const Optional<size_t> &value() const;
   const std::vector<std::shared_ptr<Tile>> &reachables() const;
 
+  // setters
   void set_value(const size_t value);
   void set_coordinates(size_t, size_t);
 
+  //! Adds tile to list of reachable tiles from this
   void add_reachable(std::shared_ptr<Tile> tile);
 
  private:
