@@ -3,7 +3,7 @@
 //
 
 #include <tuple>
-#include "tile.h"
+#include "src/tile.h"
 
 namespace pie {
 
@@ -33,6 +33,10 @@ void Tile::set_value(const size_t value) {
 
 void Tile::set_coordinates(size_t x, size_t y) {
   coordinates_ = std::make_pair(x, y);
+}
+
+void Tile::add_reachable(std::shared_ptr<Tile> tile) {
+  reachables_.push_back(std::move(tile));
 }
 
 } //namespace pie
