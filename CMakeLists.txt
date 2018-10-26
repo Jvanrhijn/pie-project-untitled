@@ -32,5 +32,5 @@ if (COVERAGE)
 endif()
 
 # executables
-add_executable(${TARGET} main.cc ${SOURCES} util/macros.h)
+add_executable(${TARGET} main.cc ${SOURCES} util/macros.h util/functions.h)
 target_link_libraries(${TARGET} sources)
