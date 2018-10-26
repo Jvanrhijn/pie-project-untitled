@@ -16,15 +16,15 @@ class Board {
  public:
   explicit Board(size_t side);
 
-  //! Get the value of the active tile
-  size_t CurrentValue() const;
+  //! Retrieves a reference to the tile located at (row, col)
+  std::shared_ptr<Tile> GetTile(size_t row, size_t col);
 
-  //! Move to a new tile if possible
-  void MoveTo(size_t row, size_t col);
+  // Getters
+  size_t side() const;
 
  private:
-  SquareGrid<Tile> tiles_;
-  std::shared_ptr<Tile> current_tile_;
+  SquareGrid<std::shared_ptr<Tile>> tiles_;
+  size_t side_;
 
 };
 

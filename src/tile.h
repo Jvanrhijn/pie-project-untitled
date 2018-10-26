@@ -40,6 +40,7 @@ class Tile {
 
 };
 
+} //namespace pie
+
 #endif //__PIE_SRC_TILE_H
 
-} //namespace pie
