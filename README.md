@@ -1,7 +1,7 @@
 # PiE C++ project
 
-[![Coverage Status](https://coveralls.io/repos/github/Jvanrhijn/pie-project-untitled/badge.svg?branch=master)](https://coveralls.io/github/Jvanrhijn/pie-project-untitled?branch=master)
 [![Build Status](https://travis-ci.com/Jvanrhijn/pie-project-untitled.svg?branch=master)](https://travis-ci.com/Jvanrhijn/pie-project-untitled)
+[![codecov](https://codecov.io/gh/Jvanrhijn/pie-project-untitled/branch/master/graph/badge.svg)](https://codecov.io/gh/Jvanrhijn/pie-project-untitled)
 
 This project implements an interactive math puzzle, played as follows:
 
