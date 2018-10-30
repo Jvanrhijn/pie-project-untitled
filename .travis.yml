@@ -4,6 +4,8 @@ dist:
 language: 
   - cpp
 
+compiler: clang
+
 before_script: |
   sudo apt-get install -y libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxkbcommon-dev libegl1-mesa-dev &&
   wget https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.zip && unzip glfw-3.2.1.zip &&
