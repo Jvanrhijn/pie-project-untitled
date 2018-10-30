@@ -16,4 +16,4 @@ set (test_files
 
 # adding executable
 add_executable(${UNIT_TESTS} tests/tests.cc ${test_files})
-target_link_libraries(${UNIT_TESTS} gtest gtest_main Threads::Threads sources)
+target_link_libraries(${UNIT_TESTS} PRIVATE gtest gtest_main Threads::Threads sources)
