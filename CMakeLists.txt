@@ -33,9 +33,9 @@ include_directories(${TARGET} ${OPENGL_INCLUDE_DIR})
 
 
 # code coverage analysis
-if(COVERAGE)
-  target_compile_options(unit_tests PRIVATE --coverage)
-  target_link_libraries(unit_tests PRIVATE --coverage)
+if (COVERAGE)
+  target_compile_options(unit_tests PRIVATE --coverage -g)
+  target_link_libraries(unit_tests PRIVATE --coverage -g)
 endif()
 
 # executables
