@@ -7,26 +7,22 @@ language:
 compiler: 
   - gcc
 
-matrix:
-  - include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-7
-      env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+  packages:
+    - gcc-6
+    - g++-6
+    - cmake
 
 before_script: |
-  eval "${MATRIX_EVAL}" &&
   sudo apt-get install -y libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxkbcommon-dev libegl1-mesa-dev &&
   wget https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.zip && unzip glfw-3.2.1.zip &&
   cd glfw-3.2.1 && mkdir build && cd build && cmake .. && sudo make install && cd $TRAVIS_BUILD_DIR
 
 script:
-  - cmake -DCOVERAGE=1 .
+  - CC=/usr/bin/gcc-6 CXX=/usr/bin/g++ cmake -DCOVERAGE=1 .
   - cmake --build .
   - ./unit_tests
 
