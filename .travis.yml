@@ -4,8 +4,9 @@ dist:
 language: 
   - cpp
 
-sudo:
-  - false
+before_script: |
+  wget https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.zip && unzip glfw-3.2.1.zip &&
+  cd glfw-3.2.1 && mkdir build && cd build && cmake .. && sudo make install
 
 script:
   - CXX=/usr/bin/g++ CC=/usr/bin/gcc cmake -DCOVERAGE=1 .

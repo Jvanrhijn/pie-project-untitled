@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.9.2)
 project(pie)
 
 set(TARGET pie)
+set(OpenGL_GL_PREFERENCE GLVND)
+
 set(UNIT_TESTS unit_tests)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -18,10 +20,17 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 include_directories(.)
 
 # include other CMakeLists
-include(tests/CMakeLists.txt)
+include(lib/renderer/CMakeLists.txt)
 include(lib/glad/CMakeLists.txt)
 include(lib/game/CMakeLists.txt)
+include(tests/CMakeLists.txt)
 include(gtest.cmake)
+
+# OpenGL libraries
+find_package(glfw3 3.2 REQUIRED)
+find_package(OpenGL REQUIRED)
+include_directories(${TARGET} ${OPENGL_INCLUDE_DIR})
+
 
 # code coverage analysis
 if(COVERAGE)
@@ -30,5 +39,5 @@ if(COVERAGE)
 endif()
 
 # executables
-add_executable(${TARGET} src/main.cc util/macros.h util/functions.h)
-target_link_libraries(${TARGET} game glad)
+add_executable(${TARGET} src/main.cc util/macros.h util/functions.h lib/draw/drawable.h)
+target_link_libraries(${TARGET} glfw glad ${OPENGL_gl_LIBRARY} renderer game)
