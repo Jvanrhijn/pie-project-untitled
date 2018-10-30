@@ -7,7 +7,7 @@ language:
 before_script: |
   sudo apt-get install -y libxrandr-dev libxcursor-dev libxinerama-dev &&
   wget https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.zip && unzip glfw-3.2.1.zip &&
-  cd glfw-3.2.1 && mkdir build && cd build && cmake .. && sudo make install && cd ..
+  cd glfw-3.2.1 && mkdir build && cd build && cmake .. && sudo make install && cd $TRAVIS_BUILD_DIR
 #before_script:
 #  - sudo apt-get update
 #  - sudo apt-get install -y libglfw3-dev
