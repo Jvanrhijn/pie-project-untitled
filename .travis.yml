@@ -1,5 +1,5 @@
 dist:
-  - xenial
+  - trusty 
 
 sudo:
   require
@@ -23,6 +23,7 @@ addons:
       - libegl1-mesa-dev
       - llvm
       - lcov
+      - kcov
 
 before_script: |
   wget https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.zip && unzip glfw-3.2.1.zip &&
@@ -35,13 +36,5 @@ script:
 
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
-  - echo "#!/bin/bash" > llvm-gcov.sh
-  - echo 'exec llvm-cov gcov "$@"' >> llvm-gcov.sh
-  - cat llvm-gcov.sh
-  - chmod +x llvm-gcov.sh
-  - lcov --directory . --base-directory . --gcov-tool ./llvm-gcov.sh --capture -o coverage.info
-    #- lcov --directory . --capture --output-file coverage.info # capture coverage info
-  - lcov --remove coverage.info '/usr/*' '.*gtest.*' '.*glad.*' --output-file coverage.info # filter out system & gtest
-  - lcov --list coverage.info #debug info
-  # Uploading report to CodeCov
-  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+  - kcov --exclude-pattern=gtest,/usr --verify out unit_tests
+  - bash <(curl -s https://codecov.io/bash) && echo "Uploaded code coverage"
