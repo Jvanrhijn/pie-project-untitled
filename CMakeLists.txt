@@ -31,4 +31,4 @@ endif()
 
 # executables
 add_executable(${TARGET} main.cc util/macros.h util/functions.h)
-target_link_libraries(${TARGET} STATIC sources glad)
+target_link_libraries(${TARGET} sources glad)
