@@ -36,5 +36,5 @@ script:
 
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
-  - kcov --exclude-pattern=gtest,/usr --verify out unit_tests
+  - kcov --exclude-pattern=gtest,/usr out unit_tests
   - bash <(curl -s https://codecov.io/bash) && echo "Uploaded code coverage"
