@@ -22,6 +22,8 @@ class Rules {
 
   std::shared_ptr<Tile> current_tile() const;
 
+  const Board& board() const;
+
   bool Finished() const;
 
  private:

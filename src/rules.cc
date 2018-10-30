@@ -21,6 +21,10 @@ std::shared_ptr<Tile> Rules::current_tile() const {
   return current_tile_;
 }
 
+const Board& Rules::board() const {
+  return board_;
+}
+
 bool Rules::Finished() const {
   return *current_tile_->value() == board_.side()*board_.side();
 }
