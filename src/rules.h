@@ -22,6 +22,8 @@ class Rules {
 
   std::shared_ptr<Tile> current_tile() const;
 
+  bool Finished() const;
+
  private:
   void SetTileReachables(std::shared_ptr<Tile> tile);
 

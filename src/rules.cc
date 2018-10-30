@@ -21,11 +21,18 @@ std::shared_ptr<Tile> Rules::current_tile() const {
   return current_tile_;
 }
 
+bool Rules::Finished() const {
+  return *current_tile_->value() == board_.side()*board_.side();
+}
+
 Optional<std::shared_ptr<Tile>> Rules::MoveTo(size_t row, size_t col) {
   auto new_coordinates = std::make_pair(row, col);
   auto reachables = current_tile_->reachables();
+  auto current_val = *current_tile_->value();
   for (const auto& r: reachables) {
     if (r->coordinates() == new_coordinates) {
+      r->set_value(current_val+1);
+      current_tile_ = r;
       return r;
     }
   }
