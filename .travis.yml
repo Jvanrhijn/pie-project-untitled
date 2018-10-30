@@ -35,7 +35,8 @@ script:
 
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
-  - echo '#!/bin/bash\nexec llvm-cov gcov "$@"' > llvm-gcov.sh
+  - echo "#!/bin/bash" > llvm-gcov.sh
+  - echo 'llvm-cov gcov "$@"' >> llvm-gcov.sh
   - cat llvm-gcov.sh
   - chmod +x llvm-gcov.sh
   - lcov --directory . --base-directory . --gcov-tool ./llvm-gcov.sh --capture -o coverage.info
