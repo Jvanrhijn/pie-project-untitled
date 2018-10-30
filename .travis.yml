@@ -22,6 +22,7 @@ addons:
       - libxkbcommon-dev
       - libegl1-mesa-dev
       - llvm
+      - lcov
 
 before_script: |
   wget https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.zip && unzip glfw-3.2.1.zip &&
