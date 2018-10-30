@@ -5,8 +5,8 @@
 #ifndef __PIE_SRC_RULES_H
 #define __PIE_SRC_RULES_H
 
-#include "src/board.h"
-#include "src/tile.h"
+#include "board.h"
+#include "tile.h"
 
 #include "util/functions.h"
 

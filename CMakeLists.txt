@@ -18,9 +18,9 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 include_directories(.)
 
 # include other CMakeLists
-include(src/CMakeLists.txt)
 include(tests/CMakeLists.txt)
 include(lib/glad/CMakeLists.txt)
+include(lib/game/CMakeLists.txt)
 include(gtest.cmake)
 
 # code coverage analysis
@@ -30,5 +30,5 @@ if(COVERAGE)
 endif()
 
 # executables
-add_executable(${TARGET} main.cc util/macros.h util/functions.h)
-target_link_libraries(${TARGET} sources glad)
+add_executable(${TARGET} src/main.cc util/macros.h util/functions.h)
+target_link_libraries(${TARGET} game glad)

@@ -3,7 +3,7 @@
 //
 
 #include <tuple>
-#include "src/tile.h"
+#include "tile.h"
 
 namespace pie {
 

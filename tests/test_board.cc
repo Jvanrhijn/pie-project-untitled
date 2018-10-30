@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "src/board.h"
+#include "lib/game/board.h"
 
 TEST(TestBoard, GetTile) {
   pie::Board board(5);

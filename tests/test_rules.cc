@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "src/rules.h"
+#include "lib/game/rules.h"
 
 #include "util/functions.h"
 

@@ -2,7 +2,7 @@
 // Created by jesse on 10/25/18.
 //
 
-#include "src/rules.h"
+#include "rules.h"
 
 namespace pie {
 
