@@ -40,4 +40,4 @@ endif()
 
 # executables
 add_executable(${TARGET} src/main.cc util/macros.h util/functions.h lib/draw/drawable.h)
-target_link_libraries(${TARGET} glfw glad ${OPENGL_gl_LIBRARY} renderer game)
+target_link_libraries(${TARGET} ${OPENGL_gl_LIBRARY} glfw glad renderer game)
