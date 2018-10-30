@@ -12,7 +12,7 @@ before_script: |
   cd glfw-3.2.1 && mkdir build && cd build && cmake .. && sudo make install && cd $TRAVIS_BUILD_DIR
 
 script:
-  - CXX=/usr/bin/clang++ CC=/usr/bin/clang cmake -DCOVERAGE=1 .
+  - cmake -DCOVERAGE=1 .
   - cmake --build .
   - ./unit_tests
 
