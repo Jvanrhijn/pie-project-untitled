@@ -3,7 +3,7 @@
 //
 
 #include "gtest/gtest.h"
-#include "src/tile.h"
+#include "lib/game/tile.h"
 
 TEST(TestTile, Constructor) {
   size_t row = 1; //arbitrary row value
