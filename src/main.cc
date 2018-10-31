@@ -14,7 +14,6 @@ using namespace pie;
 
 int main() {
   Renderer renderer(1600, 900);
-  Square square(0., 0., 1.);
   renderer.AddObject((std::shared_ptr<Drawable>(static_cast<Drawable*>(new Square(0., 0., 1.)))));
   renderer.Loop();
   return 0;
