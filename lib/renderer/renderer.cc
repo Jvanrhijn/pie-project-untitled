@@ -12,6 +12,10 @@ Renderer::Renderer(size_t width, size_t height)
   if(!glfwInit()) {
     exit(ExitCode::FAIL_OPENGL_INIT);
   }
+  // set OpenGL version
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   if (!(window_ = glfwCreateWindow(width, height, "Game", nullptr, nullptr))) {
     exit(ExitCode::FAIL_WINDOW_CREATE);
   }
