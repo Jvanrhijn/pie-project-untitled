@@ -14,7 +14,7 @@ class Drawable {
  public:
   virtual ~Drawable() = default;
 
-  virtual void Draw() = 0;
+  virtual void Draw() const = 0;
 };
 
 } // namespace pie
