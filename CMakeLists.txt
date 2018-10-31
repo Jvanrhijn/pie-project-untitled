@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.9.2)
 project(pie)
+
 set(TARGET pie)
+set(OpenGL_GL_PREFERENCE GLVND)
+
 set(UNIT_TESTS unit_tests)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -17,20 +20,24 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 include_directories(.)
 
 # include other CMakeLists
-include(src/CMakeLists.txt)
+include(lib/renderer/CMakeLists.txt)
+include(lib/glad/CMakeLists.txt)
+include(lib/game/CMakeLists.txt)
 include(tests/CMakeLists.txt)
 include(gtest.cmake)
 
-# Gtest required libs
-find_package(Threads)
-target_link_libraries(unit_tests PRIVATE gtest ${CMAKE_THREAD_LIBS_INIT} sources)
+# OpenGL libraries
+find_package(glfw3 3.2 REQUIRED)
+find_package(OpenGL REQUIRED)
+include_directories(${TARGET} ${OPENGL_INCLUDE_DIR})
+
 
 # code coverage analysis
 if (COVERAGE)
-  target_compile_options(unit_tests PRIVATE --coverage)
-  target_link_libraries(unit_tests PRIVATE --coverage)
+  target_compile_options(unit_tests PRIVATE --coverage -g)
+  target_link_libraries(unit_tests PRIVATE --coverage -g)
 endif()
 
 # executables
-add_executable(${TARGET} main.cc ${SOURCES} util/macros.h util/functions.h)
-target_link_libraries(${TARGET} sources)
+add_executable(${TARGET} src/main.cc util/macros.h util/functions.h lib/draw/drawable.h)
+target_link_libraries(${TARGET} ${OPENGL_gl_LIBRARY} glfw glad renderer game)
