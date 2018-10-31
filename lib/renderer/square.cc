@@ -16,9 +16,12 @@ Square::Square(double x, double y, double side)
   glGenBuffers(1, &vertex_buffer_);
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_);
   glBufferData(GL_ARRAY_BUFFER, sizeof(Square::vertex_buffer_data_), vertex_buffer_data_, GL_STATIC_DRAW);
+  // load shaders
+  program_ = loadShaders("lib/renderer/shaders/vertex_shader_test.vertexshader", "lib/renderer/shaders/fragment_shader_test.fragmentshader");
 }
 
 void Square::Draw() const {
+  glUseProgram(program_);
   glEnableVertexAttribArray(0);
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_);
   glVertexAttribPointer(
@@ -31,6 +34,10 @@ void Square::Draw() const {
       );
   glDrawArrays(GL_TRIANGLES, 0, 3);
   glDisableVertexAttribArray(0);
+}
+
+const GLuint& Square::program() const {
+  return program_;
 }
 
 } // namespace pie

@@ -40,7 +40,7 @@ void Renderer::AddObject(std::shared_ptr<pie::Drawable> object) {
 void Renderer::Loop() const {
   while(!glfwWindowShouldClose(window_)) {
     glViewport(0, 0, width_, height_);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for (const auto& obj: objects_) {
       DrawObject(*obj);
     }
