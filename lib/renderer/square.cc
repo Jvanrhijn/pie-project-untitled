@@ -17,7 +17,7 @@ Square::Square(double x, double y, double side)
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_);
   glBufferData(GL_ARRAY_BUFFER, sizeof(Square::vertex_buffer_data_), vertex_buffer_data_, GL_STATIC_DRAW);
   // load shaders
-  program_ = loadShaders("lib/renderer/shaders/vertex_shader_test.vertexshader", "lib/renderer/shaders/fragment_shader_test.fragmentshader");
+  program_ = loadShaders(vertex_shader_path_, fragment_shader_path_);
 }
 
 void Square::Draw() const {

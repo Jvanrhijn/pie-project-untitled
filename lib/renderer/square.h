@@ -38,6 +38,9 @@ class Square : public Shape, public Drawable {
       0.0f,   1.0f, 0.0f
   };
 
+  static constexpr char const *vertex_shader_path_{"lib/renderer/shaders/vertex_shader_test.vertexshader"};
+  static constexpr char const *fragment_shader_path_{"lib/renderer/shaders/fragment_shader_test.fragmentshader"};
+
 };
 
 }
