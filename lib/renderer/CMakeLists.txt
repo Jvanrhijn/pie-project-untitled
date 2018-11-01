@@ -5,7 +5,8 @@ set(renderer_files
         lib/renderer/shape.cc
         lib/renderer/square.cc
         lib/renderer/util/load_shader.cc
-        lib/renderer/texture.cc)
+        lib/renderer/texture.cc
+        lib/renderer/shader.cc)
 
 add_library(renderer STATIC ${renderer_files})
 target_link_libraries(renderer glad glfw3)
