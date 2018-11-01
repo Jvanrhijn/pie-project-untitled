@@ -16,7 +16,7 @@ class Shape {
   Shape(double x, double y);
   virtual ~Shape() = default;
 
- private:
+ protected:
   std::pair<double, double> location_;
 };
 

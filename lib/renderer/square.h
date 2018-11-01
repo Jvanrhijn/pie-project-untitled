@@ -17,7 +17,7 @@
 
 namespace pie {
 
-class Square : public Shape, public Drawable<GLFWwindow> {
+class Square : protected Shape, public Drawable<GLFWwindow> {
  public:
   Square(double x, double y, double side);
   ~Square() override = default;
@@ -43,11 +43,11 @@ class Square : public Shape, public Drawable<GLFWwindow> {
     float x, y;
     float r, g, b;
   };
-  static constexpr vbuffer_ vertex_buffer_data_[6] {
-      {-0.5f, -0.5f, 1.0f, 0.0f, 1.0f},
-      {0.5f,  -0.5f, 0.0f, 1.0f, 0.0f},
-      {0.5f,   0.5f, 0.0f, 0.0f, 1.0f},
-      {-0.5f, 0.5f, 1.0f, 1.0f, 0.0f}
+  static constexpr vbuffer_ vertex_buffer_data_[] {
+      {-1.0f, -1.0f, 1.0f, 0.0f, 1.0f},
+      {1.0f,  -1.0f, 0.0f, 1.0f, 0.0f},
+      {1.0f,   1.0f, 0.0f, 0.0f, 1.0f},
+      {-1.0f, 1.0f, 1.0f, 1.0f, 0.0f}
   };
   static constexpr GLuint elements_[] {
     0, 1, 2,

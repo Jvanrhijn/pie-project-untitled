@@ -34,14 +34,16 @@ Square::Square(double x, double y, double side)
 }
 
 void Square::Draw(GLFWwindow *window) const {
-  mat4x4 m, p, mvp;
+  mat4x4 model, project, mvp;
   int width, height;
   glfwGetFramebufferSize(window, &width, &height);
   float ratio = width/static_cast<float>(height);
   // transformation matrices
-  mat4x4_identity(m);
-  mat4x4_ortho(p, -ratio, ratio, -1.0f, 1.0f, 1.0f, -1.0f);
-  mat4x4_mul(mvp, p, m);
+  mat4x4_identity(model);
+  mat4x4_translate_in_place(model, location_.first, location_.second, 0.0f);
+  mat4x4_scale_aniso(model, model, side_, side_, 1.0f);
+  mat4x4_ortho(project, -ratio, ratio, -1.0f, 1.0f, 1.0f, -1.0f);
+  mat4x4_mul(mvp, project, model);
   // draw object
   glUseProgram(program_);
   // perform transformations
