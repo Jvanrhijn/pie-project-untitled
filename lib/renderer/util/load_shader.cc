@@ -19,7 +19,8 @@ GLuint loadShaders(const char *vertex_file_path, const char *fragment_file_path)
     std::stringstream sstr;
     sstr << VertexShaderStream.rdbuf();
     VertexShaderCode = sstr.str();
-    VertexShaderStream.close();
+    VertexShaderStream.close
+    ();
   } else {
     printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n",
            vertex_file_path);
@@ -86,11 +87,11 @@ GLuint loadShaders(const char *vertex_file_path, const char *fragment_file_path)
     printf("%s\n", &ProgramErrorMessage[0]);
   }
 
-  glDetachShader(ProgramID, VertexShaderID);
-  glDetachShader(ProgramID, FragmentShaderID);
+  //glDetachShader(ProgramID, VertexShaderID);
+  //glDetachShader(ProgramID, FragmentShaderID);
 
-  glDeleteShader(VertexShaderID);
-  glDeleteShader(FragmentShaderID);
+  //glDeleteShader(VertexShaderID);
+  //glDeleteShader(FragmentShaderID);
 
   return ProgramID;
 }

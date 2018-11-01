@@ -37,7 +37,7 @@ Renderer::~Renderer() {
   glfwTerminate();
 }
 
-void Renderer::AddObject(std::shared_ptr<pie::Drawable> object) {
+void Renderer::AddObject(std::shared_ptr<pie::Drawable<GLFWwindow>> object) {
   objects_.push_back(std::move(object));
 }
 
@@ -57,8 +57,8 @@ GLFWwindow *Renderer::window() const {
   return window_;
 }
 
-void Renderer::DrawObject(const Drawable& object) const {
-  object.Draw();
+void Renderer::DrawObject(const Drawable<GLFWwindow>& object) const {
+  object.Draw(window_);
 }
 
 void Renderer::SetKeyCallbacks() {

@@ -13,8 +13,8 @@
 using namespace pie;
 
 int main() {
-  Renderer renderer(1600, 900);
-  renderer.AddObject((std::shared_ptr<Drawable>(static_cast<Drawable*>(new Square(0., 0., 1.)))));
+  Renderer renderer(600, 480);
+  renderer.AddObject(std::shared_ptr<Drawable<GLFWwindow>>(new Square(0., 0., 1.)));
   renderer.Loop();
   return 0;
 }

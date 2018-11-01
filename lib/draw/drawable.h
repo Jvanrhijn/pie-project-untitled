@@ -10,11 +10,12 @@ namespace pie {
 /**
  * @brief Interface for objects that can be drawn to the screen.
  */
+template<class Window>
 class Drawable {
  public:
   virtual ~Drawable() = default;
 
-  virtual void Draw() const = 0;
+  virtual void Draw(Window*) const = 0;
 };
 
 } // namespace pie
