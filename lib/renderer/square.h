@@ -30,6 +30,7 @@ class Square : public Shape, public Drawable<GLFWwindow> {
   double side_;
   GLuint vertex_array_id_;
   GLuint vertex_buffer_;
+  GLuint element_buffer_;
   GLuint program_;
 
   // shader data
@@ -42,10 +43,15 @@ class Square : public Shape, public Drawable<GLFWwindow> {
     float x, y;
     float r, g, b;
   };
-  static constexpr vbuffer_ vertex_buffer_data_[3] {
-      {-0.6f, -0.4f, 1.0f, 0.0f, 0.0f},
-      {0.6f,  -0.4f, 0.0f, 1.0f, 0.0f},
-      {0.0f,   0.6f, 0.0f, 0.0f, 1.0f}
+  static constexpr vbuffer_ vertex_buffer_data_[6] {
+      {-0.5f, -0.5f, 1.0f, 0.0f, 1.0f},
+      {0.5f,  -0.5f, 0.0f, 1.0f, 0.0f},
+      {0.5f,   0.5f, 0.0f, 0.0f, 1.0f},
+      {-0.5f, 0.5f, 1.0f, 1.0f, 0.0f}
+  };
+  static constexpr GLuint elements_[] {
+    0, 1, 2,
+    2, 3, 0
   };
 
   static constexpr char const *vertex_shader_path_{"lib/renderer/shaders/vertex_shader_test.vertexshader"};
