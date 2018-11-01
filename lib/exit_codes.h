@@ -10,7 +10,8 @@ namespace pie {
 enum ExitCode {
   FAIL_OPENGL_INIT = 1,
   FAIL_WINDOW_CREATE = 2,
-  FAIL_LOAD_GL = 3
+  FAIL_LOAD_GL = 3,
+  FAIL_LOAD_TEXTURE = 4,
 };
 
 }
