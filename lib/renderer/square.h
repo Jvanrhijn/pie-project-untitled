@@ -21,26 +21,37 @@ namespace pie {
 
 class Square : protected Shape, public Drawable<GLFWwindow> {
  public:
+  /**
+   * @brief Object for rendering squares, e.g. tiles
+   * @param x x-location on the screen, (-1, 1)
+   * @param y y-location on the screen, (-1, 1)
+   * @param texture Texture object to draw on the square
+   * @param shader Shader to render object with
+   */
   Square(double x, double y, double side, const Texture& texture, const Shader &shader);
   ~Square() override = default;
 
   void Draw(GLFWwindow*) const override;
 
-  int vertex_offset() const;
-  int color_offset() const;
-  int texture_offset() const;
-  int stride() const;
+  // Getters
+  long vertex_offset() const;
+  long color_offset() const;
+  long texture_offset() const;
+  long stride() const;
 
  private:
   const Texture &texture_;
   const Shader &shader_;
 
   double side_;
+
+  // OpenGL IDs
   GLuint vertex_array_id_;
   GLuint vertex_buffer_;
   GLuint element_buffer_;
 
-  //! Rendering details: (-1, -1) is the lower left corner
+  // Constants for this model
+  //! vertex data (pos, color, texture coordinates)
   static constexpr float vertex_buffer_data_[] {
       -1.0f, -1.0f, 0.0f,     1.0f, 0.0f, 0.0f,   0.0f, 0.0f,
       1.0f,  -1.0f, 0.0f,     0.0f, 1.0f, 0.0f,   1.0f, 0.0f,
@@ -48,20 +59,17 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
       -1.0f, 1.0f, 0.0f,      1.0f, 1.0f, 0.0f,   0.0f, 1.0f
   };
 
+  //! Triangle element indices
   static constexpr GLuint elements_[] {
     0, 1, 2,
     2, 3, 0
   };
 
+  // Offsets and stride for vertex_buffer_data_
   static constexpr int vertex_offset_{sizeof(float)*0};
   static constexpr int color_offset_{sizeof(float)*3};
   static constexpr int texture_offset_{sizeof(float)*6};
-
   static constexpr int stride_{sizeof(float)*8};
-
-  static constexpr char const *vertex_shader_path_{"lib/renderer/shaders/vertex_shader_test.vertexshader"};
-  static constexpr char const *fragment_shader_path_{"lib/renderer/shaders/fragment_shader_test.fragmentshader"};
-  static constexpr char const *texture_path_{"textures/paper.jpg"};
 
 };
 

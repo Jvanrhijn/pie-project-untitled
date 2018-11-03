@@ -29,19 +29,19 @@ Square::Square(double x, double y, double side, const Texture& texture, const Sh
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements_), elements_, GL_STATIC_DRAW);
 }
 
-int Square::vertex_offset() const {
+long Square::vertex_offset() const {
   return vertex_offset_;
 }
 
-int Square::color_offset() const {
+long Square::color_offset() const {
   return color_offset_;
 }
 
-int Square::texture_offset() const {
+long Square::texture_offset() const {
   return texture_offset_;
 }
 
-int Square::stride() const {
+long Square::stride() const {
   return stride_;
 }
 

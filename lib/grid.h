@@ -29,11 +29,14 @@ class Grid {
     return data_.at(row).at(col);
   }
 
-  const size_t &rows() const {
+  // Getters
+
+  // not const because that actually adds overhead
+  size_t rows() const {
     return rows_;
   }
 
-  const size_t &columns() const {
+  size_t columns() const {
     return columns_;
   }
 

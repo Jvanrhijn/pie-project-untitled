@@ -7,6 +7,7 @@
 
 namespace pie {
 
+//! Exit codes for fatal errors
 enum ExitCode {
   FAIL_OPENGL_INIT = 1,
   FAIL_WINDOW_CREATE = 2,
