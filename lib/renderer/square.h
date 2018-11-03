@@ -13,6 +13,7 @@
 #include "lib/renderer/shape.h"
 #include "lib/renderer/util/load_shader.h"
 #include "lib/renderer/texture.h"
+#include "lib/renderer/shader.h"
 #include "lib/draw/drawable.h"
 #include "lib/linmath.h"
 
@@ -20,27 +21,24 @@ namespace pie {
 
 class Square : protected Shape, public Drawable<GLFWwindow> {
  public:
-  Square(double x, double y, double side, const Texture& texture);
+  Square(double x, double y, double side, const Texture& texture, const Shader &shader);
   ~Square() override = default;
 
   void Draw(GLFWwindow*) const override;
 
-  const GLuint& program() const;
+  int vertex_offset() const;
+  int color_offset() const;
+  int texture_offset() const;
+  int stride() const;
 
  private:
   const Texture &texture_;
+  const Shader &shader_;
 
   double side_;
   GLuint vertex_array_id_;
   GLuint vertex_buffer_;
   GLuint element_buffer_;
-  GLuint program_;
-
-  // shader data
-  GLint mvp_location_;
-  GLint vpos_location_;
-  GLint vcol_location_;
-  GLint vtex_location_;
 
   //! Rendering details: (-1, -1) is the lower left corner
   static constexpr float vertex_buffer_data_[] {
