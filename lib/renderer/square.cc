@@ -8,7 +8,8 @@ namespace pie {
 constexpr float Square::vertex_buffer_data_[];
 constexpr GLuint Square::elements_[];
 
-Square::Square(double x, double y, double side, const Texture& texture, const Shader& shader)
+Square::Square(double x, double y, double side,
+    const Texture& texture, const ShaderPipeline<Shader<GL_VERTEX_SHADER>, Shader<GL_FRAGMENT_SHADER>>& shader)
 : Shape(x, y), Drawable(), texture_(texture), shader_(shader), side_(side)
 {
   // Taken from:

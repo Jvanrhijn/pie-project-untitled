@@ -6,6 +6,44 @@
 
 namespace pie {
 
+void loadShader(const char *shader_path, GLuint shader_type, GLuint &program) {
+  // create shader
+  GLuint shader_id = glCreateShader(shader_type);
+
+  // read shader code from file
+  std::string shader_code;
+  std::ifstream shader_stream(shader_path, std::ios::in);
+  if (shader_stream.is_open()) {
+    std::stringstream sstr;
+    sstr << shader_stream.rdbuf();
+    shader_code = sstr.str();
+    shader_stream.close();
+  } else {
+    std::cerr << "Impossible to open " << shader_path << ", are you in the right directory?" << std::endl;
+  }
+   GLint result = GL_FALSE;
+  std::clog << "Compiling shader " << shader_path << std::endl;
+  const char *source_pointer = shader_code.c_str();
+  glShaderSource(shader_id, 1, &source_pointer, nullptr);
+  glCompileShader(shader_id);
+
+  int info_log_length;
+  glGetShaderiv(shader_id, GL_COMPILE_STATUS, &result);
+  glGetShaderiv(shader_id, GL_INFO_LOG_LENGTH, &info_log_length);
+
+  if (info_log_length > 0) {
+    std::vector<char> err_msg(info_log_length + 1);
+    glGetShaderInfoLog(shader_id, info_log_length, nullptr, &err_msg[0]);
+    std::cerr << err_msg[0] << std::endl;
+  }
+
+  // attach program
+  std::clog << "Linking program" << std::endl;
+
+  glAttachShader(program, shader_id);
+  glDeleteShader(shader_id);
+}
+
 GLuint loadShaders(const char *vertex_file_path, const char *fragment_file_path) {
 
   // Create the shaders
@@ -19,8 +57,7 @@ GLuint loadShaders(const char *vertex_file_path, const char *fragment_file_path)
     std::stringstream sstr;
     sstr << VertexShaderStream.rdbuf();
     VertexShaderCode = sstr.str();
-    VertexShaderStream.close
-    ();
+    VertexShaderStream.close();
   } else {
     printf("Impossible to open %s. Are you in the right directory ? Don't forget to read the FAQ !\n",
            vertex_file_path);

@@ -12,34 +12,53 @@
 namespace pie {
 
 /**
- * Program class for wrapping OpenGL shader program, which runs on the GPU
- */
-class Program {
- public:
-  explicit Program(const std::string &vs, const std::string &fs);
-  ~Program() = default;
-
-  // Getter
-  GLuint program() const;
-
- private:
-  GLuint program_;
-};
-
-/**
  * Shader class, pass this to objects to render. Can be shared between multiple objects which require the same
  * shader to run, to avoid multiple compilation of the same shader.
  */
+template<GLuint ShaderType>
 class Shader {
  public:
   /**
-   * @param vs Path to vertex shader
-   * @param fs Path to fragment shader
+   * @param shader_path Path to shader
    */
-  explicit Shader(const std::string &vs, const std::string &fs);
-  ~Shader() = default;
+  explicit Shader(std::string shader_path)
+    : shader_path_(std::move(shader_path))
+  {}
 
-  //! Bind this shader to a drawable object
+  //! Type
+  GLuint type() const {
+    return ShaderType;
+  }
+
+  //! Getters
+  const std::string& shader_path() const {
+    return shader_path_;
+  }
+
+ private:
+  std::string shader_path_;
+
+};
+
+
+template<class ...Shaders>
+class ShaderPipeline {
+ public:
+  explicit ShaderPipeline(const Shaders... shaders)
+    : program_(glCreateProgram())
+  {
+    // create program
+    (void)std::initializer_list<int>{
+      ((void)loadShader(shaders.shader_path().c_str(), shaders.type(), program_), 0)...
+    };
+    glLinkProgram(program_);
+    // get shader attribute locations
+    mvp_loc_= glGetUniformLocation(program_, "MVP");
+    vpos_loc_ = glGetAttribLocation(program_, "vPos");
+    vcol_loc_ = glGetAttribLocation(program_, "vCol");
+    vtex_loc_ = glGetAttribLocation(program_, "vTex");
+  }
+
   template<class T>
   void Bind(T& drawable) const {
     // Set vertex attribute pointers to the vertex data given in the shaders
@@ -56,17 +75,14 @@ class Shader {
    * @brief Use the shader in the rendering loop
    * @param mvp The model-view-projection matrix data
    */
-  void Use(const float *mvp) const;
+  void Use(const float *mvp) const {
+    glUseProgram(program_);
+    // perform transformations
+    glUniformMatrix4fv(mvp_loc_, 1, GL_FALSE, (const GLfloat*) mvp);
+  }
 
  private:
-  //! Compile the shader, return OpenGL program
-  Program CompileShader();
-
- private:
-  std::string vs_;
-  std::string fs_;
-
-  Program program_;
+  GLuint program_;
 
   GLuint mvp_loc_;
   GLuint vpos_loc_;
@@ -74,6 +90,7 @@ class Shader {
   GLuint vtex_loc_;
 
 };
+
 
 } // namespace pie
 
