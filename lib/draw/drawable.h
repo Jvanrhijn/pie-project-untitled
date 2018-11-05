@@ -16,6 +16,10 @@ class Drawable {
   virtual ~Drawable() = default;
 
   virtual void Draw(Window*) const = 0;
+  
+  virtual void Rotate(double angle) = 0;
+  virtual void MoveTo(double x, double y) = 0;
+
 };
 
 } // namespace pie
