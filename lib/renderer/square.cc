@@ -46,6 +46,15 @@ long Square::stride() const {
   return stride_;
 }
 
+void Square::Rotate(double angle) {
+  angle_ = angle;
+}
+
+void Square::MoveTo(double x, double y) {
+  location_.first = x;
+  location_.second = y;
+}
+
 void Square::Draw(GLFWwindow *window) const {
   glBindTexture(GL_TEXTURE_2D, texture_.texture_id());
   mat4x4 model, project, mvp;
@@ -55,6 +64,7 @@ void Square::Draw(GLFWwindow *window) const {
   // transformation matrices
   mat4x4_identity(model);
   mat4x4_translate_in_place(model, location_.first, location_.second, 0.0f);
+  mat4x4_rotate_Z(model, model, angle_);
   mat4x4_scale_aniso(model, model, side_, side_, 1.0f);
   mat4x4_ortho(project, -ratio, ratio, -1.0f, 1.0f, 1.0f, -1.0f);
   mat4x4_mul(mvp, project, model);

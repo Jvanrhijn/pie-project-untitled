@@ -16,9 +16,10 @@ int main() {
   Shader<GL_FRAGMENT_SHADER> fragment_shader("lib/renderer/shaders/fragment_shader_test.fs");
   ShaderPipeline<decltype(vertex_shader), decltype(fragment_shader)> square_shader(vertex_shader, fragment_shader);
 
-  renderer.AddObject(std::shared_ptr<Drawable<GLFWwindow>>(new Square(0.0, 0.2, 0.2, wall, square_shader)));
-  renderer.AddObject(std::shared_ptr<Drawable<GLFWwindow>>(new Square(0.5, 0.5, 0.3, paper, square_shader)));
-  renderer.AddObject(std::shared_ptr<Drawable<GLFWwindow>>(new Square(-0.5, -0.5, 0.2, container, square_shader)));
+  renderer.AddObject(std::shared_ptr<Drawable<GLFWwindow>>(new Square(-0.5, -0.5,  0.4, paper, square_shader)));
+  renderer.AddObject(std::shared_ptr<Drawable<GLFWwindow>>(new Square( 0.5, -0.5,  0.4, paper, square_shader)));
+  renderer.AddObject(std::shared_ptr<Drawable<GLFWwindow>>(new Square(-0.5,  0.5,  0.4, paper, square_shader)));
+  renderer.AddObject(std::shared_ptr<Drawable<GLFWwindow>>(new Square( 0.5,  0.5,  0.4, paper, square_shader)));
 
   renderer.Loop();
   return 0;

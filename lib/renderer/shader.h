@@ -44,7 +44,7 @@ class Shader {
 template<class ...Shaders>
 class ShaderPipeline {
  public:
-  explicit ShaderPipeline(const Shaders... shaders)
+  explicit ShaderPipeline(const Shaders& ...shaders)
     : program_(glCreateProgram())
   {
     // create program

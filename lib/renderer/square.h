@@ -34,6 +34,10 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
 
   void Draw(GLFWwindow*) const override;
 
+  void Rotate(double angle) override;
+
+  void MoveTo(double x, double y) override;
+
   // Getters
   long vertex_offset() const;
   long color_offset() const;
@@ -45,6 +49,7 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
   const ShaderPipeline<Shader<GL_VERTEX_SHADER>, Shader<GL_FRAGMENT_SHADER>> &shader_;
 
   double side_;
+  double angle_;
 
   // OpenGL IDs
   GLuint vertex_array_id_;
@@ -54,10 +59,10 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
   // Constants for this model
   //! vertex data (pos, color, texture coordinates)
   static constexpr float vertex_buffer_data_[] {
-      -1.0f, -1.0f, 0.0f,     1.0f, 0.0f, 0.0f,   0.0f, 0.0f,
-      1.0f,  -1.0f, 0.0f,     0.0f, 1.0f, 0.0f,   1.0f, 0.0f,
-      1.0f,   1.0f, 0.0f,     0.0f, 0.0f, 1.0f,   1.0f, 1.0f,
-      -1.0f, 1.0f, 0.0f,      1.0f, 1.0f, 0.0f,   0.0f, 1.0f
+      -1.0f, -1.0f, 0.0f,    1.0f, 0.0f, 0.0f,    0.0f, 0.0f,
+       1.0f, -1.0f, 0.0f,    0.0f, 1.0f, 0.0f,    1.0f, 0.0f,
+       1.0f,  1.0f, 0.0f,    0.0f, 0.0f, 1.0f,    1.0f, 1.0f,
+      -1.0f,  1.0f, 0.0f,    1.0f, 1.0f, 0.0f,    0.0f, 1.0f
   };
 
   //! Triangle element indices

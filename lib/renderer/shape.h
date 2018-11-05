@@ -19,6 +19,9 @@ class Shape {
   Shape(double x, double y);
   virtual ~Shape() = default;
 
+  virtual void Rotate(double angle) = 0;
+  virtual void MoveTo(double x, double y) = 0;
+
  protected:
   std::pair<double, double> location_;
 };
