@@ -13,7 +13,7 @@
 #include <GLFW/glfw3.h>
 
 #include "lib/exit_codes.h"
-#include "lib/draw/drawable.h"
+#include "drawable.h"
 #include "lib/renderer/shape.h"
 
 namespace pie {

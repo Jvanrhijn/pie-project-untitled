@@ -7,7 +7,7 @@
 
 #include <utility>
 
-#include "lib/draw/drawable.h"
+#include "drawable.h"
 
 namespace pie {
 

@@ -1,6 +1,6 @@
 #include "lib/renderer/renderer.h"
 #include "lib/renderer/square.h"
-#include "lib/draw/drawable.h"
+#include "lib/renderer/drawable.h"
 #include "lib/renderer/texture.h"
 
 using namespace pie;
@@ -13,8 +13,7 @@ void grid(int num_per_side, const Texture &tex, const SP &shader, Renderer &rend
     for (int j=0; j<num_per_side; j++) {
       double x = width*(j + 0.5) - 1.0;
       double y = width*(i + 0.5) - 1.0;
-      std::shared_ptr<Drawable<GLFWwindow>> object;
-      object = std::make_shared<Square>(x, y, 0.4*width, tex, shader);
+      std::shared_ptr<Drawable<GLFWwindow>> object = std::make_shared<Square>(x, y, 0.4*width, tex, shader);
       renderer.AddObject(object);
     }
   }

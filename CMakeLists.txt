@@ -39,5 +39,5 @@ if (COVERAGE)
 endif()
 
 # executables
-add_executable(${TARGET} src/main.cc util/macros.h util/functions.h lib/draw/drawable.h)
+add_executable(${TARGET} src/main.cc util/macros.h util/functions.h lib/renderer/drawable.h)
 target_link_libraries(${TARGET} ${OPENGL_gl_LIBRARY} glfw glad renderer game)

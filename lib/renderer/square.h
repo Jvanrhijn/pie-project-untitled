@@ -14,8 +14,8 @@
 #include "lib/renderer/util/load_shader.h"
 #include "lib/renderer/texture.h"
 #include "lib/renderer/shader.h"
-#include "lib/draw/drawable.h"
-#include "lib/linmath.h"
+#include "drawable.h"
+#include "linmath.h"
 
 namespace pie {
 
