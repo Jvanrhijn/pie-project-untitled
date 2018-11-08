@@ -13,7 +13,8 @@ void grid(int num_per_side, const Texture &tex, const SP &shader, Renderer &rend
     for (int j=0; j<num_per_side; j++) {
       double x = width*(j + 0.5) - 1.0;
       double y = width*(i + 0.5) - 1.0;
-      auto object = std::shared_ptr<Drawable<GLFWwindow>>(new Square(x, y, 0.4*width, tex, shader));
+      std::shared_ptr<Drawable<GLFWwindow>> object;
+      object = std::make_shared<Square>(x, y, 0.4*width, tex, shader);
       renderer.AddObject(object);
     }
   }
