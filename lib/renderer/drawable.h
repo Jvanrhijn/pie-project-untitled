@@ -16,9 +16,31 @@ class Drawable {
   virtual ~Drawable() = default;
 
   virtual void Draw(Window*) const = 0;
-  
   virtual void Rotate(double angle) = 0;
   virtual void MoveTo(double x, double y) = 0;
+
+  long stride() const {
+    return stride_;
+  }
+
+  long vertex_offset() const {
+    return vertex_offset_;
+  }
+
+  long color_offset() const {
+    return color_offset_;
+  }
+
+  long texture_offset() const {
+    return texture_offset_;
+  }
+
+ protected:
+  // Offsets and stride for vertex_buffer_data_
+  static constexpr long vertex_offset_{sizeof(float)*0};
+  static constexpr long color_offset_{sizeof(float)*3};
+  static constexpr long texture_offset_{sizeof(float)*6};
+  static constexpr long stride_{sizeof(float)*8};
 
 };
 

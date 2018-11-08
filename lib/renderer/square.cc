@@ -9,7 +9,7 @@ constexpr float Square::vertex_buffer_data_[];
 constexpr GLuint Square::elements_[];
 
 Square::Square(double x, double y, double side,
-    const Texture& texture, const ShaderPipeline<Shader<GL_VERTEX_SHADER>, Shader<GL_FRAGMENT_SHADER>>& shader)
+    const Texture& texture, const VFShader& shader)
 : Shape(x, y), Drawable(), texture_(texture), shader_(shader), side_(side)
 {
   // Taken from:
@@ -30,21 +30,6 @@ Square::Square(double x, double y, double side,
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements_), elements_, GL_STATIC_DRAW);
 }
 
-long Square::vertex_offset() const {
-  return vertex_offset_;
-}
-
-long Square::color_offset() const {
-  return color_offset_;
-}
-
-long Square::texture_offset() const {
-  return texture_offset_;
-}
-
-long Square::stride() const {
-  return stride_;
-}
 
 void Square::Rotate(double angle) {
   angle_ = angle;

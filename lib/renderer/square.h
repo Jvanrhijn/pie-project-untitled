@@ -29,7 +29,7 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
    * @param shader Shader to render object with
    */
   Square(double x, double y, double side,
-      const Texture& texture, const ShaderPipeline<Shader<GL_VERTEX_SHADER>, Shader<GL_FRAGMENT_SHADER>> &shader);
+      const Texture& texture, const VFShader &shader);
   ~Square() override = default;
 
   void Draw(GLFWwindow*) const override;
@@ -38,15 +38,9 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
 
   void MoveTo(double x, double y) override;
 
-  // Getters
-  long vertex_offset() const;
-  long color_offset() const;
-  long texture_offset() const;
-  long stride() const;
-
  private:
   const Texture &texture_;
-  const ShaderPipeline<Shader<GL_VERTEX_SHADER>, Shader<GL_FRAGMENT_SHADER>> &shader_;
+  const VFShader &shader_;
 
   double side_;
   double angle_;
@@ -70,12 +64,6 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
     0, 1, 2,
     2, 3, 0
   };
-
-  // Offsets and stride for vertex_buffer_data_
-  static constexpr int vertex_offset_{sizeof(float)*0};
-  static constexpr int color_offset_{sizeof(float)*3};
-  static constexpr int texture_offset_{sizeof(float)*6};
-  static constexpr int stride_{sizeof(float)*8};
 
 };
 

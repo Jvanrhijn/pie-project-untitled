@@ -78,7 +78,11 @@ class ShaderPipeline {
   void Use(const float *mvp) const {
     glUseProgram(program_);
     // perform transformations
-    glUniformMatrix4fv(mvp_loc_, 1, GL_FALSE, (const GLfloat*) mvp);
+    glUniformMatrix4fv(mvp_loc_, 1, GL_FALSE, mvp);
+  }
+
+  const GLuint &program() const {
+    return program_;
   }
 
  private:
@@ -91,7 +95,7 @@ class ShaderPipeline {
 
 };
 
-typedef ShaderPipeline<Shader<GL_VERTEX_SHADER>, Shader<GL_FRAGMENT_SHADER>> VSShader;
+typedef ShaderPipeline<Shader<GL_VERTEX_SHADER>, Shader<GL_FRAGMENT_SHADER>> VFShader;
 
 } // namespace pie
 
