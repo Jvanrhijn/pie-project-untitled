@@ -91,6 +91,7 @@ class ShaderPipeline {
 
 };
 
+typedef ShaderPipeline<Shader<GL_VERTEX_SHADER>, Shader<GL_FRAGMENT_SHADER>> VSShader;
 
 } // namespace pie
 

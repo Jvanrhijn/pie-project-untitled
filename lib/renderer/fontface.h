@@ -16,7 +16,7 @@ namespace pie {
 class FontFace {
  public:
   FontFace(const std::string &path, size_t size);
-  ~FontFace() = default;
+  ~FontFace();
 
   void LoadChar(char c);
 

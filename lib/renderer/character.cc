@@ -6,8 +6,18 @@
 
 namespace pie {
 
-Character::Character(FontFace &face, const char c)
-  : c_(c)
+float Character::vertex_data_[24] = {
+  0.0f, 0.0f,    0.0f, 0.0f,
+  0.0f, 0.0f,    0.0f, 1.0f,
+  0.0f, 0.0f,    1.0f, 1.0f,
+
+  0.0f, 0.0f,    0.0f, 0.0f,
+  0.0f, 0.0f,    1.0f, 1.0f,
+  0.0f, 0.0f,    1.0f, 0.0f
+};
+
+Character::Character(FontFace &face, const char c, const VSShader &sp)
+  : c_(c), shader_(sp)
 {
   face.LoadChar(c);
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -35,11 +45,33 @@ Character::Character(FontFace &face, const char c)
       static_cast<int>(face.face()->glyph->bitmap_left),
       static_cast<int>(face.face()->glyph->bitmap_top)
   );
-  advance_ = face.face()->glyph->advance.x;
+  advance_ = static_cast<GLuint>(face.face()->glyph->advance.x);
+  // build vertex data
+  this->BuildVertices();
 }
 
 void Character::Draw(GLFWwindow *window) const {
 
+}
+
+void Character::BuildVertices() {
+  new (vertex_data_) float(0.0);
+  float xpos = bearing_.first;
+  float ypos = bearing_.second - size_.second;
+  float w = size_.first;
+  float h = size_.second;
+  vertex_data_[0*stride_ + 1] = xpos;
+  vertex_data_[0*stride_ + 1] = ypos + h;
+  vertex_data_[1*stride_ + 0] = xpos;
+  vertex_data_[1*stride_ + 1] = ypos;
+  vertex_data_[2*stride_ + 0] = xpos + w;
+  vertex_data_[2*stride_ + 1] = ypos;
+  vertex_data_[3*stride_ + 0] = xpos;
+  vertex_data_[3*stride_ + 1] = ypos + h;
+  vertex_data_[4*stride_ + 0] = xpos + w;
+  vertex_data_[4*stride_ + 1] = ypos;
+  vertex_data_[5*stride_ + 0] = xpos + w;
+  vertex_data_[5*stride_ + 1] = ypos + h;
 }
 
 } // namespace pie

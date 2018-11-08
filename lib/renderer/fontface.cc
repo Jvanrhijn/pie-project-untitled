@@ -16,6 +16,11 @@ FontFace::FontFace(const std::string &path, size_t size) {
   FT_Set_Pixel_Sizes(face_, 0, size);
 }
 
+FontFace::~FontFace() {
+  FT_Done_Face(face_);
+  FT_Done_FreeType(ftlib_);
+}
+
 void FontFace::LoadChar(const char c) {
   if (FT_Load_Char(face_, static_cast<unsigned short>(c), FT_LOAD_RENDER)) {
     std::cerr << "Failed to load glyph" << std::endl;

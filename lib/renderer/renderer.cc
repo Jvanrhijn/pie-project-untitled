@@ -28,6 +28,9 @@ Renderer::Renderer(size_t width, size_t height)
   glfwSetErrorCallback([](int err, const char* descr) {
     std::cerr << "GLFW ERROR " << err << ": " << descr << std::endl;
   });
+  // Enable blending
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   // Set keypress callbacks
   SetKeyCallbacks();
 }
