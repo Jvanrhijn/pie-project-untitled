@@ -36,10 +36,11 @@ Character::Character(FontFace &face, const char c, const VFShader &sp)
       face.face()->glyph->bitmap.buffer
   );
   // set texture options
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  // extract geometry info from glyph
   size_ = std::make_pair(
       face.face()->glyph->bitmap.width,
       face.face()->glyph->bitmap.rows
@@ -54,24 +55,18 @@ Character::Character(FontFace &face, const char c, const VFShader &sp)
 }
 
 void Character::Draw(GLFWwindow *window) const {
-  // Bind generated glyph texture
   // define mvp matrix
   mat4x4 model, project, mvp;
   int width, height;
   glfwGetFramebufferSize(window, &width, &height);
-  float ratio = width/static_cast<float>(height);
   mat4x4_identity(model);
   mat4x4_scale_aniso(model, model, 1.0f, 1.0f, 1.0f);
   // convert model space coordinates to view space
   mat4x4_ortho(project, -width/2.0f, width/2.0f, -height/2.0f, height/2.0f, 1.0f, -1.0f);
   mat4x4_mul(mvp, project, model);
-  shader_.Use((const float *) mvp);
+  shader_.Use();
   glUniformMatrix4fv(glGetUniformLocation(shader_.program(), "MVP"), 1, GL_FALSE, (const float *) mvp);
-  // get text color location in shader
   glUniform3f(glGetUniformLocation(shader_.program(), "textColor"), 0.5, 0.8, 0.2);
-  glBindVertexArray(vao_);
-  glBindTexture(GL_TEXTURE_2D, tex_id_);
-  glBindBuffer(GL_ARRAY_BUFFER, vbo_);
   // render quad
   glEnableVertexAttribArray(0);
   glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -89,22 +84,12 @@ void Character::Rotate(double angle) {
 void Character::BuildVertices() {
   float xpos = bearing_.first;
   float ypos = bearing_.second - size_.second;
-  float w = size_.first;
-  float h = size_.second;
   constexpr auto stride = stride_/sizeof(float);
   // set vertex positions
-  vertex_data_[0*stride + 0] = xpos;
-  vertex_data_[0*stride + 1] = ypos + h;
-  vertex_data_[1*stride + 0] = xpos;
-  vertex_data_[1*stride + 1] = ypos;
-  vertex_data_[2*stride + 0] = xpos + w;
-  vertex_data_[2*stride + 1] = ypos;
-  vertex_data_[3*stride + 0] = xpos;
-  vertex_data_[3*stride + 1] = ypos + h;
-  vertex_data_[4*stride + 0] = xpos + w;
-  vertex_data_[4*stride + 1] = ypos;
-  vertex_data_[5*stride + 0] = xpos + w;
-  vertex_data_[5*stride + 1] = ypos + h;
+  for (size_t i=0; i<6; i++) {
+    vertex_data_[i*stride + 0] = xpos + (i == 0 || i == 1 || i == 3? -size_.first/2.0f : size_.first/2.0f);
+    vertex_data_[i*stride + 1] = ypos + (i == 1 || i == 2 || i == 4? -size_.second/2.0f : size_.second/2.0f);
+  }
   // generate vertex array
   glGenVertexArrays(1, &vao_);
   glBindVertexArray(vao_);

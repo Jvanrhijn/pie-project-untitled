@@ -38,7 +38,7 @@ int main() {
   Shader<GL_FRAGMENT_SHADER> fs("lib/renderer/shaders/fragment_shader_test.fs");
   VFShader shader(vs, fs);
 
-  std::shared_ptr<Drawable<GLFWwindow>> letter = std::make_shared<Character>(face, 'o', shader);
+  std::shared_ptr<Drawable<GLFWwindow>> letter = std::make_shared<Character>(face, '4', shader);
 
   renderer.AddObject(letter);
 

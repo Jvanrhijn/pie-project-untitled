@@ -81,7 +81,7 @@ class ShaderPipeline {
    * @brief Use the shader in the rendering loop
    * @param mvp The model-view-projection matrix data
    */
-  void Use(const float *mvp) const {
+  void Use() const {
     glUseProgram(program_);
   }
 
