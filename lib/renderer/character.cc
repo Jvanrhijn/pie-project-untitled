@@ -55,7 +55,6 @@ Character::Character(FontFace &face, const char c, const VFShader &sp)
 
 void Character::Draw(GLFWwindow *window) const {
   // Bind generated glyph texture
-  glBindTexture(GL_TEXTURE_2D, tex_id_);
   // define mvp matrix
   mat4x4 model, project, mvp;
   int width, height;
@@ -63,25 +62,22 @@ void Character::Draw(GLFWwindow *window) const {
   float ratio = width/static_cast<float>(height);
   mat4x4_identity(model);
   mat4x4_scale_aniso(model, model, 1.0f, 1.0f, 1.0f);
-  mat4x4_ortho(project, -1.0f, 1.0f, 0.0f, width, 0.0f, height);
+  mat4x4_ortho(project, -ratio, ratio, -1.0f, 1.0f, 1.0f, -1.0f);
   mat4x4_mul(mvp, project, model);
-  // draw text
   shader_.Use((const float *) mvp);
+  glUniformMatrix4fv(glGetUniformLocation(shader_.program(), "MVP"), 1, GL_FALSE, (const float *) mvp);
+  // get text color location in shader
   auto text_col = glGetUniformLocation(shader_.program(), "textColor");
   if (text_col >= 0) {
     glUniform3f(text_col, 0.5, 0.8, 0.2);
   }
-  //glActiveTexture(GL_TEXTURE0);
-  // update content of VBO
-  //glBindBuffer(GL_ARRAY_BUFFER, vbo_);
-  //glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertex_data_), vertex_data_);
-  //glBindBuffer(GL_ARRAY_BUFFER, 0);
-  //glBindVertexArray(vao_);
+  glBindVertexArray(vao_);
+  glBindTexture(GL_TEXTURE_2D, tex_id_);
+  glBindBuffer(GL_ARRAY_BUFFER, vbo_);
   // render quad
+  glEnableVertexAttribArray(0);
   glDrawArrays(GL_TRIANGLES, 0, 6);
   glDisableVertexAttribArray(0);
-  //glBindVertexArray(0);
-  //glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Character::MoveTo(double x, double y) {
@@ -119,7 +115,6 @@ void Character::BuildVertices() {
   // bind buffer
   glBindBuffer(GL_ARRAY_BUFFER, vbo_);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_data_), vertex_data_, GL_STATIC_DRAW);
-  glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertex_data_), vertex_data_);
   // bind shader
   shader_.Bind(*this);
 }

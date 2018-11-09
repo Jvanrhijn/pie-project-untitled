@@ -28,6 +28,8 @@ Renderer::Renderer(size_t width, size_t height)
   glfwSetErrorCallback([](int err, const char* descr) {
     std::cerr << "GLFW ERROR " << err << ": " << descr << std::endl;
   });
+  // setup viewport
+  glViewport(0, 0, width_, height_);
   // OpenGL options
   glEnable(GL_CULL_FACE);
   glEnable(GL_BLEND);
@@ -47,7 +49,6 @@ void Renderer::AddObject(std::shared_ptr<pie::Drawable<GLFWwindow>> object) {
 
 void Renderer::Loop() const {
   while(!glfwWindowShouldClose(window_)) {
-    glViewport(0, 0, width_, height_);
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for (const auto& obj: objects_) {

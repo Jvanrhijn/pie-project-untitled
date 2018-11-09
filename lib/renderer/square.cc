@@ -55,6 +55,7 @@ void Square::Draw(GLFWwindow *window) const {
   mat4x4_mul(mvp, project, model);
   // draw object
   shader_.Use((const float *)mvp);
+  glUniformMatrix4fv(glGetUniformLocation(shader_.program(), "MVP"), 1, GL_FALSE, (const float *) mvp);
   glEnableVertexAttribArray(0);
   glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
   glDisableVertexAttribArray(0);

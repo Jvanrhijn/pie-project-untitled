@@ -83,10 +83,6 @@ class ShaderPipeline {
    */
   void Use(const float *mvp) const {
     glUseProgram(program_);
-    // perform transformations
-    if (mvp_loc_ >= 0) {
-      glUniformMatrix4fv(mvp_loc_, 1, GL_FALSE, mvp);
-    }
   }
 
   const GLuint &program() const {
