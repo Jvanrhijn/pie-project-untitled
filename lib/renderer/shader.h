@@ -52,6 +52,14 @@ class ShaderPipeline {
       ((void)loadShader(shaders.shader_path().c_str(), shaders.type(), program_), 0)...
     };
     glLinkProgram(program_);
+    // check if linking was successful
+    int success;
+    glGetProgramiv(program_, GL_LINK_STATUS, &success);
+    char info_log[512];
+    if (!success) {
+      glGetProgramInfoLog(program_, 512, nullptr, info_log);
+      std::cerr << "Shader linking failed\n" << info_log << std::endl;
+    }
     // get shader attribute locations
     mvp_loc_= glGetUniformLocation(program_, "MVP");
     vpos_loc_ = glGetAttribLocation(program_, "vPos");

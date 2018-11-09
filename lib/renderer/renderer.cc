@@ -16,6 +16,7 @@ Renderer::Renderer(size_t width, size_t height)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
   if (!(window_ = glfwCreateWindow(width, height, "Game", nullptr, nullptr))) {
     exit(ExitCode::FAIL_WINDOW_CREATE);
   }
@@ -50,7 +51,7 @@ void Renderer::AddObject(std::shared_ptr<pie::Drawable<GLFWwindow>> object) {
 void Renderer::Loop() const {
   while(!glfwWindowShouldClose(window_)) {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
     for (const auto& obj: objects_) {
       DrawObject(*obj);
     }

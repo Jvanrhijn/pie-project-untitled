@@ -34,7 +34,7 @@ void loadShader(const char *shader_path, GLuint shader_type, GLuint &program) {
   if (info_log_length > 0) {
     std::vector<char> err_msg(info_log_length + 1);
     glGetShaderInfoLog(shader_id, info_log_length, nullptr, &err_msg[0]);
-    std::cerr << err_msg[0] << std::endl;
+    std::cerr << "Shader compilation failed: " << err_msg[0] << std::endl;
   }
 
   // attach program

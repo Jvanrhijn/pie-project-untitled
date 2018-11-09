@@ -66,7 +66,8 @@ void Character::Draw(GLFWwindow *window) const {
   mat4x4_mul(mvp, project, model);
   shader_.Use();
   glUniformMatrix4fv(glGetUniformLocation(shader_.program(), "MVP"), 1, GL_FALSE, (const float *) mvp);
-  glUniform3f(glGetUniformLocation(shader_.program(), "textColor"), 0.5, 0.8, 0.2);
+  auto tc = glGetUniformLocation(shader_.program(), "text");
+  glUniform3f(tc, 0.5, 0.8, 0.2);
   // render quad
   glEnableVertexAttribArray(0);
   glDrawArrays(GL_TRIANGLES, 0, 6);
