@@ -62,15 +62,13 @@ void Character::Draw(GLFWwindow *window) const {
   float ratio = width/static_cast<float>(height);
   mat4x4_identity(model);
   mat4x4_scale_aniso(model, model, 1.0f, 1.0f, 1.0f);
-  mat4x4_ortho(project, -ratio, ratio, -1.0f, 1.0f, 1.0f, -1.0f);
+  // convert model space coordinates to view space
+  mat4x4_ortho(project, -width/2.0f, width/2.0f, -height/2.0f, height/2.0f, 1.0f, -1.0f);
   mat4x4_mul(mvp, project, model);
   shader_.Use((const float *) mvp);
   glUniformMatrix4fv(glGetUniformLocation(shader_.program(), "MVP"), 1, GL_FALSE, (const float *) mvp);
   // get text color location in shader
-  auto text_col = glGetUniformLocation(shader_.program(), "textColor");
-  if (text_col >= 0) {
-    glUniform3f(text_col, 0.5, 0.8, 0.2);
-  }
+  glUniform3f(glGetUniformLocation(shader_.program(), "textColor"), 0.5, 0.8, 0.2);
   glBindVertexArray(vao_);
   glBindTexture(GL_TEXTURE_2D, tex_id_);
   glBindBuffer(GL_ARRAY_BUFFER, vbo_);
