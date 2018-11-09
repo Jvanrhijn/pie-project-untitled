@@ -29,7 +29,6 @@ class Character : public Drawable<GLFWwindow> {
   void BuildVertices();
 
  private:
-  char c_;
   VFShader shader_;
 
   GLuint tex_id_;

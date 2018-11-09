@@ -60,15 +60,21 @@ class ShaderPipeline {
   }
 
   template<class T>
-  void Bind(T& drawable) const {
+  void Bind(const T& drawable) const {
     // Set vertex attribute pointers to the vertex data given in the shaders
     // Ugly cast to void* needed because of the OpenGL API
-    glVertexAttribPointer(vpos_loc_, 3, GL_FLOAT, GL_FALSE, drawable.stride(), (void*)drawable.vertex_offset());
-    glEnableVertexAttribArray(vpos_loc_); // vpos_location_
-    glVertexAttribPointer(vcol_loc_, 3, GL_FLOAT, GL_FALSE, drawable.stride(), (void*)drawable.color_offset());
-    glEnableVertexAttribArray(vcol_loc_); // vcol_location_
-    glVertexAttribPointer(vtex_loc_, 2, GL_FLOAT, GL_FALSE, drawable.stride(), (void*)drawable.texture_offset());
-    glEnableVertexAttribArray(vtex_loc_);
+    if (vpos_loc_ >= 0) {
+      glVertexAttribPointer(vpos_loc_, 3, GL_FLOAT, GL_FALSE, drawable.stride(), (void *) drawable.vertex_offset());
+      glEnableVertexAttribArray(vpos_loc_);
+    }
+    if (vcol_loc_ >= 0) {
+      glVertexAttribPointer(vcol_loc_, 3, GL_FLOAT, GL_FALSE, drawable.stride(), (void *) drawable.color_offset());
+      glEnableVertexAttribArray(vcol_loc_);
+    }
+    if (vtex_loc_ >= 0) {
+      glVertexAttribPointer(vtex_loc_, 2, GL_FLOAT, GL_FALSE, drawable.stride(), (void *) drawable.texture_offset());
+      glEnableVertexAttribArray(vtex_loc_);
+    }
   }
 
   /**
@@ -78,7 +84,9 @@ class ShaderPipeline {
   void Use(const float *mvp) const {
     glUseProgram(program_);
     // perform transformations
-    glUniformMatrix4fv(mvp_loc_, 1, GL_FALSE, mvp);
+    if (mvp_loc_ >= 0) {
+      glUniformMatrix4fv(mvp_loc_, 1, GL_FALSE, mvp);
+    }
   }
 
   const GLuint &program() const {
@@ -88,10 +96,10 @@ class ShaderPipeline {
  private:
   GLuint program_;
 
-  GLuint mvp_loc_;
-  GLuint vpos_loc_;
-  GLuint vcol_loc_;
-  GLuint vtex_loc_;
+  GLint mvp_loc_;
+  GLint vpos_loc_;
+  GLint vcol_loc_;
+  GLint vtex_loc_;
 
 };
 
