@@ -4,6 +4,9 @@
 #include "lib/renderer/texture.h"
 #include "lib/renderer/character.h"
 
+#include <map>
+#include <thread>
+
 using namespace pie;
 
 
@@ -24,23 +27,32 @@ void grid(int num_per_side, const Texture &tex, const SP &shader, Renderer &rend
 int main() {
   Renderer renderer(900, 900);
 
-  //Texture marble("textures/marble.jpg");
+  Texture marble("textures/marble.jpg");
 
-  //Shader<GL_VERTEX_SHADER> vertex_shader("lib/renderer/shaders/vertex_shader_test.vs");
-  //Shader<GL_FRAGMENT_SHADER> fragment_shader("lib/renderer/shaders/fragment_shader_test.fs");
-  //ShaderPipeline<decltype(vertex_shader), decltype(fragment_shader)> square_shader(vertex_shader, fragment_shader);
+  Shader<GL_VERTEX_SHADER> vertex_shader("lib/renderer/shaders/vertex_shader_test.vs");
+  Shader<GL_FRAGMENT_SHADER> fragment_shader("lib/renderer/shaders/fragment_shader_test.fs");
+  VFShader square_shader(vertex_shader, fragment_shader);
 
-  //grid(4, marble, square_shader, renderer);
+  //grid(5, marble, square_shader, renderer);
 
+  // construct charmap
   FontFace face("lib/renderer/fonts/arial.ttf", 48);
-
   Shader<GL_VERTEX_SHADER> vs("lib/renderer/shaders/text.vs");
   Shader<GL_FRAGMENT_SHADER> fs("lib/renderer/shaders/text.fs");
   VFShader shader(vs, fs);
+  Color col{0.0, 0.0, 0.0};
 
-  std::shared_ptr<Drawable<GLFWwindow>> letter = std::make_shared<Character>(face, '4', shader);
+  std::map<GLchar, std::shared_ptr<Drawable<GLFWwindow>>> arial_char_map;
+  for (GLubyte c=0; c<128; c++) {
+    std::shared_ptr<Drawable<GLFWwindow>> character  = std::make_shared<Character>(face, c, col, shader);
+    arial_char_map.insert(std::make_pair(c, character));
+  }
 
-  renderer.AddObject(letter);
+  std::shared_ptr<Drawable<GLFWwindow>> tile = std::make_shared<Square>(0.0, 0.0, 0.1f, marble, square_shader);
+  renderer.AddObject(tile);
+  //grid(4, marble, square_shader, renderer);
+
+  renderer.AddObject(arial_char_map['b']);
 
   renderer.Loop();
 

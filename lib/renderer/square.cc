@@ -10,7 +10,7 @@ constexpr GLuint Square::elements_[];
 
 Square::Square(double x, double y, double side,
     const Texture& texture, const VFShader& shader)
-: Shape(x, y), Drawable(), texture_(texture), shader_(shader), side_(side)
+: Shape(x, y), Drawable(), texture_(texture), shader_(shader), side_(side), angle_(0.0)
 {
   // Taken from:
   // http://www.opengl-tutorial.org/beginners-tutorials/tutorial-2-the-first-triangle/
@@ -25,9 +25,9 @@ Square::Square(double x, double y, double side,
   shader_.Bind(*this);
   // bind buffers
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_);
+  //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data_), vertex_buffer_data_, GL_STATIC_DRAW);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements_), elements_, GL_STATIC_DRAW);
+  //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements_), elements_, GL_STATIC_DRAW);
 }
 
 
@@ -41,6 +41,7 @@ void Square::MoveTo(double x, double y) {
 }
 
 void Square::Draw(GLFWwindow *window) const {
+  glBindVertexArray(vertex_array_id_);
   glBindTexture(GL_TEXTURE_2D, texture_.texture_id());
   mat4x4 model, project, mvp;
   int width, height;
@@ -57,8 +58,12 @@ void Square::Draw(GLFWwindow *window) const {
   shader_.Use();
   glUniformMatrix4fv(glGetUniformLocation(shader_.program(), "MVP"), 1, GL_FALSE, (const float *) mvp);
   glEnableVertexAttribArray(0);
-  glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+  //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+  glDrawArrays(GL_TRIANGLES, 0, 6);
+  // unbind array object and texture
   glDisableVertexAttribArray(0);
+  glBindTexture(GL_TEXTURE_2D, 0);
+  glBindVertexArray(0);
 }
 
 } // namespace pie

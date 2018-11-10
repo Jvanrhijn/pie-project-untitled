@@ -10,7 +10,6 @@ set(renderer_files
         lib/renderer/square.cc
         lib/renderer/util/load_shader.cc
         lib/renderer/texture.cc
-        lib/renderer/shader.cc
         lib/renderer/character.cc
         lib/renderer/fontface.cc)
 

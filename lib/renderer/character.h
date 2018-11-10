@@ -17,7 +17,8 @@ namespace pie {
 
 class Character : public Drawable<GLFWwindow> {
  public:
-  Character(FontFace &face, char c, const VFShader &sp);
+  Character(FontFace &face, char c, const Color &color, const VFShader &sp);
+  Character(const Character &) = default;
   ~Character() override = default;
 
   void Draw(GLFWwindow *window) const override;
@@ -30,6 +31,8 @@ class Character : public Drawable<GLFWwindow> {
 
  private:
   VFShader shader_;
+
+  Color color_;
 
   GLuint tex_id_;
   GLuint advance_;
@@ -45,6 +48,7 @@ class Character : public Drawable<GLFWwindow> {
   GLuint vao_;
   // vertex buffer object
   GLuint vbo_;
+
 };
 
 } // namespace pie

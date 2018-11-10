@@ -11,6 +11,12 @@
 
 namespace pie {
 
+struct Color {
+  float r;
+  float g;
+  float b;
+};
+
 /**
  * Shader class, pass this to objects to render. Can be shared between multiple objects which require the same
  * shader to run, to avoid multiple compilation of the same shader.
