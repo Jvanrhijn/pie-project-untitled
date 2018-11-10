@@ -21,17 +21,17 @@ void loadShader(const char *shader_path, GLuint shader_type, GLuint &program) {
   } else {
     std::cerr << "Unable to open " << shader_path << ", are you in the right directory?" << std::endl;
   }
-   GLint result = GL_FALSE;
+
+  GLint result = GL_FALSE;
   std::clog << "Compiling shader " << shader_path << std::endl;
   const char *source_pointer = shader_code.c_str();
   glShaderSource(shader_id, 1, &source_pointer, nullptr);
   glCompileShader(shader_id);
 
-  int info_log_length;
   glGetShaderiv(shader_id, GL_COMPILE_STATUS, &result);
-  glGetShaderiv(shader_id, GL_INFO_LOG_LENGTH, &info_log_length);
-
-  if (info_log_length > 0) {
+  if (!result) {
+    int info_log_length;
+    glGetShaderiv(shader_id, GL_INFO_LOG_LENGTH, &info_log_length);
     std::vector<char> err_msg(info_log_length + 1);
     glGetShaderInfoLog(shader_id, info_log_length, nullptr, &err_msg[0]);
     std::cerr << "Shader compilation failed: " << err_msg[0] << std::endl;

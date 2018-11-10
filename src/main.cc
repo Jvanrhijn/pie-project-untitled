@@ -34,8 +34,8 @@ int main() {
 
   FontFace face("lib/renderer/fonts/arial.ttf", 48);
 
-  Shader<GL_VERTEX_SHADER> vs("lib/renderer/shaders/vertex_shader_test.vs");
-  Shader<GL_FRAGMENT_SHADER> fs("lib/renderer/shaders/fragment_shader_test.fs");
+  Shader<GL_VERTEX_SHADER> vs("lib/renderer/shaders/text.vs");
+  Shader<GL_FRAGMENT_SHADER> fs("lib/renderer/shaders/text.fs");
   VFShader shader(vs, fs);
 
   std::shared_ptr<Drawable<GLFWwindow>> letter = std::make_shared<Character>(face, '4', shader);
