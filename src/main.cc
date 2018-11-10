@@ -35,14 +35,14 @@ int main() {
   Shader<GL_FRAGMENT_SHADER> fragment_shader("lib/renderer/shaders/fragment_shader_test.fs");
   VFShader square_shader(vertex_shader, fragment_shader);
 
-
-  // construct charmap
   auto char_map = getCharMap("lib/renderer/fonts/arial.ttf", 48, Color{0.0, 0.0, 0.0});
   std::shared_ptr<Drawable<GLFWwindow>> character = std::make_shared<Character>(char_map.at('c'));
 
-  grid(3, marble, square_shader, renderer);
+  grid(5, marble, square_shader, renderer);
 
-  std::shared_ptr<Drawable<GLFWwindow>> string = std::make_shared<String>("Hello", char_map);
+  std::shared_ptr<Drawable<GLFWwindow>> string = std::make_shared<String>("hilp", char_map);
+  auto c = char_map.at('X');
+  std::shared_ptr<Drawable<GLFWwindow>> char_p = std::make_shared<Character>(c);
 
   renderer.AddObject(string);
 

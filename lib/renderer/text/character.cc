@@ -16,6 +16,9 @@ float Character::vertex_data_[] = {
   0.0f, 0.0f, 0.0f,    1.0f, 1.0f, 0.0f,    1.0f, 0.0f
 };
 
+// Implementation of text rendering taken from:
+// https://learnopengl.com/In-Practice/Text-Rendering
+
 Character::Character(FontFace &face, const char c, const Color& color, const VFShader &sp)
   : shader_(sp), color_(color), angle_(0.0f), location_(0.0f, 0.0f)
 {
@@ -62,11 +65,11 @@ void Character::Draw(GLFWwindow *window) const {
   int width, height;
   glfwGetFramebufferSize(window, &width, &height);
   mat4x4_identity(model);
-  mat4x4_translate_in_place(model, location_.first*width/2.0f, location_.second*height/2.0f, 0.0f);
+  mat4x4_translate_in_place(model, location_.first*width, location_.second*height, 0.0f);
   mat4x4_rotate_Z(model, model, angle_);
   mat4x4_scale_aniso(model, model, 1.0f, 1.0f, 1.0f);
   // convert model space coordinates to view space
-  mat4x4_ortho(project, -width/2.0f, width/2.0f, -height/2.0f, height/2.0f, 1.0f, -1.0f);
+  mat4x4_ortho(project, -width, width, -height, height, 1.0f, -1.0f);
   mat4x4_mul(mvp, project, model);
   shader_.Use();
   glUniformMatrix4fv(glGetUniformLocation(shader_.program(), "MVP"), 1, GL_FALSE, (const float *) mvp);
@@ -108,8 +111,8 @@ void Character::BuildVertices() {
   constexpr auto stride = stride_/sizeof(float);
   // set vertex positions
   for (size_t i=0; i<6; i++) {
-    vertex_data_[i*stride + 0] = xpos + size_.first/2.0f*(i == 0 || i == 1 || i == 3? -1.0f : 1.0f);
-    vertex_data_[i*stride + 1] = ypos + size_.second/2.0f*(i == 1 || i == 2 || i == 4? -1.0f : 1.0f);
+    vertex_data_[i*stride + 0] = xpos + size_.first*(i == 0 || i == 1 || i == 3? -1.0f : 1.0f);
+    vertex_data_[i*stride + 1] = ypos + size_.second*(i == 1 || i == 2 || i == 4? -1.0f : 1.0f);
   }
   // generate vertex array
   glGenVertexArrays(1, &vao_);

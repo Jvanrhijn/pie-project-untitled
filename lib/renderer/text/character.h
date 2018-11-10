@@ -31,7 +31,6 @@ class Character : public Drawable<GLFWwindow> {
   GLuint advance() const;
   std::pair<float, float> location() const;
 
-
  private:
   void BuildVertices();
 

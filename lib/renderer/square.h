@@ -63,12 +63,6 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
       -1.0f, -1.0f, 0.0f,    1.0f, 0.0f, 0.0f,    0.0f, 0.0f
   };
 
-  //! Triangle element indices
-  static constexpr GLuint elements_[] {
-    0, 1, 2,
-    2, 3, 0
-  };
-
 };
 
 }
