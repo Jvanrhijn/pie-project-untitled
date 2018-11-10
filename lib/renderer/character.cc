@@ -79,7 +79,8 @@ void Character::Draw(GLFWwindow *window) const {
 }
 
 void Character::MoveTo(double x, double y) {
-
+  location_.first = x;
+  location_.second = y;
 }
 
 void Character::Rotate(double angle) {

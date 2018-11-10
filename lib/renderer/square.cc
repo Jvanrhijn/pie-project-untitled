@@ -8,8 +8,7 @@ namespace pie {
 constexpr float Square::vertex_buffer_data_[];
 constexpr GLuint Square::elements_[];
 
-Square::Square(double x, double y, double side,
-    const Texture& texture, const VFShader& shader)
+Square::Square(double x, double y, double side, const Texture& texture, const VFShader& shader)
 : Shape(x, y), Drawable(), texture_(texture), shader_(shader), side_(side), angle_(0.0)
 {
   // Taken from:
@@ -21,13 +20,13 @@ Square::Square(double x, double y, double side,
   // generate buffers
   glGenBuffers(1, &vertex_buffer_);
   glGenBuffers(1, &element_buffer_);
-  // bind shader
-  shader_.Bind(*this);
   // bind buffers
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_);
   //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer_);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data_), vertex_buffer_data_, GL_STATIC_DRAW);
   //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements_), elements_, GL_STATIC_DRAW);
+  // bind shader
+  shader_.Bind(*this);
 }
 
 
@@ -41,8 +40,8 @@ void Square::MoveTo(double x, double y) {
 }
 
 void Square::Draw(GLFWwindow *window) const {
-  glBindVertexArray(vertex_array_id_);
   glBindTexture(GL_TEXTURE_2D, texture_.texture_id());
+  glBindVertexArray(vertex_array_id_);
   mat4x4 model, project, mvp;
   int width, height;
   glfwGetFramebufferSize(window, &width, &height);
@@ -51,7 +50,7 @@ void Square::Draw(GLFWwindow *window) const {
   mat4x4_identity(model);
   mat4x4_translate_in_place(model, location_.first, location_.second, 0.0f);
   mat4x4_rotate_Z(model, model, angle_);
-  mat4x4_scale_aniso(model, model, side_, side_, 1.0f);
+  mat4x4_scale_aniso(model, model, 0.5f*side_, 0.5f*side_, 1.0f); // factor since screen width is 2
   mat4x4_ortho(project, -ratio, ratio, -1.0f, 1.0f, 1.0f, -1.0f);
   mat4x4_mul(mvp, project, model);
   // draw object

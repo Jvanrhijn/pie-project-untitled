@@ -28,8 +28,7 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
    * @param texture Texture object to draw on the square
    * @param shader Shader to render object with
    */
-  Square(double x, double y, double side,
-      const Texture& texture, const VFShader &shader);
+  Square(double x, double y, double side, const Texture& texture, const VFShader &shader);
   ~Square() override = default;
 
   void Draw(GLFWwindow*) const override;
@@ -57,7 +56,7 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
        1.0f, -1.0f, 0.0f,    0.0f, 1.0f, 0.0f,    1.0f, 0.0f,
        1.0f,  1.0f, 0.0f,    0.0f, 0.0f, 1.0f,    1.0f, 1.0f,
 
-       1.0f, -1.0f, 0.0f,    0.0f, 1.0f, 0.0f,    1.0f, 0.0f,
+       1.0f,  1.0f, 0.0f,    0.0f, 0.0f, 1.0f,    1.0f, 1.0f,
       -1.0f,  1.0f, 0.0f,    1.0f, 1.0f, 0.0f,    0.0f, 1.0f,
       -1.0f, -1.0f, 0.0f,    1.0f, 0.0f, 0.0f,    0.0f, 0.0f
   };

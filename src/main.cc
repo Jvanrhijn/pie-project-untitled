@@ -17,7 +17,7 @@ void grid(int num_per_side, const Texture &tex, const SP &shader, Renderer &rend
     for (int j=0; j<num_per_side; j++) {
       double x = width*(j + 0.5) - 1.0;
       double y = width*(i + 0.5) - 1.0;
-      std::shared_ptr<Drawable<GLFWwindow>> object = std::make_shared<Square>(x, y, 0.4*width, tex, shader);
+      std::shared_ptr<Drawable<GLFWwindow>> object = std::make_shared<Square>(x, y, 0.9*width, tex, shader);
       renderer.AddObject(object);
     }
   }
@@ -33,7 +33,6 @@ int main() {
   Shader<GL_FRAGMENT_SHADER> fragment_shader("lib/renderer/shaders/fragment_shader_test.fs");
   VFShader square_shader(vertex_shader, fragment_shader);
 
-  //grid(5, marble, square_shader, renderer);
 
   // construct charmap
   FontFace face("lib/renderer/fonts/arial.ttf", 48);
@@ -48,11 +47,11 @@ int main() {
     arial_char_map.insert(std::make_pair(c, character));
   }
 
-  std::shared_ptr<Drawable<GLFWwindow>> tile = std::make_shared<Square>(0.0, 0.0, 0.1f, marble, square_shader);
-  renderer.AddObject(tile);
-  //grid(4, marble, square_shader, renderer);
+  //std::shared_ptr<Drawable<GLFWwindow>> tile = std::make_shared<Square>(0.0, 0.0, 0.5, marble, square_shader);
+  //renderer.AddObject(tile);
+  grid(3, marble, square_shader, renderer);
 
-  renderer.AddObject(arial_char_map['b']);
+  renderer.AddObject(arial_char_map['B']);
 
   renderer.Loop();
 
