@@ -39,6 +39,11 @@ void Square::MoveTo(double x, double y) {
   location_.second = y;
 }
 
+void Square::MoveAlong(double dx, double dy) {
+  location_.first += dx;
+  location_.second += dy;
+}
+
 void Square::Draw(GLFWwindow *window) const {
   glBindTexture(GL_TEXTURE_2D, texture_.texture_id());
   glBindVertexArray(vertex_array_id_);

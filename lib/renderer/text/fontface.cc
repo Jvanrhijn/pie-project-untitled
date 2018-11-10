@@ -2,7 +2,7 @@
 // Created by jesse on 11/8/18.
 //
 
-#include "lib/renderer/fontface.h"
+#include "fontface.h"
 
 namespace pie {
 

@@ -18,6 +18,7 @@ class Drawable {
   virtual void Draw(Window*) const = 0;
   virtual void Rotate(double angle) = 0;
   virtual void MoveTo(double x, double y) = 0;
+  virtual void MoveAlong(double dx, double dy) = 0;
 
   long stride() const {
     return stride_;

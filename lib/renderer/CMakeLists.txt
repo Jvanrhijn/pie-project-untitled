@@ -10,8 +10,10 @@ set(renderer_files
         lib/renderer/square.cc
         lib/renderer/util/load_shader.cc
         lib/renderer/texture.cc
-        lib/renderer/character.cc
-        lib/renderer/fontface.cc)
+        lib/renderer/text/character.cc
+        lib/renderer/text/fontface.cc
+        lib/renderer/text/charmap.cc
+        lib/renderer/text/string.cc)
 
 add_library(renderer STATIC ${renderer_files})
 target_link_libraries(renderer glad glfw3 freetype)

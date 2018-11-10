@@ -9,7 +9,7 @@
 #include <GLFW/glfw3.h>
 
 #include "lib/renderer/drawable.h"
-#include "lib/renderer/fontface.h"
+#include "lib/renderer/text/fontface.h"
 #include "lib/renderer/shader.h"
 #include "lib/renderer/linmath.h"
 
@@ -24,13 +24,21 @@ class Character : public Drawable<GLFWwindow> {
   void Draw(GLFWwindow *window) const override;
 
   void MoveTo(double x, double y) override;
+  void MoveAlong(double dx, double dy) override;
   void Rotate(double angle) override;
+
+  // expose advance and location for string rendering
+  GLuint advance() const;
+  std::pair<float, float> location() const;
+
 
  private:
   void BuildVertices();
 
  private:
   VFShader shader_;
+
+  float angle_;
 
   Color color_;
 

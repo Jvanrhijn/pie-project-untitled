@@ -2,7 +2,9 @@
 #include "lib/renderer/square.h"
 #include "lib/renderer/drawable.h"
 #include "lib/renderer/texture.h"
-#include "lib/renderer/character.h"
+#include "lib/renderer/text/character.h"
+#include "lib/renderer/text/charmap.h"
+#include "lib/renderer/text/string.h"
 
 #include <map>
 #include <thread>
@@ -35,23 +37,14 @@ int main() {
 
 
   // construct charmap
-  FontFace face("lib/renderer/fonts/arial.ttf", 48);
-  Shader<GL_VERTEX_SHADER> vs("lib/renderer/shaders/text.vs");
-  Shader<GL_FRAGMENT_SHADER> fs("lib/renderer/shaders/text.fs");
-  VFShader shader(vs, fs);
-  Color col{0.0, 0.0, 0.0};
+  auto char_map = getCharMap("lib/renderer/fonts/arial.ttf", 48, Color{0.0, 0.0, 0.0});
+  std::shared_ptr<Drawable<GLFWwindow>> character = std::make_shared<Character>(char_map.at('c'));
 
-  std::map<GLchar, std::shared_ptr<Drawable<GLFWwindow>>> arial_char_map;
-  for (GLubyte c=0; c<128; c++) {
-    std::shared_ptr<Drawable<GLFWwindow>> character  = std::make_shared<Character>(face, c, col, shader);
-    arial_char_map.insert(std::make_pair(c, character));
-  }
-
-  //std::shared_ptr<Drawable<GLFWwindow>> tile = std::make_shared<Square>(0.0, 0.0, 0.5, marble, square_shader);
-  //renderer.AddObject(tile);
   grid(3, marble, square_shader, renderer);
 
-  renderer.AddObject(arial_char_map['B']);
+  std::shared_ptr<Drawable<GLFWwindow>> string = std::make_shared<String>("Hello", char_map);
+
+  renderer.AddObject(string);
 
   renderer.Loop();
 

@@ -37,6 +37,8 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
 
   void MoveTo(double x, double y) override;
 
+  void MoveAlong(double dx, double dy) override;
+
  private:
   const Texture &texture_;
   const VFShader &shader_;

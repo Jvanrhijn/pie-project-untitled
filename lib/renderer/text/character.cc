@@ -2,7 +2,7 @@
 // Created by jesse on 11/8/18.
 //
 
-#include "lib/renderer/character.h"
+#include "character.h"
 
 namespace pie {
 
@@ -17,7 +17,7 @@ float Character::vertex_data_[] = {
 };
 
 Character::Character(FontFace &face, const char c, const Color& color, const VFShader &sp)
-  : shader_(sp), color_(color), location_(0.0f, 0.0f)
+  : shader_(sp), color_(color), angle_(0.0f), location_(0.0f, 0.0f)
 {
   face.LoadChar(c);
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -62,6 +62,8 @@ void Character::Draw(GLFWwindow *window) const {
   int width, height;
   glfwGetFramebufferSize(window, &width, &height);
   mat4x4_identity(model);
+  mat4x4_translate_in_place(model, location_.first*width/2.0f, location_.second*height/2.0f, 0.0f);
+  mat4x4_rotate_Z(model, model, angle_);
   mat4x4_scale_aniso(model, model, 1.0f, 1.0f, 1.0f);
   // convert model space coordinates to view space
   mat4x4_ortho(project, -width/2.0f, width/2.0f, -height/2.0f, height/2.0f, 1.0f, -1.0f);
@@ -83,8 +85,21 @@ void Character::MoveTo(double x, double y) {
   location_.second = y;
 }
 
-void Character::Rotate(double angle) {
+void Character::MoveAlong(double dx, double dy) {
+  location_.first += dx;
+  location_.second += dy;
+}
 
+void Character::Rotate(double angle) {
+  angle_ = angle;
+}
+
+GLuint Character::advance() const {
+  return advance_;
+}
+
+std::pair<float, float> Character::location() const {
+  return location_;
 }
 
 void Character::BuildVertices() {
