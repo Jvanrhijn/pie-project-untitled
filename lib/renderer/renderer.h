@@ -12,8 +12,8 @@
 #include "lib/glad/include/glad/glad.h"
 #include <GLFW/glfw3.h>
 
-#include "lib/exit_codes.h"
-#include "drawable.h"
+#include "lib/renderer/exceptions.h"
+#include "lib/renderer/drawable.h"
 #include "lib/renderer/shape.h"
 
 namespace pie {

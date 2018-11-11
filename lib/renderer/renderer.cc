@@ -10,7 +10,7 @@ Renderer::Renderer(size_t width, size_t height)
 {
   // Initialize GLFW
   if(!glfwInit()) {
-    exit(ExitCode::FAIL_OPENGL_INIT);
+    throw RenderException("Failed to initialize OpenGL");
   }
   // set OpenGL version
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -18,16 +18,16 @@ Renderer::Renderer(size_t width, size_t height)
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
   if (!(window_ = glfwCreateWindow(width, height, "Game", nullptr, nullptr))) {
-    exit(ExitCode::FAIL_WINDOW_CREATE);
+    throw RenderException("Failed to create window");
   }
   // Output errors to stderr
   glfwMakeContextCurrent(window_);
   if(!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
-    exit(ExitCode::FAIL_LOAD_GL);
+    throw RenderException("Failed to load OpenGL");
   }
   glfwSwapInterval(1);
   glfwSetErrorCallback([](int err, const char* descr) {
-    std::cerr << "GLFW ERROR " << err << ": " << descr << std::endl;
+    std::cerr << "GLFW ERROR: " << err << ": " << descr << std::endl;
   });
   // setup viewport
   glViewport(0, 0, width_, height_);

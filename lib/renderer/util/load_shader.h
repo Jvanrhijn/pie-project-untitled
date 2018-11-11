@@ -11,7 +11,7 @@
 #include <vector>
 #include <iostream>
 
-#include "lib/exit_codes.h"
+#include "lib/renderer/exceptions.h"
 #include "lib/glad/include/glad/glad.h"
 #include <GLFW/glfw3.h>
 

@@ -21,8 +21,7 @@ Texture::Texture(const char *path) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_, height_, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
   } else {
-    std::cerr << "Failed to load texture" << std::endl;
-    exit(ExitCode::FAIL_LOAD_TEXTURE);
+    throw RenderException("Failed to load texture");
   }
   stbi_image_free(data);
 }

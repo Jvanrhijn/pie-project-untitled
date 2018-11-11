@@ -12,7 +12,7 @@
 #include "lib/glad/include/glad/glad.h"
 #include <GLFW/glfw3.h>
 
-#include "lib/exit_codes.h"
+#include "exceptions.h"
 
 namespace pie {
 
