@@ -27,12 +27,12 @@ void grid(int num_per_side, const Texture &tex, const SP &shader, Renderer &rend
 
 
 int main() {
-  Renderer renderer(800, 600);
+  Renderer renderer(900, 900);
 
   Texture marble("textures/marble.jpg");
 
-  Shader<GL_VERTEX_SHADER> vertex_shader("lib/renderer/shaders/vertex_shader_test.vs");
-  Shader<GL_FRAGMENT_SHADER> fragment_shader("lib/renderer/shaders/fragment_shader_test.fs");
+  Shader<GL_VERTEX_SHADER> vertex_shader("lib/renderer/shaders/square.vs");
+  Shader<GL_FRAGMENT_SHADER> fragment_shader("lib/renderer/shaders/square.fs");
   VFShader square_shader(vertex_shader, fragment_shader);
 
   auto char_map = getCharMap("lib/renderer/fonts/arial.ttf", 48, Color{0.0, 0.0, 0.0});
@@ -40,7 +40,7 @@ int main() {
 
   grid(10, marble, square_shader, renderer);
 
-  std::shared_ptr<Drawable<GLFWwindow>> string = std::make_shared<String>("A test string", char_map, 1.0f);
+  std::shared_ptr<Drawable<GLFWwindow>> string = std::make_shared<String>("A test string", char_map, 1.5f);
   auto c = char_map.at('L');
   std::shared_ptr<Drawable<GLFWwindow>> char_p = std::make_shared<Character>(c);
 

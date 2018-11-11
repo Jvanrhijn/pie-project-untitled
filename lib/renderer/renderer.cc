@@ -50,7 +50,7 @@ void Renderer::AddObject(std::shared_ptr<pie::Drawable<GLFWwindow>> object) {
 
 void Renderer::Loop() const {
   while(!glfwWindowShouldClose(window_)) {
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for (const auto& obj: objects_) {
       if (obj) {
