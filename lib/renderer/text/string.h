@@ -18,7 +18,7 @@ namespace pie {
 
 class String : public Drawable<GLFWwindow> {
  public:
-  String(std::string text, const charmap& char_map);
+  String(std::string text, const charmap& char_map, float scale=1.0f);
 
   void Draw(GLFWwindow*) const override;
 
@@ -27,7 +27,6 @@ class String : public Drawable<GLFWwindow> {
   void MoveAlong(double dx, double dy) override;
 
   void Rotate(double angle) override;
-
 
  private:
   std::string text_;

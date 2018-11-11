@@ -27,6 +27,9 @@ class Character : public Drawable<GLFWwindow> {
   void MoveAlong(double dx, double dy) override;
   void Rotate(double angle) override;
 
+  //! Scale the text isotropically
+  void Scale(float scale);
+
   // expose advance and location for string rendering
   GLuint advance() const;
   std::pair<float, float> location() const;
@@ -38,6 +41,7 @@ class Character : public Drawable<GLFWwindow> {
   VFShader shader_;
 
   float angle_;
+  float scale_;
 
   Color color_;
 

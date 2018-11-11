@@ -19,7 +19,7 @@ void grid(int num_per_side, const Texture &tex, const SP &shader, Renderer &rend
     for (int j=0; j<num_per_side; j++) {
       double x = width*(j + 0.5) - 1.0;
       double y = width*(i + 0.5) - 1.0;
-      std::shared_ptr<Drawable<GLFWwindow>> object = std::make_shared<Square>(x, y, 0.9*width, tex, shader);
+      std::shared_ptr<Drawable<GLFWwindow>> object = std::make_shared<Square>(x, y, 0.95*width, tex, shader);
       renderer.AddObject(object);
     }
   }
@@ -27,7 +27,7 @@ void grid(int num_per_side, const Texture &tex, const SP &shader, Renderer &rend
 
 
 int main() {
-  Renderer renderer(900, 900);
+  Renderer renderer(800, 600);
 
   Texture marble("textures/marble.jpg");
 
@@ -38,13 +38,14 @@ int main() {
   auto char_map = getCharMap("lib/renderer/fonts/arial.ttf", 48, Color{0.0, 0.0, 0.0});
   std::shared_ptr<Drawable<GLFWwindow>> character = std::make_shared<Character>(char_map.at('c'));
 
-  grid(5, marble, square_shader, renderer);
+  grid(10, marble, square_shader, renderer);
 
-  std::shared_ptr<Drawable<GLFWwindow>> string = std::make_shared<String>("hilp", char_map);
-  auto c = char_map.at('X');
+  std::shared_ptr<Drawable<GLFWwindow>> string = std::make_shared<String>("A test string", char_map, 1.0f);
+  auto c = char_map.at('L');
   std::shared_ptr<Drawable<GLFWwindow>> char_p = std::make_shared<Character>(c);
 
   renderer.AddObject(string);
+  string->MoveTo(0.5f, 0.5f);
 
   renderer.Loop();
 
