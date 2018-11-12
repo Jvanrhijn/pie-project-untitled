@@ -27,6 +27,7 @@ void grid(int num_per_side, const Texture &tex, const SP &shader, Renderer &rend
 
 
 int main() {
+
   Renderer renderer(900, 900);
 
   Texture marble("textures/marble.jpg");
