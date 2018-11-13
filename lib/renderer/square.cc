@@ -5,8 +5,6 @@
 
 namespace pie {
 
-constexpr float Square::vertex_buffer_data_[];
-
 Square::Square(double x, double y, double side, const Texture& texture, const VFShader& shader)
 : Shape(x, y), Drawable(), texture_(texture), shader_(shader), side_(side), angle_(0.0)
 {
@@ -64,6 +62,19 @@ void Square::Draw(GLFWwindow *window) const {
   glDisableVertexAttribArray(0);
   glBindTexture(GL_TEXTURE_2D, 0);
   glBindVertexArray(0);
+}
+
+void Square::Color(const struct Color &color) {
+  constexpr auto stride = stride_/sizeof(float);
+  constexpr auto offset = color_offset_/sizeof(float);
+  for (size_t i=0; i<sizeof(vertex_buffer_data_)/stride_; i++) {
+    vertex_buffer_data_[i*stride + offset + 0] = color.r;
+    vertex_buffer_data_[i*stride + offset + 1] = color.g;
+    vertex_buffer_data_[i*stride + offset + 2] = color.b;
+  }
+  // bind buffers
+  glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data_), vertex_buffer_data_, GL_STATIC_DRAW);
 }
 
 } // namespace pie

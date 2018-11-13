@@ -39,6 +39,8 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
 
   void MoveAlong(double dx, double dy) override;
 
+  void Color(const Color &color);
+
  private:
   const Texture &texture_;
   const VFShader &shader_;
@@ -53,15 +55,16 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
 
   // Constants for this model
   //! vertex data (pos, color, texture coordinates)
-  static constexpr float vertex_buffer_data_[] {
-      -1.0f, -1.0f, 0.0f,    1.0f, 0.0f, 0.0f,    0.0f, 0.0f,
-       1.0f, -1.0f, 0.0f,    0.0f, 1.0f, 0.0f,    1.0f, 0.0f,
-       1.0f,  1.0f, 0.0f,    0.0f, 0.0f, 1.0f,    1.0f, 1.0f,
+  float vertex_buffer_data_[48]{
+      -1.0f, -1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    0.0f, 0.0f,
+      1.0f, -1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 0.0f,
+      1.0f,  1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f,
 
-       1.0f,  1.0f, 0.0f,    0.0f, 0.0f, 1.0f,    1.0f, 1.0f,
-      -1.0f,  1.0f, 0.0f,    1.0f, 1.0f, 0.0f,    0.0f, 1.0f,
-      -1.0f, -1.0f, 0.0f,    1.0f, 0.0f, 0.0f,    0.0f, 0.0f
+      1.0f,  1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f,
+      -1.0f,  1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    0.0f, 1.0f,
+      -1.0f, -1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    0.0f, 0.0f
   };
+
 
 };
 
