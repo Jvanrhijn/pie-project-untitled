@@ -52,7 +52,17 @@ int main() {
   renderer.AddObject(string);
   string->MoveTo(0.5f, 0.5f);
 
+  std::thread mouse([&renderer]() {
+    while (!glfwWindowShouldClose(renderer.window())) {
+      double xpos, ypos;
+      glfwGetCursorPos(renderer.window(), &xpos, &ypos);
+      std::cout << xpos << " " << ypos << std::endl;
+    }
+  });
+
   renderer.Loop();
+
+  mouse.join();
 
   return EXIT_SUCCESS;
 }
