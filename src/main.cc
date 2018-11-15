@@ -5,6 +5,7 @@
 #include "lib/renderer/text/character.h"
 #include "lib/renderer/text/charmap.h"
 #include "lib/renderer/text/string.h"
+#include "lib/input/input.h"
 
 #include <map>
 #include <thread>
@@ -12,7 +13,6 @@
 #include <cstdlib>
 
 using namespace pie;
-
 
 template<class SP>
 std::vector<std::shared_ptr<Square>> grid(int num_per_side, const Texture &tex, const SP &shader, Renderer &renderer) {
@@ -52,17 +52,10 @@ int main() {
   renderer.AddObject(string);
   string->MoveTo(0.5f, 0.5f);
 
-  std::thread mouse([&renderer]() {
-    while (!glfwWindowShouldClose(renderer.window())) {
-      double xpos, ypos;
-      glfwGetCursorPos(renderer.window(), &xpos, &ypos);
-      std::cout << xpos << " " << ypos << std::endl;
-    }
-  });
+
+ inp::Mouse mouse(renderer.window());
 
   renderer.Loop();
-
-  mouse.join();
 
   return EXIT_SUCCESS;
 }

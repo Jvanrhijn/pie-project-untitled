@@ -10,11 +10,23 @@
 
 namespace inp {
 
-class Input {
+template<class T>
+struct Position {
+  Position(T x, T y) : x(x), y(y) {}
+  T x;
+  T y;
+};
+
+class Mouse {
  public:
-  Input();
+  explicit Mouse(GLFWwindow *window);
+
+  static void MouseClickCallback(GLFWwindow *, int, int, int);
+
+  Position<double> GetPosition() const;
 
  private:
+  GLFWwindow *window_;
 
 
 };
