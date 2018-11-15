@@ -23,6 +23,7 @@ include_directories(.)
 include(lib/renderer/CMakeLists.txt)
 include(lib/glad/CMakeLists.txt)
 include(lib/game/CMakeLists.txt)
+include(lib/input/CMakeLists.txt)
 include(tests/CMakeLists.txt)
 include(gtest.cmake)
 
@@ -39,5 +40,5 @@ if (COVERAGE)
 endif()
 
 # executables
-add_executable(${TARGET} src/main.cc util/macros.h util/functions.h lib/draw/drawable.h)
-target_link_libraries(${TARGET} ${OPENGL_gl_LIBRARY} glfw glad renderer game)
+add_executable(${TARGET} src/main.cc util/macros.h util/functions.h lib/renderer/drawable.h)
+target_link_libraries(${TARGET} ${OPENGL_gl_LIBRARY} glfw glad renderer game input)

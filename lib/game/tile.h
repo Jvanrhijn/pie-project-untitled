@@ -10,7 +10,7 @@
 #include <memory>
 
 #include "lib/optional.h"
-#include "lib/draw/drawable.h"
+#include "lib/renderer/drawable.h"
 
 namespace pie {
 

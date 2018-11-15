@@ -9,7 +9,7 @@
 
 #include "lib/grid.h"
 #include "tile.h"
-#include "lib/draw/drawable.h"
+#include "lib/renderer/drawable.h"
 
 namespace pie {
 
