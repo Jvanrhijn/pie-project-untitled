@@ -7,10 +7,10 @@ This project implements an interactive math puzzle, played as follows (descripti
 
 [![explanation](https://i.stack.imgur.com/MW0GO.png)](https://i.stack.imgur.com/MW0GO.png)
 
->The rules are simple: Given a grid of `N x N` squares, your task is to visit every square exactly once. In each step, you may
+> The rules are simple: Given a grid of `N x N` squares, your task is to visit every square exactly once. In each step, you may
 >
->    skip 2 squares horizontally or vertically or
->    skip 1 square diagonally
+>    * skip 2 squares horizontally or vertically or
+>    * skip 1 square diagonally
 
  
  The project will implement an interactive version, where the player can choose where to move,
@@ -60,6 +60,9 @@ This will create the `unit_tests` executable in your build directory:
 
 General:
 * cmake >=3.9.2
+* OpenGL 3.3 core
+* [GLFW3](https://www.glfw.org/)
+* [FreeType](https://www.freetype.org/download.html)
 
 For development:
 * GTest: https://github.com/google/googletest
