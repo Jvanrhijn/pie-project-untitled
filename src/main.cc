@@ -52,8 +52,15 @@ int main() {
   renderer.AddObject(string);
   string->MoveTo(0.5f, 0.5f);
 
-
- inp::Mouse mouse(renderer.window());
+  inp::Mouse mouse(renderer.window());
+  glfwSetWindowUserPointer(renderer.window(), &mouse);
+  mouse.SetClickCallback([](GLFWwindow *w, int b, int a, int) {
+    if (b == GLFW_MOUSE_BUTTON_LEFT && a == GLFW_PRESS) {
+      auto mouse = static_cast<inp::Mouse *>(glfwGetWindowUserPointer(w));
+      auto pos = mouse->GetPosition();
+      std::cout << pos.x << " " << pos.y << std::endl;
+    }
+  });
 
   renderer.Loop();
 

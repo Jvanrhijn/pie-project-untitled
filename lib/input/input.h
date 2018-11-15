@@ -21,7 +21,10 @@ class Mouse {
  public:
   explicit Mouse(GLFWwindow *window);
 
-  static void MouseClickCallback(GLFWwindow *, int, int, int);
+  template<class Fn>
+  void SetClickCallback(Fn callback) {
+    glfwSetMouseButtonCallback(window_, callback);
+  }
 
   Position<double> GetPosition() const;
 
