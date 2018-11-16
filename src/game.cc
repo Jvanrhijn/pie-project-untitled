@@ -9,42 +9,49 @@ namespace pie {
 Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size_t width, std::size_t height)
   : renderer_(width, height),
     mouse_(renderer_.window()),
-    square_tex_("textures/marble.jpg"),
-    square_vs_("lib/renderer/shaders/square.vs"),
-    square_fs_("lib/renderer/shaders/square.fs"),
+    square_tex_(square_texture_path_),
+    square_vs_(square_vs_path_),
+    square_fs_(square_fs_path_),
     square_shader_(square_vs_, square_fs_),
-    char_map_(getCharMap("lib/renderer/fonts/arial.ttf", font_size, Color{0.0, 0.0, 0.0})),
+    char_map_(getCharMap(font_path_, font_size_, Color{0.0, 0.0, 0.0})),
     rules_(side, start_x, start_y),
-    squares_(side, side),
-    text_(side, side)
+    tiles_(side, side)
 {
-  // setup shaders and textures for Square
-  // build charmap
-  // setup grids of squares and text
-  double square_width = 2.0/side;
+  const double square_width = 2.0/side;
   for (size_t i=0; i<side; i++) {
     for (size_t j=0; j<side; j++) {
       double x = square_width*(j + 0.5) - 1.0;
       double y = square_width*(rules_.board().side() - i - 0.5) - 1.0;
-      squares_.Set(i, j, std::make_shared<Square>(x, y, fill_factor*square_width, square_tex_, square_shader_));
-      text_.Set(i, j, std::make_shared<String>("", char_map_, 1.5f));
-      renderer_.AddObject(std::static_pointer_cast<Drawable<GLFWwindow>>(squares_.Get(i, j)));
-      renderer_.AddObject(std::static_pointer_cast<Drawable<GLFWwindow>>(text_.Get(i, j)));
+      tiles_.Set(i, j, GameTile(
+          rules_.board().GetTile(i, j),
+          std::make_shared<Square>(x, y, fill_factor_*square_width, square_tex_, square_shader_),
+          std::make_shared<String>("", char_map_, 1.5f)
+      ));
+      renderer_.AddObject(std::static_pointer_cast<Drawable<GLFWwindow>>(tiles_.Get(i, j).square()));
+      renderer_.AddObject(std::static_pointer_cast<Drawable<GLFWwindow>>(tiles_.Get(i, j).string()));
     }
   }
   // Initialize game rules, set text to render for starting tile
-  auto start_coords = rules_.current_tile()->coordinates();
-  auto start_pos = GridToScreen(start_coords);
-  size_t start_val = rules_.current_tile()->value().value();
-  auto start_text = text_.Get(start_coords.first, start_coords.second);
-  *start_text = String(std::to_string(rules_.current_tile()->value()), char_map_, 1.5f);
-  start_text->MoveTo(start_pos.x, start_pos.y);
+  const auto start_coords = rules_.current_tile()->coordinates();
+  tiles_.Get(start_coords.first, start_coords.second).SetText(
+      String(std::to_string(rules_.current_tile()->value()), char_map_, 1.5f)
+  );
+
   for (const auto& t: rules_.current_tile()->reachables()) {
-    auto coordinates = t->coordinates();
     if (!t->IsSet()) {
-      squares_.Get(coordinates.first, coordinates.second)->Color(Color{0.0, 1.0, 0.0});
+      auto coordinates = t->coordinates();
+      tiles_.Get(coordinates.first, coordinates.second).Highlight();
     }
   }
+  glfwSetWindowUserPointer(renderer_.window(), this);
+  mouse_.SetClickCallback([](GLFWwindow *w, int b, int a, int) {
+    if (b == GLFW_MOUSE_BUTTON_LEFT && a == GLFW_PRESS) {
+      auto game = static_cast<decltype(this)>(glfwGetWindowUserPointer(w));
+      game->ProcessMouseClick();
+      /*auto coordinates = game->ScreenToGrid(game->mouse_.GetPosition());
+      game->tiles_.Get(coordinates.first, coordinates.second).Highlight();*/
+    }
+  });
   // TODO: initialize mouse callback
   // TODO: dispatch game loop thread
 }
@@ -54,10 +61,51 @@ void Game::RenderLoop() const {
 }
 
 inp::Position<double> Game::GridToScreen(const std::pair<size_t, size_t> &pos) const {
-  double square_width = fill_factor*2.0/rules_.board().side();
+  double square_width = 2.0/rules_.board().side();
   double x = square_width*(pos.second + 0.5) - 1.0;
   double y = square_width*(rules_.board().side() - pos.first - 0.5) - 1.0;
   return inp::Position<double>{x, y};
+}
+
+std::pair<size_t, size_t> Game::ScreenToGrid(const inp::Position<double> &pos) const {
+  const double width = 2.0/rules_.board().side();
+  double j = ((pos.x + 1.0)/width - 0.5);
+  double i = (rules_.board().side() - 0.5 - (pos.y + 1.0)/width);
+  auto row = static_cast<size_t>(std::round(i));
+  auto col = static_cast<size_t>(std::round(j));
+  return std::make_pair(row, col);
+}
+
+// this makes me want to kill myself but ok
+void Game::ProcessMouseClick() {
+  // get the grid coordinates of the mouse click
+  auto coords = ScreenToGrid(mouse_.GetPosition());
+  // check if the cicked tile is reachable
+  for (const auto& t: rules_.current_tile()->reachables()) {
+    if (coords == t->coordinates() && !t->IsSet()) {
+      // if the tile is reachable, move to it and
+      // reset highlight on the currently highlighted tiles
+      for (auto& r: rules_.current_tile()->reachables()) {
+        size_t x, y;
+        std::tie(x, y) = r->coordinates();
+        tiles_.Get(x, y).ResetHighlight();
+      }
+      rules_.MoveTo(coords.first, coords.second);
+      tiles_.Get(coords.first, coords.second).SetText(String(
+          std::to_string(rules_.current_tile()->value().value()),
+          char_map_,
+          1.5f
+      ));
+      for (const auto& new_t: rules_.current_tile()->reachables()) {
+        auto new_coords = new_t->coordinates();
+        auto new_tile = tiles_.Get(new_coords.first, new_coords.second);
+        if (!new_tile.tile()->IsSet()) {
+          new_tile.Highlight();
+        }
+      }
+      return;
+    }
+  }
 }
 
 } // namespace pie

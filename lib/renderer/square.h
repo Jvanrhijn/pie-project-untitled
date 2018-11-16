@@ -41,6 +41,8 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
 
   void Color(const Color &color);
 
+  std::pair<double, double> location() const;
+
  private:
   const Texture &texture_;
   const VFShader &shader_;

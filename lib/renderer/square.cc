@@ -77,5 +77,9 @@ void Square::Color(const struct Color &color) {
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data_), vertex_buffer_data_, GL_STATIC_DRAW);
 }
 
+std::pair<double, double> Square::location() const {
+  return location_;
+}
+
 } // namespace pie
 

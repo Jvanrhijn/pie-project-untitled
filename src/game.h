@@ -7,6 +7,8 @@
 
 #include <cstddef>
 
+#include "src/game_tile.h"
+
 #include "lib/renderer/renderer.h"
 #include "lib/renderer/square.h"
 #include "lib/renderer/text/string.h"
@@ -28,10 +30,17 @@ class Game {
 
  private:
   inp::Position<double> GridToScreen(const std::pair<size_t, size_t> &pos) const;
+  std::pair<size_t, size_t> ScreenToGrid(const inp::Position<double> &pos) const;
+  void ProcessMouseClick();
 
  private:
-  static constexpr size_t font_size{48};
-  static constexpr double fill_factor{0.95};
+  // constants
+  static constexpr size_t font_size_{48};
+  static constexpr double fill_factor_{0.95};
+  static constexpr char const *square_texture_path_{"textures/marble.jpg"};
+  static constexpr char const *square_vs_path_{"lib/renderer/shaders/square.vs"};
+  static constexpr char const *square_fs_path_{"lib/renderer/shaders/square.fs"};
+  static constexpr char const *font_path_{"lib/renderer/fonts/arial.ttf"};
 
   Renderer renderer_;
   inp::Mouse mouse_;
@@ -45,9 +54,7 @@ class Game {
   charmap char_map_;
 
   Rules rules_;
-
-  Grid<std::shared_ptr<Square>> squares_;
-  Grid<std::shared_ptr<String>> text_;
+  Grid<GameTile> tiles_;
 };
 
 } // namespace pie

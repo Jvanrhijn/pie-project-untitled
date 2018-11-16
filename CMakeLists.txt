@@ -41,7 +41,7 @@ endif()
 
 set (src_files
         src/game.cc
-        )
+        src/game_tile.cc)
 
 # executables
 add_executable(${TARGET} src/main.cc util/macros.h util/functions.h ${src_files})

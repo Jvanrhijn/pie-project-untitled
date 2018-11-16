@@ -36,9 +36,12 @@ std::vector<std::shared_ptr<Square>> grid(int num_per_side, const Texture &tex, 
 
 int main() {
 
-  Game game{2, 4, 10, 900, 900};
-
-  game.RenderLoop();
+  try {
+    Game game{1, 3, 10, 900, 900};
+    game.RenderLoop();
+  } catch (const std::exception &e) {
+    std::cerr << e.what() << std::endl;
+  }
 
   return EXIT_SUCCESS;
 }
