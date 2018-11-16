@@ -56,13 +56,13 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
   // Constants for this model
   //! vertex data (pos, color, texture coordinates)
   float vertex_buffer_data_[48]{
-      -1.0f, -1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    0.0f, 0.0f,
-      1.0f, -1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 0.0f,
-      1.0f,  1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f,
+      -1.0f, -1.0f, 1.0f,    1.0f, 1.0f, 1.0f,    0.0f, 0.0f,
+       1.0f, -1.0f, 1.0f,    1.0f, 1.0f, 1.0f,    1.0f, 0.0f,
+       1.0f,  1.0f, 1.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f,
 
-      1.0f,  1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f,
-      -1.0f,  1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    0.0f, 1.0f,
-      -1.0f, -1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    0.0f, 0.0f
+       1.0f,  1.0f, 1.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f,
+      -1.0f,  1.0f, 1.0f,    1.0f, 1.0f, 1.0f,    0.0f, 1.0f,
+      -1.0f, -1.0f, 1.0f,    1.0f, 1.0f, 1.0f,    0.0f, 0.0f
   };
 
 

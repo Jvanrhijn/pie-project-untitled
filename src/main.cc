@@ -7,6 +7,8 @@
 #include "lib/renderer/text/string.h"
 #include "lib/input/input.h"
 
+#include "src/game.h"
+
 #include <map>
 #include <thread>
 
@@ -34,35 +36,9 @@ std::vector<std::shared_ptr<Square>> grid(int num_per_side, const Texture &tex, 
 
 int main() {
 
-  Renderer renderer(900, 900);
+  Game game{2, 4, 10, 900, 900};
 
-  Texture marble("textures/marble.jpg");
-
-  Shader<GL_VERTEX_SHADER> vertex_shader("lib/renderer/shaders/square.vs");
-  Shader<GL_FRAGMENT_SHADER> fragment_shader("lib/renderer/shaders/square.fs");
-  VFShader square_shader(vertex_shader, fragment_shader);
-
-  auto char_map = getCharMap("lib/renderer/fonts/arial.ttf", 48, Color{0.0, 0.0, 0.0});
-
-  auto squares = grid(5, marble, square_shader, renderer);
-  squares[6]->Color(Color{1.0, 0.0, 0.0});
-
-  std::shared_ptr<Drawable<GLFWwindow>> string = std::make_shared<String>("Hello, world!", char_map, 1.5f);
-
-  renderer.AddObject(string);
-  string->MoveTo(0.5f, 0.5f);
-
-  inp::Mouse mouse(renderer.window());
-  glfwSetWindowUserPointer(renderer.window(), &mouse);
-  mouse.SetClickCallback([](GLFWwindow *w, int b, int a, int) {
-    if (b == GLFW_MOUSE_BUTTON_LEFT && a == GLFW_PRESS) {
-      auto mouse = static_cast<inp::Mouse *>(glfwGetWindowUserPointer(w));
-      auto pos = mouse->GetPosition();
-      std::cout << pos.x << " " << pos.y << std::endl;
-    }
-  });
-
-  renderer.Loop();
+  game.RenderLoop();
 
   return EXIT_SUCCESS;
 }

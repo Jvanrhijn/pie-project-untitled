@@ -13,8 +13,7 @@
 
 #include "lib/input/input.h"
 
-#include "lib/game/board.h"
-#include "lib/game/tile.h"
+#include "lib/game/rules.h"
 
 #include "lib/grid.h"
 
@@ -25,13 +24,27 @@ class Game {
  public:
   Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size_t width, std::size_t height);
 
+  void RenderLoop() const;
+
+ private:
+  inp::Position<double> GridToScreen(const std::pair<size_t, size_t> &pos) const;
+
  private:
   static constexpr size_t font_size{48};
-  static constexpr double fill_factor{0.9};
+  static constexpr double fill_factor{0.95};
 
   Renderer renderer_;
   inp::Mouse mouse_;
-  Board board_;
+
+  Texture square_tex_;
+
+  Shader<GL_VERTEX_SHADER> square_vs_;
+  Shader<GL_FRAGMENT_SHADER> square_fs_;
+  VFShader square_shader_;
+
+  charmap char_map_;
+
+  Rules rules_;
 
   Grid<std::shared_ptr<Square>> squares_;
   Grid<std::shared_ptr<String>> text_;

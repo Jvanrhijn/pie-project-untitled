@@ -31,7 +31,6 @@ class Mouse {
  private:
   GLFWwindow *window_;
 
-
 };
 
 } // namespace inp
