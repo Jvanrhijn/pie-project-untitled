@@ -46,7 +46,7 @@ class GameTile {
   std::shared_ptr<Square> square_;
   std::shared_ptr<String> string_;
 
-  static constexpr Color highlight_color_{0.0, 1.0, 0.0};
+  static constexpr Color highlight_color_{0.678, 1.0, 0.184};
   static constexpr Color current_highlight_color_{0.83, 0.83, 0.83};
 
 };
