@@ -17,6 +17,8 @@ Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size
     rules_(side, start_x, start_y),
     tiles_(side, side)
 {
+  // Improvement: make GameTile drawable, avoid need to retrieve
+  // Tile from board?
   const double square_width = 2.0/side;
   for (size_t i=0; i<side; i++) {
     for (size_t j=0; j<side; j++) {
@@ -31,12 +33,13 @@ Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size
       renderer_.AddObject(std::static_pointer_cast<Drawable<GLFWwindow>>(tiles_.Get(i, j).string()));
     }
   }
-  // Initialize game rules, set text to render for starting tile
+  // Initialize game rules, set text and highlight for starting tile
   const auto start_coords = rules_.current_tile()->coordinates();
-  tiles_.Get(start_coords.first, start_coords.second).SetText(
+  auto start_tile = tiles_.Get(start_coords.first, start_coords.second);
+  start_tile.SetText(
       String(std::to_string(rules_.current_tile()->value()), char_map_, 1.5f)
   );
-
+  start_tile.CurrentHighlight();
   for (const auto& t: rules_.current_tile()->reachables()) {
     if (!t->IsSet()) {
       auto coordinates = t->coordinates();
@@ -48,12 +51,8 @@ Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size
     if (b == GLFW_MOUSE_BUTTON_LEFT && a == GLFW_PRESS) {
       auto game = static_cast<decltype(this)>(glfwGetWindowUserPointer(w));
       game->ProcessMouseClick();
-      /*auto coordinates = game->ScreenToGrid(game->mouse_.GetPosition());
-      game->tiles_.Get(coordinates.first, coordinates.second).Highlight();*/
     }
   });
-  // TODO: initialize mouse callback
-  // TODO: dispatch game loop thread
 }
 
 void Game::RenderLoop() const {
@@ -83,19 +82,26 @@ void Game::ProcessMouseClick() {
   // check if the cicked tile is reachable
   for (const auto& t: rules_.current_tile()->reachables()) {
     if (coords == t->coordinates() && !t->IsSet()) {
-      // if the tile is reachable, move to it and
-      // reset highlight on the currently highlighted tiles
+      // if the tile is reachable, reset highlight on the currently highlighted tiles
       for (auto& r: rules_.current_tile()->reachables()) {
         size_t x, y;
         std::tie(x, y) = r->coordinates();
         tiles_.Get(x, y).ResetHighlight();
       }
+      auto cur_coords = rules_.current_tile()->coordinates();
+      tiles_.Get(cur_coords.first, cur_coords.second).ResetHighlight();
+      // move to the new tile
       rules_.MoveTo(coords.first, coords.second);
-      tiles_.Get(coords.first, coords.second).SetText(String(
-          std::to_string(rules_.current_tile()->value().value()),
+      // retrieve current tile, set highlight and text
+
+      auto tile = tiles_.Get(coords.first, coords.second);
+      tile.SetText(String(
+          std::to_string(rules_.current_tile()->value()),
           char_map_,
           1.5f
       ));
+      tile.CurrentHighlight();
+      // highlight reachable tiles
       for (const auto& new_t: rules_.current_tile()->reachables()) {
         auto new_coords = new_t->coordinates();
         auto new_tile = tiles_.Get(new_coords.first, new_coords.second);

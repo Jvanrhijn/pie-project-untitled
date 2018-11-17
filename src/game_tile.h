@@ -26,6 +26,8 @@ class GameTile {
 
   void ResetHighlight();
 
+  void CurrentHighlight();
+
   //! Getters
   std::shared_ptr<Tile> tile() const;
   std::shared_ptr<Square> square() const;

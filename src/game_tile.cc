@@ -29,6 +29,10 @@ void GameTile::ResetHighlight() {
   square_->Color(Color{1.0, 1.0, 1.0});
 }
 
+void GameTile::CurrentHighlight() {
+  square_->Color(Color{0.83, 0.83, 0.83});
+}
+
 std::pair<size_t, size_t> GameTile::coordinates() const {
   return tile_->coordinates();
 }
