@@ -19,6 +19,7 @@ void GameTile::SetText(String string) {
   double x, y;
   std::tie(x, y) = square_->location();
   string_->MoveTo(x, y);
+  string_->Center();
 }
 
 void GameTile::Highlight() {

@@ -24,7 +24,7 @@ namespace pie {
 
 class Game {
  public:
-  Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size_t width, std::size_t height);
+  Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size_t width);
 
   void RenderLoop() const;
 
@@ -35,7 +35,7 @@ class Game {
 
  private:
   // constants
-  static constexpr size_t font_size_{48};
+  static constexpr size_t font_size_{96};
   static constexpr double fill_factor_{0.95};
   static constexpr char const *square_texture_path_{"textures/marble.jpg"};
   static constexpr char const *square_vs_path_{"lib/renderer/shaders/square.vs"};
@@ -55,6 +55,9 @@ class Game {
 
   Rules rules_;
   Grid<GameTile> tiles_;
+
+  float font_scale_;
+
 };
 
 } // namespace pie

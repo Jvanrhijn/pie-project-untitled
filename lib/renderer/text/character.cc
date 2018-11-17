@@ -83,6 +83,15 @@ void Character::Draw(GLFWwindow *window) const {
   glBindTexture(GL_TEXTURE_2D, 0);
 }
 
+double Character::Width() const {
+  return advance_ >> 6;
+  //return size_.first;
+}
+
+double Character::Height() const {
+  return size_.second;
+}
+
 void Character::MoveTo(double x, double y) {
   location_.first = x;
   location_.second = y;
@@ -103,6 +112,10 @@ void Character::Scale(float scale) {
 
 GLuint Character::advance() const {
   return advance_;
+}
+
+std::pair<int, int> Character::bearing() const {
+  return bearing_;
 }
 
 std::pair<float, float> Character::location() const {

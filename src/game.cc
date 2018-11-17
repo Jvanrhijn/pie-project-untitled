@@ -6,8 +6,8 @@
 
 namespace pie {
 
-Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size_t width, std::size_t height)
-  : renderer_(width, height),
+Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size_t width)
+  : renderer_(width, width),
     mouse_(renderer_.window()),
     square_tex_(square_texture_path_),
     square_vs_(square_vs_path_),
@@ -19,7 +19,12 @@ Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size
 {
   // Improvement: make GameTile drawable, avoid need to retrieve
   // Tile from board?
-  const double square_width = 2.0/side;
+  {
+    // empirical font scaling based on screen size and num tiles
+    float scale = width/900.0f * 10.0f/side * 48.0f/font_size_;
+    font_scale_ = 1.5f*scale;
+  }
+  const double square_width = 2.0 / side;
   for (size_t i=0; i<side; i++) {
     for (size_t j=0; j<side; j++) {
       double x = square_width*(j + 0.5) - 1.0;
@@ -27,7 +32,7 @@ Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size
       tiles_.Set(i, j, GameTile(
           rules_.board().GetTile(i, j),
           std::make_shared<Square>(x, y, fill_factor_*square_width, square_tex_, square_shader_),
-          std::make_shared<String>("", char_map_, 1.5f)
+          std::make_shared<String>("", char_map_, font_scale_)
       ));
       renderer_.AddObject(std::static_pointer_cast<Drawable<GLFWwindow>>(tiles_.Get(i, j).square()));
       renderer_.AddObject(std::static_pointer_cast<Drawable<GLFWwindow>>(tiles_.Get(i, j).string()));
@@ -37,7 +42,7 @@ Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size
   const auto start_coords = rules_.current_tile()->coordinates();
   auto start_tile = tiles_.Get(start_coords.first, start_coords.second);
   start_tile.SetText(
-      String(std::to_string(rules_.current_tile()->value()), char_map_, 1.5f)
+      String(std::to_string(rules_.current_tile()->value()), char_map_, font_scale_)
   );
   start_tile.CurrentHighlight();
   for (const auto& t: rules_.current_tile()->reachables()) {
@@ -93,12 +98,11 @@ void Game::ProcessMouseClick() {
       // move to the new tile
       rules_.MoveTo(coords.first, coords.second);
       // retrieve current tile, set highlight and text
-
       auto tile = tiles_.Get(coords.first, coords.second);
       tile.SetText(String(
           std::to_string(rules_.current_tile()->value()),
           char_map_,
-          1.5f
+          font_scale_
       ));
       tile.CurrentHighlight();
       // highlight reachable tiles
