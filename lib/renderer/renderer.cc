@@ -49,8 +49,10 @@ void Renderer::AddObject(std::shared_ptr<pie::Drawable<GLFWwindow>> object) {
 }
 
 void Renderer::Loop() const {
+  // see OpenGL docs for more information on how rendering works
   while(!glfwWindowShouldClose(window_)) {
-    glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
+    // Set background color to black
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for (const auto& obj: objects_) {
       if (obj) {

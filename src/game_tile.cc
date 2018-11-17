@@ -7,6 +7,7 @@
 namespace pie {
 
 constexpr Color GameTile::highlight_color_;
+constexpr Color GameTile::current_highlight_color_;
 
 GameTile::GameTile(std::shared_ptr<pie::Tile> tile,
                    std::shared_ptr<pie::Square> square,
@@ -22,7 +23,7 @@ void GameTile::SetText(String string) {
   string_->Center();
 }
 
-void GameTile::Highlight() {
+void GameTile::ReachableHighlight() {
   square_->Color(highlight_color_);
 }
 
@@ -31,7 +32,7 @@ void GameTile::ResetHighlight() {
 }
 
 void GameTile::CurrentHighlight() {
-  square_->Color(Color{0.83, 0.83, 0.83});
+  square_->Color(current_highlight_color_);
 }
 
 std::pair<size_t, size_t> GameTile::coordinates() const {

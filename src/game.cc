@@ -17,40 +17,41 @@ Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size
     rules_(side, start_x, start_y),
     tiles_(side, side)
 {
-  // Improvement: make GameTile drawable, avoid need to retrieve
-  // Tile from board?
-  {
-    // empirical font scaling based on screen size and num tiles
-    float scale = width/900.0f * 10.0f/side * 48.0f/font_size_;
-    font_scale_ = 1.5f*scale;
-  }
+  // TODO: Improvement: make GameTile drawable, avoid need to retrieve Tile from board?
+  // Empirical font scaling based on screen size and num tiles; generalize?
+  font_scale_ = width/900.0f * 10.0f/side * 48.0f/font_size_ * 1.5f;
+  // Build grid of GameTiles from underlying Rules
   const double square_width = 2.0 / side;
   for (size_t i=0; i<side; i++) {
     for (size_t j=0; j<side; j++) {
-      double x = square_width*(j + 0.5) - 1.0;
-      double y = square_width*(rules_.board().side() - i - 0.5) - 1.0;
+      auto pos = GridToScreen(std::make_pair(i, j));
+      // first contruct the GameTile
       tiles_.Set(i, j, GameTile(
           rules_.board().GetTile(i, j),
-          std::make_shared<Square>(x, y, fill_factor_*square_width, square_tex_, square_shader_),
+          std::make_shared<Square>(pos.x, pos.y, fill_factor_*square_width, square_tex_, square_shader_),
           std::make_shared<String>("", char_map_, font_scale_)
       ));
+      // Retrieve the just-constructed tile fron the tiles grid, add square and string to Renderer
+      // static_pointer_cast<T>() is needed since renderer expects pointer to Drawable<GLFWwindow>
       renderer_.AddObject(std::static_pointer_cast<Drawable<GLFWwindow>>(tiles_.Get(i, j).square()));
       renderer_.AddObject(std::static_pointer_cast<Drawable<GLFWwindow>>(tiles_.Get(i, j).string()));
     }
   }
-  // Initialize game rules, set text and highlight for starting tile
+  // Set the starting tile text
   const auto start_coords = rules_.current_tile()->coordinates();
   auto start_tile = tiles_.Get(start_coords.first, start_coords.second);
   start_tile.SetText(
       String(std::to_string(rules_.current_tile()->value()), char_map_, font_scale_)
   );
+  // highlight the current tile and the reachable tiles
   start_tile.CurrentHighlight();
   for (const auto& t: rules_.current_tile()->reachables()) {
     if (!t->IsSet()) {
       auto coordinates = t->coordinates();
-      tiles_.Get(coordinates.first, coordinates.second).Highlight();
+      tiles_.Get(coordinates.first, coordinates.second).ReachableHighlight();
     }
   }
+  // Initialize mouse controls
   glfwSetWindowUserPointer(renderer_.window(), this);
   mouse_.SetClickCallback([](GLFWwindow *w, int b, int a, int) {
     if (b == GLFW_MOUSE_BUTTON_LEFT && a == GLFW_PRESS) {
@@ -80,7 +81,7 @@ std::pair<size_t, size_t> Game::ScreenToGrid(const inp::Position<double> &pos) c
   return std::make_pair(row, col);
 }
 
-// this makes me want to kill myself but ok
+// this should probably be refactored into an Update() method or something
 void Game::ProcessMouseClick() {
   // get the grid coordinates of the mouse click
   auto coords = ScreenToGrid(mouse_.GetPosition());
@@ -110,7 +111,7 @@ void Game::ProcessMouseClick() {
         auto new_coords = new_t->coordinates();
         auto new_tile = tiles_.Get(new_coords.first, new_coords.second);
         if (!new_tile.tile()->IsSet()) {
-          new_tile.Highlight();
+          new_tile.ReachableHighlight();
         }
       }
       return;

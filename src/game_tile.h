@@ -20,15 +20,19 @@ class GameTile {
 
   GameTile() = default;
 
+  //! Set the text to be rendered on this GameTile
   void SetText(String);
 
-  void Highlight();
+  //! Highlight the tile as reachable
+  void ReachableHighlight();
 
+  //! Reset the highlight
   void ResetHighlight();
 
+  //! Highlight as current tile
   void CurrentHighlight();
 
-  //! Getters
+  // Getters
   std::shared_ptr<Tile> tile() const;
   std::shared_ptr<Square> square() const;
   std::shared_ptr<String> string() const;
@@ -43,6 +47,7 @@ class GameTile {
   std::shared_ptr<String> string_;
 
   static constexpr Color highlight_color_{0.0, 1.0, 0.0};
+  static constexpr Color current_highlight_color_{0.83, 0.83, 0.83};
 
 };
 

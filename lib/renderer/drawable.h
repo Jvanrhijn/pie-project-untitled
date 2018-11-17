@@ -15,11 +15,19 @@ class Drawable {
  public:
   virtual ~Drawable() = default;
 
+  //! Draw object to the window
   virtual void Draw(Window*) const = 0;
+
+  //! Rotate object counterclockwise by angle
   virtual void Rotate(double angle) = 0;
+
+  //! Move object to (x, y) in screen space coordinates
   virtual void MoveTo(double x, double y) = 0;
+
+  //! Move object from current position (x, y) to (x + dx, y + dy)
   virtual void MoveAlong(double dx, double dy) = 0;
 
+  // Getters
   long stride() const {
     return stride_;
   }
@@ -37,7 +45,7 @@ class Drawable {
   }
 
  protected:
-  // Offsets and stride for vertex_buffer_data_
+  // Offsets and stride for vertex buffer data (see OpenGL docs for more information)
   static constexpr long vertex_offset_{sizeof(float)*0};
   static constexpr long color_offset_{sizeof(float)*3};
   static constexpr long texture_offset_{sizeof(float)*6};

@@ -19,6 +19,7 @@
 
 namespace pie {
 
+// See Documentation of Drawable for inherited function docs
 class Square : protected Shape, public Drawable<GLFWwindow> {
  public:
   /**

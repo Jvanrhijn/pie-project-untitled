@@ -26,11 +26,17 @@ class Game {
  public:
   Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size_t width);
 
+  //! Start the game loop
   void RenderLoop() const;
 
  private:
+  //! Convert grid indices to screen-space coordinates
   inp::Position<double> GridToScreen(const std::pair<size_t, size_t> &pos) const;
+
+  //! Convert screen space coordinates to grid indices
   std::pair<size_t, size_t> ScreenToGrid(const inp::Position<double> &pos) const;
+
+  //! Perform the actions required when clicking on the grid
   void ProcessMouseClick();
 
  private:

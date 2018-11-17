@@ -21,7 +21,7 @@ class Texture {
   Texture() = default;
   explicit Texture(const char *data);
 
-  // Don't want texture to be copyable -- huge overhead
+  // Don't want texture to be copyable, pass around references instead
   Texture(const Texture&) = delete;
 
   ~Texture() = default;

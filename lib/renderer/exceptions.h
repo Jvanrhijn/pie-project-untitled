@@ -10,9 +10,10 @@
 
 namespace pie {
 
+// Throw this when there is something wrong with the rendering backend
 class RenderException : std::exception {
  public:
-  explicit RenderException(const std::string& message) : message_(message) {}
+  explicit RenderException(std::string message) : message_(std::move(message)) {}
 
   virtual const char *what() const noexcept {
     return message_.c_str();
