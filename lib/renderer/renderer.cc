@@ -58,7 +58,7 @@ void Renderer::Loop() const {
       }
     }
     glfwSwapBuffers(window_);
-    glfwPollEvents();
+    glfwWaitEvents();
   }
 }
 
