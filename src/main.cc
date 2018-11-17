@@ -3,7 +3,7 @@
 
 int main() {
   try {
-    pie::Game game{1, 1, 6, 600};
+    pie::Game game{1, 1, 5, 600}  ;
     game.RenderLoop();
   } catch (const std::exception &e) {
     std::cerr << e.what() << std::endl;
