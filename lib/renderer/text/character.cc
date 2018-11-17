@@ -84,8 +84,8 @@ void Character::Draw(GLFWwindow *window) const {
 }
 
 double Character::Width() const {
-  return advance_ >> 6;
-  //return size_.first;
+  //return advance_ >> 6;
+  return size_.first;
 }
 
 double Character::Height() const {
