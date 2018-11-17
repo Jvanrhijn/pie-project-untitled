@@ -36,11 +36,11 @@ class Game {
  private:
   // constants
   static constexpr size_t font_size_{96};
-  static constexpr double fill_factor_{0.95};
-  static constexpr char const *square_texture_path_{"textures/marble.jpg"};
+  static constexpr double fill_factor_{1.0};
+  static constexpr char const *square_texture_path_{"textures/graph_paper.jpg"};
   static constexpr char const *square_vs_path_{"lib/renderer/shaders/square.vs"};
   static constexpr char const *square_fs_path_{"lib/renderer/shaders/square.fs"};
-  static constexpr char const *font_path_{"lib/renderer/fonts/arial.ttf"};
+  static constexpr char const *font_path_{"lib/renderer/fonts/josh.ttf"};
 
   Renderer renderer_;
   inp::Mouse mouse_;
