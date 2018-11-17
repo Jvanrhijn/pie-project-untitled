@@ -32,8 +32,8 @@ void String::Center() {
   const double xshift = -0.5*(loc.first + last_char.Width())*scale_;
   // all numbers are equally tall; grab last char arbitrarily
   const double yshift = -0.5*last_char.Height()*scale_;
-  std::for_each(characters_.begin(), characters_.end(),
-                [&xshift, &yshift](Character& c){c.MoveAlong(xshift, yshift);});
+  std::for_each(characters_.begin(), characters_.end(), [&xshift, &yshift](Character& c){
+    c.MoveAlong(xshift, yshift);});
 }
 
 void String::Draw(GLFWwindow *window) const {
