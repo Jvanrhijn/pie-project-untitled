@@ -19,7 +19,7 @@ Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size
 {
   // TODO: Improvement: make GameTile drawable, avoid need to retrieve Tile from board?
   // Empirical font scaling based on screen size and num tiles; generalize?
-  font_scale_ = width/900.0f * 10.0f/side * 48.0f/font_size_ * 1.5f;
+  font_scale_ = width/900.0f * 10.0f/side * 48.0f/font_size_ * 2.0f;
   // Build grid of GameTiles from underlying Rules
   const double square_width = 2.0 / side;
   for (size_t i=0; i<side; i++) {
