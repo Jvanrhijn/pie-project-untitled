@@ -46,12 +46,16 @@ class Character : public Drawable<GLFWwindow> {
   void BuildVertices();
 
  private:
+  unsigned char *bitmap_buffer_;
+
+  char char_;
+
   VFShader shader_;
+
+  Color color_;
 
   float angle_;
   float scale_;
-
-  Color color_;
 
   GLuint tex_id_;
   GLuint advance_;

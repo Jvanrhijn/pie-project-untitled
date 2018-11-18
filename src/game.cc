@@ -56,8 +56,9 @@ void Game::SetupBoard() {
       auto pos = GridToScreen(std::make_pair(i, j));
       // first contruct the GameTile
       auto tile = rules_.board().GetTile(i, j);
-      auto tile_text = std::make_shared<String>(tile->IsSet()? std::to_string(tile->value()) : "", char_map_, font_scale_);
+      auto tile_text = std::make_shared<String>(tile->IsSet()? std::to_string(tile->value()) : " ", char_map_, font_scale_);
       tile_text->MoveTo(pos.x, pos.y);
+      tile_text->Center();
       tiles_.Set(i, j, GameTile(
           tile,
           std::make_shared<Square>(pos.x, pos.y, fill_factor_*square_width, square_tex_, square_shader_),

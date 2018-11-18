@@ -6,7 +6,7 @@
 
 namespace pie {
 
-String::String(std::string text, const pie::charmap &char_map, float scale)
+String::String(std::string text, const charmap &char_map, float scale)
   : text_(std::move(text)), location_(0.0f, 0.0f), scale_(scale)
 {
   float dx = 0.0f;
@@ -25,8 +25,7 @@ String::String(std::string text, const pie::charmap &char_map, float scale)
 }
 
 void String::Center() {
-  const auto first_char = characters_.front();
-  const auto last_char = characters_.back();
+  const auto &last_char = characters_.back();
   const auto loc = last_char.location();
   // only need first and last char for x shift
   const double xshift = -0.5*(loc.first + last_char.Width())*scale_;

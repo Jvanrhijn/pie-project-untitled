@@ -20,9 +20,10 @@ float Character::vertex_data_[] = {
 // https://learnopengl.com/In-Practice/Text-Rendering
 
 Character::Character(FontFace &face, const char c, const Color& color, const VFShader &sp)
-  : shader_(sp), color_(color), angle_(0.0f), scale_(1.0f), location_(0.0f, 0.0f)
+  : char_(c), shader_(sp), color_(color), angle_(0.0f), scale_(1.0f), location_(0.0f, 0.0f)
 {
   face.LoadChar(c);
+  bitmap_buffer_ = face.face()->glyph->bitmap.buffer;
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
   // generate texture
   glGenTextures(1, &tex_id_);
@@ -36,7 +37,7 @@ Character::Character(FontFace &face, const char c, const Color& color, const VFS
       0,
       GL_RED,
       GL_UNSIGNED_BYTE,
-      face.face()->glyph->bitmap.buffer
+      bitmap_buffer_
   );
   // set texture options
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
