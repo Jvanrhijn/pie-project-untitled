@@ -24,6 +24,7 @@ include(lib/renderer/CMakeLists.txt)
 include(lib/glad/CMakeLists.txt)
 include(lib/game/CMakeLists.txt)
 include(lib/input/CMakeLists.txt)
+include(lib/argparse/CMakeLists.txt)
 include(tests/CMakeLists.txt)
 include(gtest.cmake)
 
@@ -45,4 +46,4 @@ set (src_files
 
 # executables
 add_executable(${TARGET} src/main.cc util/macros.h util/functions.h ${src_files})
-target_link_libraries(${TARGET} ${OPENGL_gl_LIBRARY} glfw glad renderer game input)
+target_link_libraries(${TARGET} ${OPENGL_gl_LIBRARY} glfw glad renderer game input argparse)
