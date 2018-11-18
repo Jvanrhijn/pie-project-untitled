@@ -17,28 +17,40 @@ class ArgParser {
  public:
   ArgParser(int argc, char *argv[]);
 
-  template<class T>
-  T GetArg(const std::string &name, T def) const {
+  int GetArg(const std::string &name, int def) const {
     auto value = args_.find(name);
     if (value != args_.end()) {
-      if (SameTypes<T, bool>()) {
-        return args_.at(name) == "true";
-      } else if (SameTypes<T, int>()) {
-        return std::stoi(args_.at(name));
-      } else if (SameTypes<T, double>()) {
-        return std::stod(args_.at(name));
-      }
+      return std::stoi(args_.at(name));
+    }
+    return def;
+  }
+
+  double GetArg(const std::string &name, double def) const {
+    auto value = args_.find(name);
+    if (value != args_.end()) {
+      return std::stod(args_.at(name));
+    }
+    return def;
+  }
+
+  bool GetArg(const std::string &name, bool def) const {
+    auto value = args_.find(name);
+    if (value != args_.end()) {
+      return args_.at(name) == "true";
+    }
+    return def;
+  }
+
+  const std::string& GetArg(const std::string &name, const std::string &def) const {
+    auto value = args_.find(name);
+    if (value != args_.end()) {
+      return args_.at(name);
     }
     return def;
   }
 
  private:
   static std::string NameFromArg(const std::string &arg);
-
-  template<class T, class U>
-  static constexpr bool SameTypes() {
-    return std::is_same<T, U>::value;
-  }
 
  private:
   std::map<const std::string, std::string> args_;
