@@ -25,11 +25,15 @@ namespace pie {
 class Game {
  public:
   Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size_t width);
+  Game(std::size_t width, const Rules& rules);
 
   //! Start the game loop
   void RenderLoop() const;
 
  private:
+  //! Initialize the game board from the state of the rules object
+  void SetupBoard();
+
   //! Convert grid indices to screen-space coordinates
   inp::Position<double> GridToScreen(const std::pair<size_t, size_t> &pos) const;
 
