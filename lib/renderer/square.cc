@@ -25,7 +25,7 @@ Square::Square(double x, double y, double side, const Texture& texture, const VF
 }
 
 
-void Square::Rotate(double angle) {
+void Square::Rotate(float angle) {
   angle_ = angle;
 }
 

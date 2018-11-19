@@ -48,7 +48,7 @@ void Game::SetupBoard() {
   size_t side = rules_.board().side();
   int width, height;
   glfwGetFramebufferSize(renderer_.window(), &width, &height);
-  font_scale_ = width/900.0f * 10.0f/side * 48.0f/font_size_ * 2.0f;
+  font_scale_ = font_scale_factor_*width/(side*font_size_);
   // Build grid of GameTiles from underlying Rules
   const double square_width = 2.0 / side;
   for (size_t i=0; i<side; i++) {

@@ -31,7 +31,7 @@ class Character : public Drawable<GLFWwindow> {
 
   void MoveTo(double x, double y) override;
   void MoveAlong(double dx, double dy) override;
-  void Rotate(double angle) override;
+  void Rotate(float angle) override;
 
   //! Scale the text isotropically
   void Scale(float scale);
@@ -47,8 +47,6 @@ class Character : public Drawable<GLFWwindow> {
 
  private:
   unsigned char *bitmap_buffer_;
-
-  char char_;
 
   VFShader shader_;
 

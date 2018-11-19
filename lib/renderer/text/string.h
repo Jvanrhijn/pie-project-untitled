@@ -29,7 +29,7 @@ class String : public Drawable<GLFWwindow> {
 
   void MoveAlong(double dx, double dy) override;
 
-  void Rotate(double angle) override;
+  void Rotate(float angle) override;
 
  private:
   std::string text_;

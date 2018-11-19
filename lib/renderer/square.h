@@ -34,7 +34,7 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
 
   void Draw(GLFWwindow*) const override;
 
-  void Rotate(double angle) override;
+  void Rotate(float angle) override;
 
   void MoveTo(double x, double y) override;
 

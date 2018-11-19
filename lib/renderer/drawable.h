@@ -19,7 +19,7 @@ class Drawable {
   virtual void Draw(Window*) const = 0;
 
   //! Rotate object counterclockwise by angle
-  virtual void Rotate(double angle) = 0;
+  virtual void Rotate(float angle) = 0;
 
   //! Move object to (x, y) in screen space coordinates
   virtual void MoveTo(double x, double y) = 0;

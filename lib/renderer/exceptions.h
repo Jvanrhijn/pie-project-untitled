@@ -24,6 +24,18 @@ class RenderException : std::exception {
 
 };
 
+class FreetypeException : std::exception {
+ public:
+  explicit FreetypeException(std::string message) : message_(std::move(message)) {}
+
+  virtual const char *what() const noexcept {
+    return message_.c_str();
+  }
+
+ private:
+  std::string message_;
+};
+
 }
 
 #endif //PIE_EXIT_CODES_H

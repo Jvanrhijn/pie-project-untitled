@@ -63,7 +63,7 @@ void String::MoveAlong(double dx, double dy) {
   location_.second += dy;
 }
 
-void String::Rotate(double angle) {
+void String::Rotate(float) {
   throw std::runtime_error("String rotating not implemented");
 }
 

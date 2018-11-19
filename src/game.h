@@ -45,6 +45,7 @@ class Game {
 
  private:
   // constants
+  static constexpr float font_scale_factor_{1.2f};
   static constexpr size_t font_size_{96};
   static constexpr double fill_factor_{1.0};
   static constexpr char const *square_texture_path_{"textures/wrinkled_graph.jpg"};

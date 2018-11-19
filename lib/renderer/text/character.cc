@@ -20,7 +20,7 @@ float Character::vertex_data_[] = {
 // https://learnopengl.com/In-Practice/Text-Rendering
 
 Character::Character(FontFace &face, const char c, const Color& color, const VFShader &sp)
-  : char_(c), shader_(sp), color_(color), angle_(0.0f), scale_(1.0f), location_(0.0f, 0.0f)
+  : shader_(sp), color_(color), angle_(0.0f), scale_(1.0f), location_(0.0f, 0.0f)
 {
   face.LoadChar(c);
   bitmap_buffer_ = face.face()->glyph->bitmap.buffer;
@@ -103,7 +103,7 @@ void Character::MoveAlong(double dx, double dy) {
   location_.second += dy;
 }
 
-void Character::Rotate(double angle) {
+void Character::Rotate(float angle) {
   angle_ = angle;
 }
 
