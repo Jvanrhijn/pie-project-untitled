@@ -25,15 +25,10 @@ class String : public Drawable<GLFWwindow> {
 
   void Draw(GLFWwindow*) const override;
 
-  void MoveTo(double x, double y) override;
-
-  void MoveAlong(double dx, double dy) override;
-
   void Rotate(float angle) override;
 
  private:
   std::string text_;
-  std::pair<float, float> location_;
 
   std::vector<Character> characters_;
 

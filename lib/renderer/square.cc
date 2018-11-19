@@ -5,8 +5,8 @@
 
 namespace pie {
 
-Square::Square(double x, double y, double side, const Texture& texture, const VFShader& shader)
-: Shape(x, y), Drawable(), texture_(texture), shader_(shader), side_(side), angle_(0.0)
+Square::Square(float x, float y, double side, const Texture& texture, const VFShader& shader)
+: Drawable(x, y), texture_(texture), shader_(shader), side_(side)
 {
   // Taken from:
   // http://www.opengl-tutorial.org/beginners-tutorials/tutorial-2-the-first-triangle/
@@ -22,21 +22,6 @@ Square::Square(double x, double y, double side, const Texture& texture, const VF
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_buffer_data_), vertex_buffer_data_, GL_STATIC_DRAW);
   // bind shader
   shader_.Bind(*this);
-}
-
-
-void Square::Rotate(float angle) {
-  angle_ = angle;
-}
-
-void Square::MoveTo(double x, double y) {
-  location_.first = x;
-  location_.second = y;
-}
-
-void Square::MoveAlong(double dx, double dy) {
-  location_.first += dx;
-  location_.second += dy;
 }
 
 void Square::Draw(GLFWwindow *window) const {

@@ -29,10 +29,6 @@ class Character : public Drawable<GLFWwindow> {
 
   void Draw(GLFWwindow *window) const override;
 
-  void MoveTo(double x, double y) override;
-  void MoveAlong(double dx, double dy) override;
-  void Rotate(float angle) override;
-
   //! Scale the text isotropically
   void Scale(float scale);
 
@@ -46,7 +42,6 @@ class Character : public Drawable<GLFWwindow> {
   void BuildVertices();
 
  private:
-  unsigned char *bitmap_buffer_;
 
   VFShader shader_;
 
@@ -60,9 +55,6 @@ class Character : public Drawable<GLFWwindow> {
   std::pair<int, int> size_;
   std::pair<int, int> bearing_;
 
-  std::pair<float, float> location_;
-
-  // OpenGL vertex data
   static float vertex_data_[96];
 
   // vertex array object

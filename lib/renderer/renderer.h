@@ -14,7 +14,6 @@
 
 #include "lib/renderer/exceptions.h"
 #include "lib/renderer/drawable.h"
-#include "lib/renderer/shape.h"
 
 namespace pie {
 

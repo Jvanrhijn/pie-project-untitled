@@ -20,10 +20,9 @@ float Character::vertex_data_[] = {
 // https://learnopengl.com/In-Practice/Text-Rendering
 
 Character::Character(FontFace &face, const char c, const Color& color, const VFShader &sp)
-  : shader_(sp), color_(color), angle_(0.0f), scale_(1.0f), location_(0.0f, 0.0f)
+  : Drawable(0.0f, 0.0f), shader_(sp), color_(color), angle_(0.0f), scale_(1.0f)
 {
   face.LoadChar(c);
-  bitmap_buffer_ = face.face()->glyph->bitmap.buffer;
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
   // generate texture
   glGenTextures(1, &tex_id_);
@@ -37,7 +36,7 @@ Character::Character(FontFace &face, const char c, const Color& color, const VFS
       0,
       GL_RED,
       GL_UNSIGNED_BYTE,
-      bitmap_buffer_
+      face.face()->glyph->bitmap.buffer
   );
   // set texture options
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
@@ -85,26 +84,11 @@ void Character::Draw(GLFWwindow *window) const {
 }
 
 double Character::Width() const {
-  //return advance_ >> 6;
   return size_.first;
 }
 
 double Character::Height() const {
   return size_.second;
-}
-
-void Character::MoveTo(double x, double y) {
-  location_.first = x;
-  location_.second = y;
-}
-
-void Character::MoveAlong(double dx, double dy) {
-  location_.first += dx;
-  location_.second += dy;
-}
-
-void Character::Rotate(float angle) {
-  angle_ = angle;
 }
 
 void Character::Scale(float scale) {

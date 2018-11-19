@@ -7,7 +7,7 @@
 namespace pie {
 
 String::String(std::string text, const charmap &char_map, float scale)
-  : text_(std::move(text)), location_(0.0f, 0.0f), scale_(scale)
+  : Drawable(0.0f, 0.0f), text_(std::move(text)), scale_(scale)
 {
   float dx = 0.0f;
   for (const auto& c: text_) {
@@ -51,16 +51,6 @@ void String::Draw(GLFWwindow *window) const {
     // draw each character into the OpenGL window
     char_moved.Draw(window);
   }
-}
-
-void String::MoveTo(double x, double y) {
-  location_.first = x;
-  location_.second = y;
-}
-
-void String::MoveAlong(double dx, double dy) {
-  location_.first += dx;
-  location_.second += dy;
 }
 
 void String::Rotate(float) {
