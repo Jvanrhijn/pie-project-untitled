@@ -21,6 +21,8 @@ int main(int argc, char *argv[]) {
   // ghetto user input validation
   if (r < 0 || c < 0 || side <= 0 || width <= 0) {
     throw std::runtime_error("All command line parameters must be non-negative");
+  } else if (r >= side || c >= side) {
+    throw std::runtime_error("Starting row and column must be less than the number of squares per side");
   }
 
   try {
