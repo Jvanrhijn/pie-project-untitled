@@ -1,0 +1,3 @@
+lib/renderer/linmath.h linguist-vendored
+lib/renderer/stb_image.h linguist-vendored
+lib/glad/* linguist-vendored
