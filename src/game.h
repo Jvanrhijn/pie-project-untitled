@@ -34,6 +34,9 @@ class Game {
   //! Initialize the game board from the state of the rules object
   void SetupBoard();
 
+  //! Reset state of the game
+  void Reset();
+
   //! Convert grid indices to screen-space coordinates
   inp::Position<double> GridToScreen(const std::pair<size_t, size_t> &pos) const;
 
@@ -66,6 +69,7 @@ class Game {
   charmap char_map_;
 
   Rules rules_;
+  Rules init_rules_;
   Grid<GameTile> tiles_;
 
   float font_scale_;

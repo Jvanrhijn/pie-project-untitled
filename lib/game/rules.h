@@ -18,6 +18,8 @@ class Rules {
  public:
   Rules(size_t board_side, size_t start_row, size_t start_col);
 
+  Rules(const Rules &rules);
+
   Optional<std::shared_ptr<Tile>> MoveTo(size_t row, size_t col);
 
   std::shared_ptr<Tile> current_tile() const;

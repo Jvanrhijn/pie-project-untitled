@@ -34,17 +34,23 @@ class Renderer {
   //! Rendering loop
   void Loop() const;
 
+  //! Adds a drawable object to the renderer
   void AddObject(std::shared_ptr<Drawable<GLFWwindow>> object);
+
+  //! Clears all objects from the render buffer
+  void Clear();
+
+  template<class Fn>
+  void SetKeyCallback(Fn callback) {
+    glfwSetKeyCallback(window_, callback);
+  }
 
   //! Window getter
   GLFWwindow *window() const;
 
-
  private:
   //! Draw a drawable object
   void DrawObject(const Drawable<GLFWwindow> &object) const;
-
-  void SetKeyCallbacks();
 
  private:
   size_t width_;
