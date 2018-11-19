@@ -34,7 +34,8 @@ before_script: |
 
 script:
   - mkdir build && cd build
-  - cmake --build .. -DCOVERAGE=1
+  - cmake -DCOVERAGE=1 ..
+  - make
   - ./unit_tests
 
 after_success:
