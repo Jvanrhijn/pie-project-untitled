@@ -30,9 +30,7 @@ addons:
 
 before_script: |
   wget https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.zip && unzip glfw-3.2.1.zip &&
-  cd glfw-3.2.1 && mkdir build && cd build && cmake .. && sudo make install && cd $TRAVIS_BUILD_DIR && git clone git://git.savannah.gnu.org/freetype/freetype2.git && cd freetype2 &&
-  cmake -E make_directory build && cmake -E chdir build cmake .. && cmake --build build &&
-  sudo cmake --build build --target install && cd $TRAVIS_BUILD_DIR
+  cd glfw-3.2.1 && mkdir build && cd build && cmake .. && sudo make install && cd $TRAVIS_BUILD_DIR
 
 script:
   - cmake -DCOVERAGE=1 .
