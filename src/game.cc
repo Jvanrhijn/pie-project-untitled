@@ -6,6 +6,8 @@
 
 namespace pie {
 
+constexpr Color Game::text_color_;
+
 Game::Game(std::size_t width, const Rules& rules)
   : renderer_(width, width),
     mouse_(renderer_.window()),
@@ -27,13 +29,11 @@ Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size
     square_vs_(square_vs_path_),
     square_fs_(square_fs_path_),
     square_shader_(square_vs_, square_fs_),
-    char_map_(getCharMap(font_path_, font_size_, Color{0.157, 0.259, 0.514})),
+    char_map_(getCharMap(font_path_, font_size_, text_color_)),
     rules_(side, start_x, start_y),
     tiles_(side, side)
 {
   this->SetupBoard();
-  // TODO: Improvement: make GameTile drawable, avoid need to retrieve Tile from board?
-  // Empirical font scaling based on screen size and num tiles; generalize?
   // Initialize mouse controls
   glfwSetWindowUserPointer(renderer_.window(), this);
   mouse_.SetClickCallback([](GLFWwindow *w, int b, int a, int) {

@@ -52,6 +52,7 @@ class Game {
   static constexpr char const *square_vs_path_{"lib/renderer/shaders/square.vs"};
   static constexpr char const *square_fs_path_{"lib/renderer/shaders/square.fs"};
   static constexpr char const *font_path_{"lib/renderer/fonts/josh.ttf"};
+  static constexpr Color text_color_{0.157, 0.259, 0.514};
 
   Renderer renderer_;
   inp::Mouse mouse_;
