@@ -21,6 +21,11 @@ Game::Game(std::size_t width, const Rules& rules)
     tiles_(rules_.board().side(), rules_.board().side())
 {
   this->SetupBoard();
+  renderer_.SetKeyCallback([](GLFWwindow *w, int k, int, int, int) {
+    if ((k == GLFW_KEY_ESCAPE || k == GLFW_KEY_Q) && GLFW_PRESS) {
+      glfwSetWindowShouldClose(w, GLFW_TRUE);
+    }
+  });
 }
 
 Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size_t width)
