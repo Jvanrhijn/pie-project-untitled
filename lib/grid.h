@@ -29,6 +29,11 @@ class Grid {
     return data_.at(row).at(col);
   }
 
+  //! Get a const referene to the grid element at (row, col)
+  const T& Get(size_t row, size_t col) const {
+    return data_.at(row).at(col);
+  }
+
   // Getters
 
   // not const because that actually adds overhead

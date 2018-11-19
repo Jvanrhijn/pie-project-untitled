@@ -17,6 +17,7 @@ Game::Game(std::size_t width, const Rules& rules)
     square_shader_(square_vs_, square_fs_),
     char_map_(getCharMap(font_path_, font_size_, Color{0.157, 0.259, 0.514})),
     rules_(rules),
+    init_rules_(rules_),
     tiles_(rules_.board().side(), rules_.board().side())
 {
   this->SetupBoard();
@@ -31,6 +32,7 @@ Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size
     square_shader_(square_vs_, square_fs_),
     char_map_(getCharMap(font_path_, font_size_, text_color_)),
     rules_(side, start_x, start_y),
+    init_rules_(rules_),
     tiles_(side, side)
 {
   this->SetupBoard();
@@ -42,6 +44,22 @@ Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size
       game->ProcessMouseClick();
     }
   });
+  // initialize keyboard controls
+  renderer_.SetKeyCallback([](GLFWwindow *w, int k, int, int, int) {
+    auto game = static_cast<decltype(this)>(glfwGetWindowUserPointer(w));
+    if ((k == GLFW_KEY_ESCAPE || k == GLFW_KEY_Q) &&  GLFW_PRESS) {
+      glfwSetWindowShouldClose(w, GLFW_TRUE);
+    } else if (k == GLFW_KEY_R && GLFW_PRESS) {
+      game->Reset();
+    }
+  });
+}
+
+void Game::Reset() {
+  rules_ = Rules(init_rules_);
+  tiles_ = Grid<GameTile>(rules_.board().side(), rules_.board().side());
+  renderer_.Clear();
+  this->SetupBoard();
 }
 
 void Game::SetupBoard() {
@@ -109,7 +127,8 @@ void Game::ProcessMouseClick() {
   // check if the cicked tile is reachable
   for (const auto& t: rules_.current_tile()->reachables()) {
     if (coords == t->coordinates() && !t->IsSet()) {
-      // if the tile is reachable, reset highlight on the currently highlighted tiles
+      // if the tile is reachable, preserve the current state for undo
+      // reset highlight on the currently highlighted tiles
       for (auto& r: rules_.current_tile()->reachables()) {
         size_t x, y;
         std::tie(x, y) = r->coordinates();

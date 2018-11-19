@@ -35,8 +35,6 @@ Renderer::Renderer(size_t width, size_t height)
   glEnable(GL_CULL_FACE);
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  // Set keypress callbacks
-  SetKeyCallbacks();
 }
 
 Renderer::~Renderer() {
@@ -46,6 +44,10 @@ Renderer::~Renderer() {
 
 void Renderer::AddObject(std::shared_ptr<pie::Drawable<GLFWwindow>> object) {
   objects_.push_back(std::move(object));
+}
+
+void Renderer::Clear() {
+  objects_.clear();
 }
 
 void Renderer::Loop() const {
@@ -70,15 +72,6 @@ GLFWwindow *Renderer::window() const {
 
 void Renderer::DrawObject(const Drawable<GLFWwindow>& object) const {
   object.Draw(window_);
-}
-
-void Renderer::SetKeyCallbacks() {
-  // Close the window on ESC or Q
-  glfwSetKeyCallback(window_, [](GLFWwindow *window, int key, int, int, int) {
-    if ((key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) && GLFW_PRESS) {
-      glfwSetWindowShouldClose(window, GLFW_TRUE);
-    }
-  });
 }
 
 }
