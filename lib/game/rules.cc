@@ -17,11 +17,28 @@ Rules::Rules(size_t side, size_t start_row, size_t start_col)
   }
 }
 
+Rules::Rules(const Rules &other)
+  : board_(other.board_),
+    current_tile_(board_.GetTile(other.current_tile_->coordinates().first, other.current_tile_->coordinates().second))
+{
+  current_tile_->set_value(other.current_tile_->value());
+  auto side = board_.side();
+  for (size_t i=0; i<side; i++) {
+    for (size_t j=0; j<side; j++) {
+      SetTileReachables(board_.GetTile(i, j));
+    }
+  }
+}
+
 std::shared_ptr<Tile> Rules::current_tile() const {
   return current_tile_;
 }
 
 const Board& Rules::board() const {
+  return board_;
+}
+
+Board& Rules::board() {
   return board_;
 }
 
@@ -34,7 +51,7 @@ Optional<std::shared_ptr<Tile>> Rules::MoveTo(size_t row, size_t col) {
   auto reachables = current_tile_->reachables();
   auto current_val = *current_tile_->value();
   for (const auto& r: reachables) {
-    if (r->coordinates() == new_coordinates) {
+    if (r->coordinates() == new_coordinates && !r->value().has_value()) {
       r->set_value(current_val+1);
       current_tile_ = r;
       return r;

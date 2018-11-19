@@ -9,13 +9,15 @@
 
 #include "lib/grid.h"
 #include "tile.h"
-#include "lib/draw/drawable.h"
+#include "lib/renderer/drawable.h"
 
 namespace pie {
 
 class Board {
  public:
   explicit Board(size_t side);
+
+  Board(const Board &other);
 
   //! Retrieves a reference to the tile located at (row, col)
   std::shared_ptr<Tile> GetTile(size_t row, size_t col);

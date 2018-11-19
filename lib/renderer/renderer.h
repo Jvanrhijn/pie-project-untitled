@@ -12,9 +12,8 @@
 #include "lib/glad/include/glad/glad.h"
 #include <GLFW/glfw3.h>
 
-#include "lib/exit_codes.h"
-#include "lib/draw/drawable.h"
-#include "lib/renderer/shape.h"
+#include "lib/renderer/exceptions.h"
+#include "lib/renderer/drawable.h"
 
 namespace pie {
 
@@ -35,24 +34,30 @@ class Renderer {
   //! Rendering loop
   void Loop() const;
 
-  void AddObject(std::shared_ptr<Drawable> object);
+  //! Adds a drawable object to the renderer
+  void AddObject(std::shared_ptr<Drawable<GLFWwindow>> object);
+
+  //! Clears all objects from the render buffer
+  void Clear();
+
+  template<class Fn>
+  void SetKeyCallback(Fn callback) {
+    glfwSetKeyCallback(window_, callback);
+  }
 
   //! Window getter
   GLFWwindow *window() const;
 
-
  private:
   //! Draw a drawable object
-  void DrawObject(const Drawable &object) const;
-
-  void SetKeyCallbacks();
+  void DrawObject(const Drawable<GLFWwindow> &object) const;
 
  private:
   size_t width_;
   size_t height_;
   GLFWwindow *window_;
 
-  std::vector<std::shared_ptr<Drawable>> objects_;
+  std::vector<std::shared_ptr<Drawable<GLFWwindow>>> objects_;
 };
 
 }

@@ -7,16 +7,19 @@
 
 #include <utility>
 
-#include "lib/draw/drawable.h"
+#include "drawable.h"
 
 namespace pie {
 
+/**
+ * @brief Object for creating shape-type objects to render, meant to be inherited from (e.g. for Square)
+ */
 class Shape {
  public:
   Shape(double x, double y);
   virtual ~Shape() = default;
 
- private:
+ protected:
   std::pair<double, double> location_;
 };
 

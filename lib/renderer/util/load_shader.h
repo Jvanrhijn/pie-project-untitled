@@ -9,11 +9,15 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <iostream>
 
+#include "lib/renderer/exceptions.h"
 #include "lib/glad/include/glad/glad.h"
 #include <GLFW/glfw3.h>
 
 namespace pie {
+
+void loadShader(const char *, GLuint, GLuint&);
 
 GLuint loadShaders(const char *vertex_file_path, const char *fragment_file_path);
 

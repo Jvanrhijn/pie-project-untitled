@@ -66,3 +66,9 @@ TEST(TestOptional, Pointer) {
   pie::Optional<int*> o_foo = &foo;
   ASSERT_EQ(&foo, *o_foo);
 }
+
+TEST(TestOptional, string) {
+  std::string str = "foo";
+  pie::Optional<std::string> o = str;
+  ASSERT_EQ(o.value(), str);
+}
