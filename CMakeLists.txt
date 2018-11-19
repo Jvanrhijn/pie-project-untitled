@@ -23,7 +23,6 @@ include_directories(.)
 include_directories(freetype2)
 include_directories(freetype2/include)
 
-
 # include other CMakeLists
 include(lib/renderer/CMakeLists.txt)
 include(lib/glad/CMakeLists.txt)
