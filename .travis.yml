@@ -34,10 +34,11 @@ before_script: |
 
 script:
   - cmake -DCOVERAGE=1 .
-  - cmake --build .
+  - mkdir build && cd build
+  - cmake --build ..
   - ./unit_tests
 
 after_success:
-  - cd ${TRAVIS_BUILD_DIR}
+  - cd ${TRAVIS_BUILD_DIR}/build
   - kcov --exclude-pattern=gtest,/usr out unit_tests
   - bash <(curl -s https://codecov.io/bash) && echo "Uploaded code coverage"
