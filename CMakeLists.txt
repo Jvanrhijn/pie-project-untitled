@@ -16,8 +16,13 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 
+add_subdirectory(freetype2)
+
 # include dirs
 include_directories(.)
+include_directories(freetype2)
+include_directories(freetype2/include)
+
 
 # include other CMakeLists
 include(lib/renderer/CMakeLists.txt)
@@ -32,7 +37,6 @@ include(gtest.cmake)
 find_package(glfw3 3.2 REQUIRED)
 find_package(OpenGL REQUIRED)
 include_directories(${TARGET} ${OPENGL_INCLUDE_DIR})
-
 
 # code coverage analysis
 if (COVERAGE)
