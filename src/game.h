@@ -48,10 +48,10 @@ class Game {
   static constexpr float font_scale_factor_{1.2f};
   static constexpr size_t font_size_{96};
   static constexpr double fill_factor_{1.0};
-  static constexpr char const *square_texture_path_{"textures/wrinkled_graph.jpg"};
-  static constexpr char const *square_vs_path_{"lib/renderer/shaders/square.vs"};
-  static constexpr char const *square_fs_path_{"lib/renderer/shaders/square.fs"};
-  static constexpr char const *font_path_{"lib/renderer/fonts/josh.ttf"};
+  static constexpr char const *square_texture_path_{"assets/textures/wrinkled_graph.jpg"};
+  static constexpr char const *square_vs_path_{"assets/shaders/square.vs"};
+  static constexpr char const *square_fs_path_{"assets/shaders/square.fs"};
+  static constexpr char const *font_path_{"assets/fonts/lemon.otf"};
   static constexpr Color text_color_{0.157, 0.259, 0.514};
 
   Renderer renderer_;
