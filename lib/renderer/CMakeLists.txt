@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 3.9.2)
 
-find_package(FreeType)
-
-include_directories(${FREETYPE_INCLUDE_DIRS})
-
 set(renderer_files
         lib/renderer/renderer.cc
         lib/renderer/square.cc

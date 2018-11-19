@@ -8,7 +8,7 @@
 #include <string>
 #include <iostream>
 
-#include <ft2build.h>
+#include "freetype2/include/ft2build.h"
 #include FT_FREETYPE_H
 
 namespace pie {
