@@ -25,6 +25,10 @@ const Board& Rules::board() const {
   return board_;
 }
 
+Board& Rules::board() {
+  return board_;
+}
+
 bool Rules::Finished() const {
   return *current_tile_->value() == board_.side()*board_.side();
 }

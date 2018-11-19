@@ -21,39 +21,41 @@ class Character : public Drawable<GLFWwindow> {
   Character(const Character &) = default;
   ~Character() override = default;
 
-  void Draw(GLFWwindow *window) const override;
+  //! Returns character width in pixels
+  double Width() const;
 
-  void MoveTo(double x, double y) override;
-  void MoveAlong(double dx, double dy) override;
-  void Rotate(double angle) override;
+  //! Returns character height in pixels
+  double Height() const;
+
+  void Draw(GLFWwindow *window) const override;
 
   //! Scale the text isotropically
   void Scale(float scale);
 
-  // expose advance and location for string rendering
+  // expose some glyph metrics
   GLuint advance() const;
+  std::pair<int, int> bearing() const;
+
   std::pair<float, float> location() const;
 
  private:
   void BuildVertices();
 
  private:
+
   VFShader shader_;
+
+  Color color_;
 
   float angle_;
   float scale_;
-
-  Color color_;
 
   GLuint tex_id_;
   GLuint advance_;
   std::pair<int, int> size_;
   std::pair<int, int> bearing_;
 
-  std::pair<float, float> location_;
-
-  // OpenGL vertex data
-  static float vertex_data_[48];
+  static float vertex_data_[96];
 
   // vertex array object
   GLuint vao_;

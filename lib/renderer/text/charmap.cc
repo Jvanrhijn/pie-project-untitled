@@ -14,7 +14,7 @@ charmap getCharMap(const std::string &fontpath, size_t size, const Color &color)
   charmap char_map;
   for (unsigned char c = 0; c < 128; c++) {
     Character character(face, c, color, shader);
-    char_map.insert(std::make_pair(c, character));
+    char_map.insert(std::make_pair(c, std::move(character)));
   }
   return char_map;
 }

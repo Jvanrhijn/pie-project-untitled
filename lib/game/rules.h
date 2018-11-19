@@ -24,6 +24,8 @@ class Rules {
 
   const Board& board() const;
 
+  Board& board();
+
   bool Finished() const;
 
  private:

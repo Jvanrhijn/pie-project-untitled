@@ -46,16 +46,24 @@ class Shader {
 
 };
 
-
+/**
+ * @brief Combines multiple shaders into an OpenGL shader program
+ * @tparam Shaders The shader types to combine; should at least be one Shader<GL_VERTEX_SHADER> and one
+ * Shader<GL_FRAGMENT_SHADER>
+ */
 template<class ...Shaders>
 class ShaderPipeline {
  public:
   explicit ShaderPipeline(const Shaders& ...shaders)
     : program_(glCreateProgram())
   {
-    // create program
+    // this stupid hack essentially does a for_each() on each parameter in the
+    // variadic template parameter pack by abusing side effects
+    // It works by abusing the comma operator to evaluate the function,
+    // while returning a zero to construct an initializer list (so everything actually gets evaluated)
+    // the initializer list is cast to void since we don't use it
     (void)std::initializer_list<int>{
-      ((void)loadShader(shaders.shader_path().c_str(), shaders.type(), program_), 0)...
+      (loadShader(shaders.shader_path().c_str(), shaders.type(), program_), 0)...
     };
     glLinkProgram(program_);
     // check if linking was successful
@@ -113,6 +121,7 @@ class ShaderPipeline {
 
 };
 
+// convenient typedef for most-used shader type
 typedef ShaderPipeline<Shader<GL_VERTEX_SHADER>, Shader<GL_FRAGMENT_SHADER>> VFShader;
 
 } // namespace pie

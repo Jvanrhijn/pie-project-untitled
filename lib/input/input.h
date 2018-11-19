@@ -10,6 +10,8 @@
 
 namespace inp {
 
+//! Simple struct wrapping x, y coordinates
+// public member access is intentional
 template<class T>
 struct Position {
   Position(T x, T y) : x(x), y(y) {}
@@ -26,11 +28,11 @@ class Mouse {
     glfwSetMouseButtonCallback(window_, callback);
   }
 
+  //! Retrieve cursor position in screen space coordinates
   Position<double> GetPosition() const;
 
  private:
   GLFWwindow *window_;
-
 
 };
 

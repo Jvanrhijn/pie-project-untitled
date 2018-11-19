@@ -6,6 +6,7 @@
 #define PIE_STRING_H
 
 #include <string>
+#include <algorithm>
 
 #include "lib/glad/include/glad/glad.h"
 #include <GLFW/glfw3.h>
@@ -20,19 +21,18 @@ class String : public Drawable<GLFWwindow> {
  public:
   String(std::string text, const charmap& char_map, float scale=1.0f);
 
+  void Center();
+
   void Draw(GLFWwindow*) const override;
 
-  void MoveTo(double x, double y) override;
-
-  void MoveAlong(double dx, double dy) override;
-
-  void Rotate(double angle) override;
+  void Rotate(float angle) override;
 
  private:
   std::string text_;
-  std::pair<float, float> location_;
 
   std::vector<Character> characters_;
+
+  float scale_;
 
 };
 

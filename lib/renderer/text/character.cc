@@ -20,7 +20,7 @@ float Character::vertex_data_[] = {
 // https://learnopengl.com/In-Practice/Text-Rendering
 
 Character::Character(FontFace &face, const char c, const Color& color, const VFShader &sp)
-  : shader_(sp), color_(color), angle_(0.0f), scale_(1.0f), location_(0.0f, 0.0f)
+  : Drawable(0.0f, 0.0f), shader_(sp), color_(color), angle_(0.0f), scale_(1.0f)
 {
   face.LoadChar(c);
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -83,18 +83,12 @@ void Character::Draw(GLFWwindow *window) const {
   glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Character::MoveTo(double x, double y) {
-  location_.first = x;
-  location_.second = y;
+double Character::Width() const {
+  return size_.first;
 }
 
-void Character::MoveAlong(double dx, double dy) {
-  location_.first += dx;
-  location_.second += dy;
-}
-
-void Character::Rotate(double angle) {
-  angle_ = angle;
+double Character::Height() const {
+  return size_.second;
 }
 
 void Character::Scale(float scale) {
@@ -103,6 +97,10 @@ void Character::Scale(float scale) {
 
 GLuint Character::advance() const {
   return advance_;
+}
+
+std::pair<int, int> Character::bearing() const {
+  return bearing_;
 }
 
 std::pair<float, float> Character::location() const {

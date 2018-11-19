@@ -5,6 +5,8 @@
 #ifndef __PIE_LIB_DRAW_DRAWABLE_H
 #define __PIE_LIB_DRAW_DRAWABLE_H
 
+#include <utility>
+
 namespace pie {
 
 /**
@@ -13,12 +15,28 @@ namespace pie {
 template<class Window>
 class Drawable {
  public:
+  Drawable(float x, float y) : angle_(0.0f), location_(x, y) {}
   virtual ~Drawable() = default;
 
+  //! Draw object to the window
   virtual void Draw(Window*) const = 0;
-  virtual void Rotate(double angle) = 0;
-  virtual void MoveTo(double x, double y) = 0;
-  virtual void MoveAlong(double dx, double dy) = 0;
+
+  //! Rotate object counterclockwise by angle
+  virtual void Rotate(float angle) {
+    angle_ += angle;
+  }
+
+  //! Move object to (x, y) in screen space coordinates
+  virtual void MoveTo(float x, float y) {
+    location_.first = x;
+    location_.second = y;
+  }
+
+  //! Move object from current position (x, y) to (x + dx, y + dy)
+  virtual void MoveAlong(float dx, float dy) {
+    location_.first += dx;
+    location_.second += dy;
+  }
 
   long stride() const {
     return stride_;
@@ -37,11 +55,14 @@ class Drawable {
   }
 
  protected:
-  // Offsets and stride for vertex_buffer_data_
+  // Offsets and stride for vertex buffer data (see OpenGL docs for more information)
   static constexpr long vertex_offset_{sizeof(float)*0};
   static constexpr long color_offset_{sizeof(float)*3};
   static constexpr long texture_offset_{sizeof(float)*6};
   static constexpr long stride_{sizeof(float)*8};
+
+  float angle_;
+  std::pair<float, float> location_;
 
 };
 

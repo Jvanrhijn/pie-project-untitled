@@ -40,6 +40,10 @@ if (COVERAGE)
   target_link_libraries(unit_tests PRIVATE --coverage -g)
 endif()
 
+set (src_files
+        src/game.cc
+        src/game_tile.cc)
+
 # executables
-add_executable(${TARGET} src/main.cc util/macros.h util/functions.h lib/renderer/drawable.h)
+add_executable(${TARGET} src/main.cc util/macros.h util/functions.h ${src_files})
 target_link_libraries(${TARGET} ${OPENGL_gl_LIBRARY} glfw glad renderer game input argparse)

@@ -10,7 +10,6 @@
 #include "lib/glad/include/glad/glad.h"
 #include <GLFW/glfw3.h>
 
-#include "lib/renderer/shape.h"
 #include "lib/renderer/util/load_shader.h"
 #include "lib/renderer/texture.h"
 #include "lib/renderer/shader.h"
@@ -19,7 +18,8 @@
 
 namespace pie {
 
-class Square : protected Shape, public Drawable<GLFWwindow> {
+// See Documentation of Drawable for inherited function docs
+class Square : public Drawable<GLFWwindow> {
  public:
   /**
    * @brief Object for rendering squares, e.g. tiles
@@ -28,25 +28,22 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
    * @param texture Texture object to draw on the square
    * @param shader Shader to render object with
    */
-  Square(double x, double y, double side, const Texture& texture, const VFShader &shader);
+  Square(float x, float y, double side, const Texture& texture, const VFShader &shader);
   ~Square() override = default;
 
   void Draw(GLFWwindow*) const override;
 
-  void Rotate(double angle) override;
-
-  void MoveTo(double x, double y) override;
-
-  void MoveAlong(double dx, double dy) override;
-
+  //! Set the color of the square
   void Color(const Color &color);
+
+  // getters
+  std::pair<double, double> location() const;
 
  private:
   const Texture &texture_;
   const VFShader &shader_;
 
   double side_;
-  double angle_;
 
   // OpenGL IDs
   GLuint vertex_array_id_;
@@ -56,15 +53,14 @@ class Square : protected Shape, public Drawable<GLFWwindow> {
   // Constants for this model
   //! vertex data (pos, color, texture coordinates)
   float vertex_buffer_data_[48]{
-      -1.0f, -1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    0.0f, 0.0f,
-      1.0f, -1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 0.0f,
-      1.0f,  1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f,
+      -1.0f, -1.0f, 1.0f,    1.0f, 1.0f, 1.0f,    0.0f, 0.0f,
+       1.0f, -1.0f, 1.0f,    1.0f, 1.0f, 1.0f,    1.0f, 0.0f,
+       1.0f,  1.0f, 1.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f,
 
-      1.0f,  1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f,
-      -1.0f,  1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    0.0f, 1.0f,
-      -1.0f, -1.0f, 0.0f,    1.0f, 1.0f, 1.0f,    0.0f, 0.0f
+       1.0f,  1.0f, 1.0f,    1.0f, 1.0f, 1.0f,    1.0f, 1.0f,
+      -1.0f,  1.0f, 1.0f,    1.0f, 1.0f, 1.0f,    0.0f, 1.0f,
+      -1.0f, -1.0f, 1.0f,    1.0f, 1.0f, 1.0f,    0.0f, 0.0f
   };
-
 
 };
 
