@@ -1,4 +1,5 @@
 #include "src/game.h"
+#include "src/solver.h"
 #include "lib/argparse/argparse.h"
 
 
@@ -28,11 +29,8 @@ int main(int argc, char *argv[]) {
       pie::Game game(r, c, side, width);
       game.RenderLoop();
     } else {
-      pie::Rules rules(side, r, c);
-      rules.MoveTo(2, 2);
-      rules.MoveTo(4, 4);
-      rules.MoveTo(1, 4);
-      pie::Game game(width, rules);
+      pie::Solver solver(pie::Rules(side, r, c), 10);
+      pie::Game game(width, solver.Solve());
       game.RenderLoop();
     }
   } catch (const std::exception &e) {

@@ -4,6 +4,7 @@ set (source_files
         src/board.cc
         src/tile.cc
         src/cli_draw.cc
-        src/rules.cc)
+        src/rules.cc
+        src/solver.cc)
 
 add_library(sources STATIC ${source_files})
