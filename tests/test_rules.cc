@@ -7,7 +7,7 @@
 
 #include "../util/functions.h"
 
-TEST(TestRules, Construct) {
+/*TEST(TestRules, Construct) {
   size_t side = 10;
   size_t x = 5;
   size_t y = 5;
@@ -56,7 +56,7 @@ TEST(TestRules, ReachablesCorner) {
     ASSERT_TRUE(pie::contains(coordinates, r->coordinates()));
   }
 }
-
+*/
 TEST(TestRules, MoveTo) {
   size_t side = 10;
   size_t x = 5;
@@ -69,7 +69,7 @@ TEST(TestRules, MoveTo) {
   ASSERT_EQ(rules.current_tile(), *new_tile); // test for correctly updated tile
   ASSERT_EQ((*new_tile)->value().value(), 2); // test for correctly updated value
 }
-
+/*
 TEST(TestRules, WinCondition) {
   size_t side = 5;
   size_t x = 0;
@@ -109,4 +109,4 @@ TEST(TestRules, WinCondition) {
   }
 
   ASSERT_TRUE(rules.Finished());
-}
+}*/

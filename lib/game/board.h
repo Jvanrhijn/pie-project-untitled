@@ -19,7 +19,7 @@ class Board {
 
   Board(const Board &other);
 
-  //! Retrieves a reference to the tile located at (row, col)
+  //! Retrieves a pointer to the tile located at (row, col)
   std::shared_ptr<Tile> GetTile(size_t row, size_t col);
 
   // Getters

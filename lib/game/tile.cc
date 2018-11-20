@@ -27,8 +27,8 @@ const std::vector<std::shared_ptr<Tile>> &Tile::reachables() const {
   return reachables_;
 }
 
-void Tile::set_value(const size_t value) {
-  Tile::value_ = value;
+void Tile::set_value(size_t value) {
+  value_ = value;
 }
 
 void Tile::set_coordinates(size_t x, size_t y) {

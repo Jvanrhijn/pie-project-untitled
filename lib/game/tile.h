@@ -14,12 +14,14 @@
 
 namespace pie {
 
+//! Class representing a single Tile on the game board
 class Tile {
  public:
   Tile(size_t row, size_t column);
 
   Tile() = default;
 
+  //! Returns true if the tile has a value
   bool IsSet() const;
 
   // getters
@@ -28,7 +30,7 @@ class Tile {
   const std::vector<std::shared_ptr<Tile>> &reachables() const;
 
   // setters
-  void set_value(const size_t value);
+  void set_value(size_t value);
   void set_coordinates(size_t, size_t);
 
   //! Adds tile to list of reachable tiles from this

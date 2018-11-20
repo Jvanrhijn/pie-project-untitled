@@ -18,17 +18,23 @@ class Rules {
 
   Rules(const Rules &rules);
 
+  /**
+   * @brief Attempt move to the tile located at (row, column)
+   * returns empty Optional if the move is not allows, otherwise Optional containing
+   * the moved-to tile
+  */
   Optional<std::shared_ptr<Tile>> MoveTo(size_t row, size_t col);
 
-  std::shared_ptr<Tile> current_tile() const;
-
-  const Board& board() const;
-
-  Board& board();
-
+  //! Returns true if the board is in a finished state, i.e. each square is occupied
   bool Finished() const;
 
+  // getters
+  std::shared_ptr<Tile> current_tile() const;
+  const Board& board() const;
+  Board& board();
+
  private:
+  //! Construct the reachable tiles for the passed argument and set them
   void SetTileReachables(std::shared_ptr<Tile> tile);
 
  private:

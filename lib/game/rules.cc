@@ -50,14 +50,15 @@ Optional<std::shared_ptr<Tile>> Rules::MoveTo(size_t row, size_t col) {
   auto new_coordinates = std::make_pair(row, col);
   auto reachables = current_tile_->reachables();
   auto current_val = *current_tile_->value();
-  for (const auto& r: reachables) {
+  for (auto& r: reachables) {
     if (r->coordinates() == new_coordinates && !r->value().has_value()) {
       r->set_value(current_val+1);
       current_tile_ = r;
       return r;
     }
   }
-  return Optional<std::shared_ptr<Tile>>();
+  Optional<std::shared_ptr<Tile>> retval;
+  return retval;
 }
 
 void Rules::SetTileReachables(std::shared_ptr<Tile> tile) {

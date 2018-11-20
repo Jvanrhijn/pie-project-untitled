@@ -8,6 +8,8 @@
 #include <stdexcept>
 #include <string>
 
+#include <iostream>
+
 
 namespace pie {
 
@@ -23,20 +25,29 @@ namespace pie {
 template<class T>
 class Optional {
  public:
+  //! default constructor
+  Optional()
+    : has_value_(false)
+  {}
+
+  //! Implicit conversion constructor
   Optional(T value)
-  : has_value_(true)
+    : has_value_(true)
   {
-    // use placement new to place constructed T into byte array value_
-    (void) reinterpret_cast<unsigned char*>(new (value_) T(value));
+    (void) reinterpret_cast<unsigned char *>(new(value_) T(value));
   }
 
-  //! Default constructor
-  Optional()
-  : has_value_(false) {}
+  //! Perfect forwarding constructor
+  template<class ...Args, size_t N=sizeof...(Args), class std::enable_if<(N>1), int>::type=0>
+  Optional(Args&& ...args)
+    : has_value_(true)
+  {
+    (void) reinterpret_cast<unsigned char *>(new(value_) T(std::forward<Args>(args)...));
+  }
 
   ~Optional() {
     if (has_value_) {
-      reinterpret_cast<T *>(value_)->~T();
+      reinterpret_cast<T*>(value_)->~T();
     }
   }
 
@@ -63,7 +74,7 @@ class Optional {
     return value();
   }
 
-  //! Copy assignment operator
+  //! assignment operator
   Optional &operator=(T value) {
     (void) new (value_) T(value);
     has_value_ = true;
