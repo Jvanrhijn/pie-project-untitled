@@ -25,14 +25,6 @@ include_directories(lib/glad/include/glad)
 find_package(glfw3 3.2 REQUIRED)
 find_package(OpenGL REQUIRED)
 
-<<<<<<< HEAD
-set (src_files
-        src/game.cc
-        src/game_tile.cc
-        src/solver.cc)
-=======
 add_subdirectory(lib)
 add_subdirectory(src)
 add_subdirectory(tests)
->>>>>>> ca2595189d187537a2e40ab17ae42cea55f158c3
-
