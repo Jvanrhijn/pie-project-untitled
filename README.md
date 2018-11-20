@@ -21,6 +21,12 @@ This project implements an interactive math puzzle, played as follows (descripti
  * Automated mode (WIP): will generate a solution by employing a depth-first search
  with Warnsdorff's rule as a heuristic.
 
+ ### Requirements
+
+* cmake >=3.9.2
+* OpenGL 3.3 core
+* [GLFW3](https://www.glfw.org/)
+
  ### Building
 
  Clone the repository:
@@ -39,7 +45,7 @@ Build the source with optimizations:
 
 ```
 $ cmake -DCMAKE_BUILD_TYPE=RELEASE ..
-$ make -j pie
+$ make -j hopscotch 
 ```
 
 ### Running
@@ -47,7 +53,7 @@ $ make -j pie
 Run the executable from the repository root directory:
 
 ```
-$ /home/../hopscotch/build/src/hopscotch
+$ /home/.../hopscotch/build/src/hopscotch
 ```
 
 Legal moves will be highlighted in green. To quit the game, press `ESC` or `Q`. To
@@ -65,7 +71,7 @@ The game mode can be changed by supplying command line arguments:
 
 For example,
 
-```$xslt
+```
 $ ./build/src/hopscotch -n 8 -r 1 -w 900
 ```
 
@@ -86,10 +92,3 @@ This will create the `unit_tests` executable in your build directory:
 ```
 ./build/tests/unit_tests
 ```
-
- ### Requirements
-
-* cmake >=3.9.2
-* OpenGL 3.3 core
-* [GLFW3](https://www.glfw.org/)
-
