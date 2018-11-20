@@ -18,3 +18,9 @@ set (test_files
 # adding executable
 add_executable(${UNIT_TESTS} tests.cc ${test_files})
 target_link_libraries(${UNIT_TESTS} PRIVATE gtest Threads::Threads renderer game argparse)
+
+# code coverage analysis
+if (COVERAGE)
+    target_compile_options(unit_tests PRIVATE --coverage -g)
+    target_link_libraries(unit_tests PRIVATE --coverage -g)
+endif()

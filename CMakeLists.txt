@@ -30,8 +30,3 @@ add_subdirectory(src)
 add_subdirectory(tests)
 include(gtest.cmake)
 
-# code coverage analysis
-if (COVERAGE)
-  target_compile_options(unit_tests PRIVATE --coverage -g)
-  target_link_libraries(unit_tests PRIVATE --coverage -g)
-endif()
