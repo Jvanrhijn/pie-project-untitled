@@ -1,0 +1,5 @@
+add_subdirectory(argparse)
+add_subdirectory(renderer)
+add_subdirectory(glad)
+add_subdirectory(game)
+add_subdirectory(input)
