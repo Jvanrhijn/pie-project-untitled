@@ -2,8 +2,7 @@
 // Created by Guthorak on 11/19/18.
 //
 
-#include "src/solver.h"
-#include <iostream>
+#include "solver.h"
 
 namespace pie {
 
@@ -52,7 +51,7 @@ Optional<std::shared_ptr<Tile>> Solver::NextMove() const {
       possible_moves.emplace_back(r, num_reachable);
     }
   }
-  // Account for the possibility that the tile might have no valid reachables by using Optional method.
+  // Account for the possibility that the tile might have no valid reachables by using Optional
   if (possible_moves.empty()) {
     return Optional<std::shared_ptr<Tile>>();
   }
