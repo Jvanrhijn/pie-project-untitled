@@ -1,12 +1,12 @@
 # Hopscotch
 
-[![Build Status](https://travis-ci.com/Jvanrhijn/pie-project-untitled.svg?branch=master)](https://travis-ci.com/Jvanrhijn/pie-project-untitled)
-[![codecov](https://codecov.io/gh/Jvanrhijn/pie-project-untitled/branch/master/graph/badge.svg)](https://codecov.io/gh/Jvanrhijn/pie-project-untitled)
+[![Build Status](https://travis-ci.com/Jvanrhijn/hopscotch.svg?branch=master)](https://travis-ci.com/Jvanrhijn/hopscotch)
+[![codecov](https://codecov.io/gh/Jvanrhijn/hopscotch/branch/master/graph/badge.svg)](https://codecov.io/gh/Jvanrhijn/hopscotch)
 
 This project implements an interactive math puzzle, played as follows (description from [here](https://puzzling.stackexchange.com/questions/20238/explore-the-square-with-100-hops)):
 
 <p align="center">
-   <img src="https://i.imgur.com/q0kOl1r.png">
+   <img src="https://i.imgur.com/SSlJ7UD.png">
 </p>
 
 
