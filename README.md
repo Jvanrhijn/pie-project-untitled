@@ -60,6 +60,8 @@ The game mode can be changed by supplying command line arguments:
 * `-r` and `-c` set the starting row and column, indexed with 0.
 * `-n` sets the size of the board.
 * `-w` sets the width of the window in pixels.
+* `-a` automatically solves the game. 
+* `-i` sets the number of iterations to attempt in the autosolver.
 
 For example,
 

@@ -15,12 +15,18 @@ Game::Game(std::size_t width, const Rules& rules)
     square_vs_(square_vs_path_),
     square_fs_(square_fs_path_),
     square_shader_(square_vs_, square_fs_),
-    char_map_(getCharMap(font_path_, font_size_, Color{0.157, 0.259, 0.514})),
+    char_map_(getCharMap(font_path_, font_size_, text_color_)),
     rules_(rules),
     init_rules_(rules_),
     tiles_(rules_.board().side(), rules_.board().side())
 {
   this->SetupBoard();
+  // initialize keyboard controls
+  renderer_.SetKeyCallback([](GLFWwindow *w, int k, int, int, int) {
+    if ((k == GLFW_KEY_ESCAPE || k == GLFW_KEY_Q) &&  GLFW_PRESS) {
+      glfwSetWindowShouldClose(w, GLFW_TRUE);
+    }
+  });
 }
 
 Game::Game(std::size_t start_x, std::size_t start_y, std::size_t side, std::size_t width)

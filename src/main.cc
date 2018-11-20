@@ -7,6 +7,7 @@ constexpr int rdefault = 0;
 constexpr int cdefault = 0;
 constexpr int side_default = 5;
 constexpr int width_default = 600;
+constexpr int max_iter_default = 10;
 constexpr bool autosolve_default = false;
 
 
@@ -18,9 +19,10 @@ int main(int argc, char *argv[]) {
   int side = argparser.GetArg("n", side_default);
   int width = argparser.GetArg("w", width_default);
   bool autosolve = argparser.GetArg("a", autosolve_default);
+  int i = argparser.GetArg("i", max_iter_default);
 
   // ghetto user input validation
-  if (r < 0 || c < 0 || side <= 0 || width <= 0) {
+  if (r < 0 || c < 0 || side <= 0 || width <= 0 || i <= 0) {
     throw std::runtime_error("All command line parameters must be non-negative");
   } else if (r >= side || c >= side) {
     throw std::runtime_error("Starting row and column must be less than the number of squares per side");
@@ -31,7 +33,7 @@ int main(int argc, char *argv[]) {
       pie::Game game(r, c, side, width);
       game.RenderLoop();
     } else {
-      pie::Solver solver(pie::Rules(side, r, c), 10);
+      pie::Solver solver(pie::Rules(side, r, c), i);
       pie::Game game(width, solver.Solve());
       game.RenderLoop();
     }
