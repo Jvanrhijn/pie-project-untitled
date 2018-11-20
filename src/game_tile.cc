@@ -2,7 +2,7 @@
 // Created by jesse on 11/16/18.
 //
 
-#include "src/game_tile.h"
+#include "game_tile.h"
 
 namespace pie {
 

@@ -7,7 +7,7 @@
 
 #include <string>
 
-#include "lib/renderer/util/load_shader.h"
+#include "util/load_shader.h"
 
 namespace pie {
 

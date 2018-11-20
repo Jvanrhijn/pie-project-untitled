@@ -11,8 +11,8 @@
 #include <vector>
 #include <iostream>
 
-#include "lib/renderer/exceptions.h"
-#include "lib/glad/include/glad/glad.h"
+#include "../exceptions.h"
+#include "glad.h"
 #include <GLFW/glfw3.h>
 
 namespace pie {

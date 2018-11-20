@@ -8,9 +8,7 @@
 #include "board.h"
 #include "tile.h"
 
-#include "util/functions.h"
-
-#include "lib/optional.h"
+#include "optional.h"
 
 namespace pie {
 

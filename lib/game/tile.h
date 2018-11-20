@@ -9,8 +9,8 @@
 #include <vector>
 #include <memory>
 
-#include "lib/optional.h"
-#include "lib/renderer/drawable.h"
+#include "optional.h"
+#include "renderer/drawable.h"
 
 namespace pie {
 

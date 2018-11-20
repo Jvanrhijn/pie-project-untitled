@@ -10,4 +10,5 @@ set(renderer_files
         text/charmap.cc
         text/string.cc)
 
+include_directories(util)
 add_library(renderer STATIC ${renderer_files})

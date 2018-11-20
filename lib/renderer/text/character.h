@@ -5,13 +5,13 @@
 #ifndef __PIE_LIB_RENDERER_CHARACTER_H
 #define __PIE_LIB_RENDERER_CHARACTER_H
 
-#include "lib/glad/include/glad/glad.h"
+#include "glad.h"
 #include <GLFW/glfw3.h>
 
-#include "lib/renderer/drawable.h"
-#include "lib/renderer/text/fontface.h"
-#include "lib/renderer/shader.h"
-#include "lib/renderer/linmath.h"
+#include "renderer/drawable.h"
+#include "renderer/text/fontface.h"
+#include "renderer/shader.h"
+#include "renderer/linmath.h"
 
 namespace pie {
 

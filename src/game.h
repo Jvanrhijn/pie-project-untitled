@@ -7,17 +7,17 @@
 
 #include <cstddef>
 
-#include "src/game_tile.h"
+#include "game_tile.h"
 
-#include "lib/renderer/renderer.h"
-#include "lib/renderer/square.h"
-#include "lib/renderer/text/string.h"
+#include "renderer/renderer.h"
+#include "renderer/square.h"
+#include "renderer/text/string.h"
 
-#include "lib/input/input.h"
+#include "input/input.h"
 
-#include "lib/game/rules.h"
+#include "game/rules.h"
 
-#include "lib/grid.h"
+#include "grid.h"
 
 
 namespace pie {

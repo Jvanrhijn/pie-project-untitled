@@ -1,7 +1,7 @@
 //
 // Created by jesse on 11/10/18.
 //
-#include "lib/renderer/text/charmap.h"
+#include "charmap.h"
 
 namespace pie {
 

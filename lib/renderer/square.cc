@@ -1,7 +1,7 @@
 //
 // Created by jesse on 10/31/18.
 //
-#include "lib/renderer/square.h"
+#include "square.h"
 
 namespace pie {
 

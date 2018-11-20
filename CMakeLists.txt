@@ -16,8 +16,9 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 add_subdirectory(freetype2)
 
 # include dirs
-include_directories(.)
+include_directories(lib)
 include_directories(freetype2/include)
+include_directories(lib/glad/include/glad)
 
 # OpenGL libraries
 find_package(glfw3 3.2 REQUIRED)

@@ -1,5 +1,5 @@
-#include "src/game.h"
-#include "lib/argparse/argparse.h"
+#include "game.h"
+#include "argparse/argparse.h"
 
 
 constexpr int rdefault = 0;
