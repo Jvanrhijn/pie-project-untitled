@@ -4,9 +4,6 @@ set (UNIT_TESTS unit_tests)
 # required stuff for tests
 find_package(Threads REQUIRED)
 
-# include dirs for tests
-include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-
 set (test_files
         test_grid.cc
         test_optional.cc
@@ -18,6 +15,7 @@ set (test_files
 # adding executable
 add_executable(${UNIT_TESTS} tests.cc ${test_files})
 target_link_libraries(${UNIT_TESTS} PRIVATE gtest Threads::Threads renderer game argparse)
+include(gtest.cmake)
 
 # code coverage analysis
 if (COVERAGE)
