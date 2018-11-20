@@ -5,6 +5,7 @@ set(OpenGL_GL_PREFERENCE GLVND)
 set(src_files
         game.cc
         game_tile.cc
+        solver.cc
         main.cc)
 
 add_executable(${TARGET} ${src_files})

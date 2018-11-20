@@ -28,4 +28,3 @@ find_package(OpenGL REQUIRED)
 add_subdirectory(lib)
 add_subdirectory(src)
 add_subdirectory(tests)
-
