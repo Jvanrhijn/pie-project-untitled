@@ -6,6 +6,9 @@
 #define PIE_SOLVER_H
 
 #include <random>
+#include <algorithm>
+#include <vector>
+
 #include "game/rules.h"
 #include "optional.h"
 
