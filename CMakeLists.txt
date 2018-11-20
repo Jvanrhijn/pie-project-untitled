@@ -17,6 +17,7 @@ add_subdirectory(freetype2)
 
 # include dirs
 include_directories(lib)
+include_directories(util)
 include_directories(freetype2/include)
 include_directories(lib/glad/include/glad)
 
