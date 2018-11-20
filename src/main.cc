@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-#include "src/game.h"
-#include "src/solver.h"
-#include "lib/argparse/argparse.h"
-=======
 #include "game.h"
+#include "solver.h"
 #include "argparse/argparse.h"
->>>>>>> ca2595189d187537a2e40ab17ae42cea55f158c3
 
 
 constexpr int rdefault = 0;
