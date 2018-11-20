@@ -9,7 +9,7 @@
 #include <string>
 #include <memory>
 
-#include "lib/renderer/text/character.h"
+#include "character.h"
 
 namespace pie {
 

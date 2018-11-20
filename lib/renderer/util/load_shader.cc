@@ -1,4 +1,4 @@
-#include "lib/renderer/util/load_shader.h"
+#include "load_shader.h"
 
 /*
  * Code adapted from http://www.opengl-tutorial.org/beginners-tutorials/tutorial-2-the-first-triangle/

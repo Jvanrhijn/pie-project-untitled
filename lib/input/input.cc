@@ -1,7 +1,7 @@
 //
 // Created by jesse on 11/14/18.
 //
-#include "lib/input/input.h"
+#include "input.h"
 #include <iostream>
 
 namespace inp {

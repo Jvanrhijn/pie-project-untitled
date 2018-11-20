@@ -7,17 +7,17 @@
 
 #include <cstddef>
 
-#include "src/game_tile.h"
+#include "game_tile.h"
 
-#include "lib/renderer/renderer.h"
-#include "lib/renderer/square.h"
-#include "lib/renderer/text/string.h"
+#include "renderer/renderer.h"
+#include "renderer/square.h"
+#include "renderer/text/string.h"
 
-#include "lib/input/input.h"
+#include "input/input.h"
 
-#include "lib/game/rules.h"
+#include "game/rules.h"
 
-#include "lib/grid.h"
+#include "grid.h"
 
 
 namespace pie {
@@ -51,7 +51,7 @@ class Game {
   static constexpr float font_scale_factor_{1.2f};
   static constexpr size_t font_size_{96};
   static constexpr double fill_factor_{1.0};
-  static constexpr char const *square_texture_path_{"assets/textures/paper_pd.jpg"};
+  static constexpr char const *square_texture_path_{"assets/textures/graph.jpg"};
   static constexpr char const *square_vs_path_{"assets/shaders/square.vs"};
   static constexpr char const *square_fs_path_{"assets/shaders/square.fs"};
   static constexpr char const *font_path_{"assets/fonts/lemon.otf"};

@@ -2,8 +2,8 @@
 // Created by jesse on 10/22/18.
 //
 #include "gtest/gtest.h"
-#include "lib/optional.h"
-#include "util/macros.h"
+#include "optional.h"
+#include "../util/macros.h"
 
 TEST(TestOptional, Construct) {
   pie::Optional<int> q(0);

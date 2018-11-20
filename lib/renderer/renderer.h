@@ -9,11 +9,11 @@
 #include <vector>
 #include <memory>
 
-#include "lib/glad/include/glad/glad.h"
+#include "glad.h"
 #include <GLFW/glfw3.h>
 
-#include "lib/renderer/exceptions.h"
-#include "lib/renderer/drawable.h"
+#include "exceptions.h"
+#include "drawable.h"
 
 namespace pie {
 

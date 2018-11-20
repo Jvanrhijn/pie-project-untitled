@@ -1,7 +1,7 @@
 //
 // Created by jesse on 10/30/18.
 //
-#include "lib/renderer/renderer.h"
+#include "renderer.h"
 
 namespace pie {
 

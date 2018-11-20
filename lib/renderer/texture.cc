@@ -1,10 +1,10 @@
 //
 // Created by jesse on 11/1/18.
 //
-#include "lib/renderer/texture.h"
+#include "texture.h"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "lib/renderer/stb_image.h"
+#include "stb_image.h"
 
 namespace pie {
 

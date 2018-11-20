@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 #include "src/game.h"
 #include "src/solver.h"
 #include "lib/argparse/argparse.h"
+=======
+#include "game.h"
+#include "argparse/argparse.h"
+>>>>>>> ca2595189d187537a2e40ab17ae42cea55f158c3
 
 
 constexpr int rdefault = 0;
@@ -22,6 +27,8 @@ int main(int argc, char *argv[]) {
   // ghetto user input validation
   if (r < 0 || c < 0 || side <= 0 || width <= 0) {
     throw std::runtime_error("All command line parameters must be non-negative");
+  } else if (r >= side || c >= side) {
+    throw std::runtime_error("Starting row and column must be less than the number of squares per side");
   }
 
   try {

@@ -2,7 +2,7 @@
 // Created by jesse on 11/15/18.
 //
 
-#include "src/game.h"
+#include "game.h"
 
 namespace pie {
 
@@ -73,7 +73,7 @@ void Game::SetupBoard() {
     for (size_t j=0; j<side; j++) {
       auto pos = GridToScreen(std::make_pair(i, j));
       // first contruct the GameTile
-      auto tile = rules_.board().GetTile(i, j);
+      const auto tile = rules_.board().GetTile(i, j);
       auto tile_text = std::make_shared<String>(tile->IsSet()? std::to_string(tile->value()) : " ", char_map_, font_scale_);
       tile_text->MoveTo(pos.x, pos.y);
       tile_text->Center();
@@ -89,11 +89,11 @@ void Game::SetupBoard() {
     }
   }
   // highlight the current tile and the reachable tiles
-  auto cur_tile_coords = rules_.current_tile()->coordinates();
+  const auto cur_tile_coords = rules_.current_tile()->coordinates();
   tiles_.Get(cur_tile_coords.first, cur_tile_coords.second).CurrentHighlight();
   for (const auto& t: rules_.current_tile()->reachables()) {
     if (!t->IsSet()) {
-      auto coordinates = t->coordinates();
+      const auto coordinates = t->coordinates();
       tiles_.Get(coordinates.first, coordinates.second).ReachableHighlight();
     }
   }
@@ -105,25 +105,25 @@ void Game::RenderLoop() const {
 }
 
 inp::Position<double> Game::GridToScreen(const std::pair<size_t, size_t> &pos) const {
-  double square_width = 2.0/rules_.board().side();
-  double x = square_width*(pos.second + 0.5) - 1.0;
-  double y = square_width*(rules_.board().side() - pos.first - 0.5) - 1.0;
+  const double square_width = 2.0/rules_.board().side();
+  const double x = square_width*(pos.second + 0.5) - 1.0;
+  const double y = square_width*(rules_.board().side() - pos.first - 0.5) - 1.0;
   return inp::Position<double>{x, y};
 }
 
 std::pair<size_t, size_t> Game::ScreenToGrid(const inp::Position<double> &pos) const {
   const double width = 2.0/rules_.board().side();
-  double j = ((pos.x + 1.0)/width - 0.5);
-  double i = (rules_.board().side() - 0.5 - (pos.y + 1.0)/width);
-  auto row = static_cast<size_t>(std::round(i));
-  auto col = static_cast<size_t>(std::round(j));
+  const double j = ((pos.x + 1.0)/width - 0.5);
+  const double i = (rules_.board().side() - 0.5 - (pos.y + 1.0)/width);
+  const auto row = static_cast<size_t>(std::round(i));
+  const auto col = static_cast<size_t>(std::round(j));
   return std::make_pair(row, col);
 }
 
 // this should probably be refactored into an Update() method or something
 void Game::ProcessMouseClick() {
   // get the grid coordinates of the mouse click
-  auto coords = ScreenToGrid(mouse_.GetPosition());
+  const auto coords = ScreenToGrid(mouse_.GetPosition());
   // check if the cicked tile is reachable
   for (const auto& t: rules_.current_tile()->reachables()) {
     if (coords == t->coordinates() && !t->IsSet()) {

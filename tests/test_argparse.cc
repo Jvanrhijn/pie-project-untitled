@@ -3,7 +3,7 @@
 //
 #include "gtest/gtest.h"
 
-#include "lib/argparse/argparse.h"
+#include "argparse/argparse.h"
 
 TEST(ArgParse, GetArg) {
   int argc = 8;

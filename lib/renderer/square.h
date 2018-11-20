@@ -7,12 +7,12 @@
 
 #include <iostream>
 
-#include "lib/glad/include/glad/glad.h"
+#include "glad.h"
 #include <GLFW/glfw3.h>
 
-#include "lib/renderer/util/load_shader.h"
-#include "lib/renderer/texture.h"
-#include "lib/renderer/shader.h"
+#include "util/load_shader.h"
+#include "texture.h"
+#include "shader.h"
 #include "drawable.h"
 #include "linmath.h"
 

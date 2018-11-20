@@ -9,7 +9,7 @@
 #include <string>
 #include <type_traits>
 
-#include "lib/optional.h"
+#include "optional.h"
 
 namespace pie {
 

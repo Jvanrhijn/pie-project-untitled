@@ -1,12 +1,12 @@
 # Hopscotch
 
-[![Build Status](https://travis-ci.com/Jvanrhijn/pie-project-untitled.svg?branch=master)](https://travis-ci.com/Jvanrhijn/pie-project-untitled)
-[![codecov](https://codecov.io/gh/Jvanrhijn/pie-project-untitled/branch/master/graph/badge.svg)](https://codecov.io/gh/Jvanrhijn/pie-project-untitled)
+[![Build Status](https://travis-ci.com/Jvanrhijn/hopscotch.svg?branch=master)](https://travis-ci.com/Jvanrhijn/hopscotch)
+[![codecov](https://codecov.io/gh/Jvanrhijn/hopscotch/branch/master/graph/badge.svg)](https://codecov.io/gh/Jvanrhijn/hopscotch)
 
 This project implements an interactive math puzzle, played as follows (description from [here](https://puzzling.stackexchange.com/questions/20238/explore-the-square-with-100-hops)):
 
 <p align="center">
-   <img src="https://i.imgur.com/q0kOl1r.png">
+   <img src="https://i.imgur.com/SSlJ7UD.png">
 </p>
 
 
@@ -47,7 +47,7 @@ $ make -j pie
 Run the executable from the repository root directory:
 
 ```
-$ ./home/../hopscotch/build/pie
+$ /home/../hopscotch/build/src/hopscotch
 ```
 
 Legal moves will be highlighted in green. To quit the game, press `ESC` or `Q`. To
@@ -64,7 +64,7 @@ The game mode can be changed by supplying command line arguments:
 For example,
 
 ```$xslt
-$ ./build/pie -n 8 -r 1 -w 900
+$ ./build/src/hopscotch -n 8 -r 1 -w 900
 ```
 
 will start the game with an `8 x 8` grid, starting in row 1, in a window of `900 x 900`
@@ -82,7 +82,7 @@ $ make -j unit_tests
 This will create the `unit_tests` executable in your build directory:
 
 ```
-./unit_tests
+./build/tests/unit_tests
 ```
 
  ### Requirements

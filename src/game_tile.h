@@ -7,10 +7,10 @@
 
 #include <memory>
 
-#include "lib/renderer/square.h"
-#include "lib/renderer/text/string.h"
-#include "lib/game/tile.h"
-#include "lib/input/input.h"
+#include "renderer/square.h"
+#include "renderer/text/string.h"
+#include "game/tile.h"
+#include "input/input.h"
 
 namespace pie {
 

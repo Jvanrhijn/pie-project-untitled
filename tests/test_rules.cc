@@ -3,9 +3,9 @@
 //
 
 #include "gtest/gtest.h"
-#include "lib/game/rules.h"
+#include "game/rules.h"
 
-#include "util/functions.h"
+#include "../util/functions.h"
 
 TEST(TestRules, Construct) {
   size_t side = 10;

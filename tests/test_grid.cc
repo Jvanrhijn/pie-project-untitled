@@ -2,7 +2,7 @@
 // Created by jesse on 10/22/18.
 //
 #include "gtest/gtest.h"
-#include "lib/grid.h"
+#include "grid.h"
 
 
 TEST(TestGrid, Construct) {

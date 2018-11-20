@@ -8,12 +8,12 @@
 #include <string>
 #include <algorithm>
 
-#include "lib/glad/include/glad/glad.h"
+#include "glad.h"
 #include <GLFW/glfw3.h>
 
-#include "lib/renderer/drawable.h"
-#include "lib/renderer/text/charmap.h"
-#include "lib/renderer/text/character.h"
+#include "../drawable.h"
+#include "../text/charmap.h"
+#include "../text/character.h"
 
 namespace pie {
 
