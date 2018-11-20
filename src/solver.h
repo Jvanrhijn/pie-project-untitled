@@ -6,8 +6,8 @@
 #define PIE_SOLVER_H
 
 #include <random>
-#include "lib/game/rules.h"
-#include "lib/optional.h"
+#include "game/rules.h"
+#include "optional.h"
 
 namespace pie {
 
