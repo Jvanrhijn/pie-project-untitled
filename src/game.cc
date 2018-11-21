@@ -180,11 +180,6 @@ void Game::ColorPath() {
       }
     }
   }
-  // sort set tiles on value
-  std::sort(set_tiles.begin(), set_tiles.end(), 
-      [](const GameTile& a, const GameTile& b) {
-        return a.tile()->value() < b.tile()->value();
-      });
   constexpr float color_offset = 0.1;
   for (auto& t: set_tiles) {
     float c = color_offset + (1.0 - color_offset)*(t.tile()->value() - 1)/(current_value - 1);
