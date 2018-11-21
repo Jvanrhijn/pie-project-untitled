@@ -30,6 +30,9 @@ class Game {
   //! Start the game loop
   void RenderLoop() const;
 
+  //! Color the taken path with a gradient
+  void ColorPath();
+
  private:
   //! Initialize the game board from the state of the rules object
   void SetupBoard();
@@ -45,7 +48,7 @@ class Game {
 
   //! Perform the actions required when clicking on the grid
   void ProcessMouseClick();
-
+  
  private:
   // constants
   static constexpr float font_scale_factor_{1.2f};

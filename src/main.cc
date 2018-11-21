@@ -9,6 +9,7 @@ constexpr int side_default = 5;
 constexpr int width_default = 600;
 constexpr int max_iter_default = 10;
 constexpr bool autosolve_default = false;
+constexpr bool gradient_default = false;
 
 
 int main(int argc, char *argv[]) {
@@ -20,6 +21,7 @@ int main(int argc, char *argv[]) {
   int width = argparser.GetArg("w", width_default);
   bool autosolve = argparser.GetArg("a", autosolve_default);
   int i = argparser.GetArg("i", max_iter_default);
+  bool gradient = argparser.GetArg("g", gradient_default);
 
   // ghetto user input validation
   if (r < 0 || c < 0 || side <= 0 || width <= 0 || i <= 0) {
@@ -35,6 +37,9 @@ int main(int argc, char *argv[]) {
     } else {
       pie::Solver solver(pie::Rules(side, r, c), i);
       pie::Game game(width, solver.Solve());
+      if (gradient) {
+        game.ColorPath();
+      }
       game.RenderLoop();
     }
   } catch (const std::exception &e) {

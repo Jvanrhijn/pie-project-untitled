@@ -165,4 +165,31 @@ void Game::ProcessMouseClick() {
   }
 }
 
+void Game::ColorPath() {
+  const auto side = rules_.board().side();
+  const auto current_value = rules_.current_tile()->value();
+  // filter set tiles from the board
+  std::vector<GameTile> set_tiles;
+  for (size_t i=0; i<side; i++) {
+    for (size_t j=0; j<side; j++) {
+      auto tile = tiles_.Get(i, j);
+      if (tile.tile()->IsSet()) {
+        set_tiles.push_back(tile);
+      } else {
+        tile.square()->Color(Color{1.0, 0.0, 0.0});
+      }
+    }
+  }
+  // sort set tiles on value
+  std::sort(set_tiles.begin(), set_tiles.end(), 
+      [](const GameTile& a, const GameTile& b) {
+        return a.tile()->value() < b.tile()->value();
+      });
+  constexpr float color_offset = 0.1;
+  for (auto& t: set_tiles) {
+    float c = color_offset + (1.0 - color_offset)*(t.tile()->value() - 1)/(current_value - 1);
+    t.square()->Color(Color{c, c, c});
+  }
+}
+
 } // namespace pie
