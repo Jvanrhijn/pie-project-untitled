@@ -34,7 +34,7 @@ Rules Solver::Solve() {
 }
 
 
-Optional<std::shared_ptr<Tile>> Solver::NextMove() const {
+Optional<std::shared_ptr<Tile>> Solver::NextMove() {
   using tile_pair = std::pair<std::shared_ptr<Tile>, size_t>;
   auto tile = rules_.current_tile();
   std::vector<tile_pair> possible_moves;
@@ -65,8 +65,7 @@ Optional<std::shared_ptr<Tile>> Solver::NextMove() const {
     return x.second == possible_moves[0].second;
   });
   std::uniform_int_distribution<size_t> distribution(0, equivalent_moves.size()-1);
-  std::default_random_engine generator;
-  return equivalent_moves[distribution(generator)].first;
+  return equivalent_moves[distribution(generator_)].first;
 }
 
 

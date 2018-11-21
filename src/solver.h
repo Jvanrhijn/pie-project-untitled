@@ -20,12 +20,13 @@ class Solver {
   Rules Solve();
 
  private:
-  Optional<std::shared_ptr<Tile>> NextMove() const ;
+  Optional<std::shared_ptr<Tile>> NextMove(); 
 
  private:
   Rules rules_;
   Rules initial_rules_;
   size_t max_fails_;
+  std::default_random_engine generator_;
 
 };
 
