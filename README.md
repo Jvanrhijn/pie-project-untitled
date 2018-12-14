@@ -18,7 +18,7 @@ This project implements an interactive math puzzle, played as follows (descripti
  ### Features
  
  * Interactive mode, where the user chooses their path through the grid.
- * Automated mode (WIP): will generate a solution by employing a depth-first search
+ * Automated mode: will generate a solution by employing a depth-first search
  with Warnsdorff's rule as a heuristic.
 
  ### Requirements
