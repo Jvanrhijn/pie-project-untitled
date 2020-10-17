@@ -9,4 +9,4 @@ set(src_files
         main.cc)
 
 add_executable(${TARGET} ${src_files})
-target_link_libraries(${TARGET} ${OPENGL_gl_LIBRARY} glfw glad renderer game input argparse freetype)
+target_link_libraries(${TARGET} ${OPENGL_gl_LIBRARY} dl glfw glad renderer game input argparse freetype)
